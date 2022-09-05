@@ -1,0 +1,2 @@
+module Admin::ComicCommentsHelper
+end
