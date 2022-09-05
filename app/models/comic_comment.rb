@@ -1,0 +1,2 @@
+class ComicComment < ApplicationRecord
+end

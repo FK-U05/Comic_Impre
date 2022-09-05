@@ -1,0 +1,2 @@
+class ComicTag < ApplicationRecord
+end
