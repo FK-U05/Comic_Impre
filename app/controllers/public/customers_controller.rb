@@ -13,7 +13,7 @@ class Public::CustomersController < ApplicationController
   def quit
   end
 
-　#退会処理
+  #退会処理
   def withdrawal
   end
 
