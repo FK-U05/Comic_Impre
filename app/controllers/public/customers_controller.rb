@@ -2,7 +2,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @comic = Comic.all
+    @comics = @customer.comics
+    @comic = Comic.order('id DESC').limit(1)
   end
 
   def edit
@@ -24,6 +25,12 @@ class Public::CustomersController < ApplicationController
 
   #退会処理
   def withdrawal
+  end
+
+private
+
+  def customer_params
+    params.require(:customer).permit(:name)
   end
 
 end

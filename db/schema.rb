@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_093502) do
   end
 
   create_table "comics", force: :cascade do |t|
+    t.integer "customer_id"
     t.integer "company_id"
     t.string "title", null: false
     t.text "body", null: false

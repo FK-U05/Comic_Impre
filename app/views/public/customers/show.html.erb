@@ -7,21 +7,24 @@
 
 <h3>最新の投稿</h3>
 
-  <%= @comic.title %>
-  <%= @comic.company.name %>
-  <%= @comic.release_date %>
+ <% @customer.comics.each do |comic| %>
+  <%= comic.title %>
+  <%= comic.company.name %>
+  <%= comic.release_date %>
 
-  <% @genres.each do |genre| %>
+  <% comic.genre.each do |genre| %>
     <p>ジャンル</p>
-    <%= @comic.genre.name %>
+    <%= genre.name %>
   <% end %>
 
-  <% @tags.each do |tag| %>
+  <% comic.tag.each do |tag| %>
     <p>タグ</p>
-    <%= @comic.tag.name %>
+    <%= tag.name %>
   <% end %>
 
-  <%= link_to "投稿詳細", public_comic_path(@comic) %>
-  <%= link_to "投稿一覧", public_comics_path(@comic) %>
+  <%= link_to "投稿詳細", public_comic_path(comic) %>
+  <%= link_to "投稿一覧", public_comics_path %>
+
+<% end %>
 
   <%= link_to "投稿フォームへ", new_public_comic_path %>
