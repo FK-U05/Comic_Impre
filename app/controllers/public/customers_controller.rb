@@ -7,9 +7,16 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      redirect_to public_customer_path(@customer)
+    else
+      render "edit"
+    end
   end
 
   #ゲストログイン
@@ -30,7 +37,7 @@ class Public::CustomersController < ApplicationController
 private
 
   def customer_params
-    params.require(:customer).permit(:name, :profile_image)
+    params.require(:customer).permit(:name, :profile_image, :email)
   end
 
 end
