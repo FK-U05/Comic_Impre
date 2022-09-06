@@ -1,0 +1,27 @@
+
+<%= @customer.name %>
+
+<% if @customer == current_customer %>
+  <%= link_to "会員情報を編集する", edit_public_customer_path(@customer) %>
+<% end %>
+
+<h3>最新の投稿</h3>
+
+  <%= @comic.title %>
+  <%= @comic.company.name %>
+  <%= @comic.release_date %>
+
+  <% @genres.each do |genre| %>
+    <p>ジャンル</p>
+    <%= @comic.genre.name %>
+  <% end %>
+
+  <% @tags.each do |tag| %>
+    <p>タグ</p>
+    <%= @comic.tag.name %>
+  <% end %>
+
+  <%= link_to "投稿詳細", public_comic_path(@comic) %>
+  <%= link_to "投稿一覧", public_comics_path(@comic) %>
+
+  <%= link_to "投稿フォームへ", new_public_comic_path %>

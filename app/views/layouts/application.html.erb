@@ -23,7 +23,7 @@
 
         <% else %>
 
-          <%= link_to "ゲストログイン" %>
+          <%= link_to "ゲストログイン", public_customers_guest_sign_in_path, method: :post %>
           <%= link_to "ログイン", new_customer_session_path %>
           <%= link_to "新規登録", new_customer_registration_path %>
           <%= link_to "みんなの投稿", public_comics_path %>

@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+#顧客側
 devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
 
+#管理側
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
@@ -23,6 +25,7 @@ namespace :admin do
 end
 
 namespace :public do
+ post 'customers/guest_sign_in', to: 'customers#guest_sign_in'
  get 'search'=>"searchs#search"
  post 'comics/check', to: 'comics#check', as: "comics/check"
  get 'customers/quit', to: 'customers#quit', as: "customers/quit"
