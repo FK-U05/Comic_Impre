@@ -1,0 +1,9 @@
+<h3>退会確認</h3>
+
+<p>本当に退会しますか？<br>
+退会すると、会員登録情報や
+これまでの投稿、コメントは全て削除されます。<br>
+退会する場合は、「退会する」をクリックしてください。</p>
+
+<%= link_to "退会しない", public_customer_path(@customer) %>
+<%= link_to "退会する", public_customers_withdrawal_path(@customer), method: :patch %>

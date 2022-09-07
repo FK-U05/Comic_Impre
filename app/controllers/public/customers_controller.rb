@@ -28,10 +28,15 @@ class Public::CustomersController < ApplicationController
 
   #退会確認
   def quit
+    @customer = current_customer
   end
 
   #退会処理
   def withdrawal
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
   end
 
 private
