@@ -1,0 +1,25 @@
+<h3>投稿内容の確認</h3>
+
+<%= form_with model: @comic, url: public_comics_path, method: :post do |f| %>
+
+<p>漫画のタイトル</p>
+<%= @comic.title %>
+<%= f.hidden_field :title, :value => @comic.title %>
+
+<p>漫画の著者名</p>
+<%= @comic.name %>
+<%= f.hidden_field :name, :value => @comic.name %>
+
+<p>発行年月日</p>
+<%= @comic.release_date %>
+<%= f.hidden_field :release_date, :value => @comic.release_date %>
+
+<p>本文</p>
+<%= @comic.body %>
+<%= f.hidden_field :body, :value => @comic.body %>
+
+<%= f.submit "投稿する" %>
+
+<% end %>
+
+

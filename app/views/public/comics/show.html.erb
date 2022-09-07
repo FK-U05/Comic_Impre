@@ -1,0 +1,20 @@
+
+<%= image_tag @comic.customer.get_profile_image(100,100) %>
+<%= @comic.customer.name %>
+
+<% if @comic.customer == current_customer %>
+  <%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %>
+<% end %>
+
+<h3>投稿詳細</h3>
+  <p>漫画のタイトル</p>
+  <%= @comic.title %>
+
+  <p>漫画の著者名</p>
+  <%= @comic.name %>
+
+  <p>発行年月日</p>
+  <%= @comic.release_date %>
+
+  <p>本文</p>
+  <%= @comic.body %>

@@ -1,0 +1,10 @@
+<h3>投稿一覧</h3>
+
+<% @comics.each do |comic| %>
+
+<%= comic.title %>
+<%= comic.name %>
+<%= comic.release_date %>
+<%= comic.body %>
+
+<% end %>
