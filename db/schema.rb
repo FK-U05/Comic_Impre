@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2022_09_06_064912) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "company_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

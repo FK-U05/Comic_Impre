@@ -10,12 +10,12 @@
     <%= f.label :漫画の著者 %>
     <%= f.text_field :name %>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :出版社 %>
-    <%= f.text_field :name %>
+    <%= f.fields_for :companies %>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :発行年月日 %>
     <%= f.date_field :release_date %>

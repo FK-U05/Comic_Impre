@@ -10,6 +10,10 @@
 <%= @comic.name %>
 <%= f.hidden_field :name, :value => @comic.name %>
 
+<p>出版社名</p>
+<%= @comic.company_name %>
+<%= f.hidden_field :company_name, :value => @comic.company_name %>
+
 <p>発行年月日</p>
 <%= @comic.release_date %>
 <%= f.hidden_field :release_date, :value => @comic.release_date %>

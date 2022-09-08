@@ -9,6 +9,13 @@ class Comic < ApplicationRecord
   belongs_to :customer
   belongs_to :company
 
+  def companies_save(company_list)
+    if self.company != nil
+      comic_companies_records = ComicCompany.where(comic_id: self.id)
+      comic_companies_records.destroy_all
+    end
+  end
+
   def genres_save(genre_list)
     if self.genres != nil
       comic_genres_records = ComicGenre.where(comic_id: self.id)

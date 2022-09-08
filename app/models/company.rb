@@ -1,3 +1,5 @@
 class Company < ApplicationRecord
-   has_many :comics, dependent: :destroy
+
+   has_many :comics
+
 end
