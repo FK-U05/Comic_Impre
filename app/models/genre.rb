@@ -1,4 +1,6 @@
 class Genre < ApplicationRecord
 
-  has_many :comics, dependent: :destroy
+  has_many :comic_genres, dependent: :destroy, foreign_key: 'genre_id'
+  has_many :comics, through: :comic_genres
+
 end

@@ -18,3 +18,15 @@
 
   <p>本文</p>
   <%= @comic.body %>
+
+  <p>ジャンル</p>
+  <% @comic.genres.each do |genre| %>
+  <%= genre.name %>
+  <% end %>
+
+  <p>タグ</p>
+  <% @comic.tags.each do |tag| %>
+  <%= tag.name %>
+  <% end %>
+
+

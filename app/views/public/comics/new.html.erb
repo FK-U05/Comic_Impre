@@ -10,7 +10,12 @@
     <%= f.label :漫画の著者 %>
     <%= f.text_field :name %>
   </div>
-
+  
+  <div class="form-group">
+    <%= f.label :出版社 %>
+    <%= f.text_field :name %>
+  </div>
+  
   <div class="form-group">
     <%= f.label :発行年月日 %>
     <%= f.date_field :release_date %>
@@ -18,10 +23,20 @@
 
   <div class="form-group">
     <%= f.label :本文 %>
-    <%= f.text_field :body %>
+    <%= f.text_area :body %>
   </div>
 
-  <%= f.submit "投稿確認画面へ" %>
+  <div class="form-group">
+    <%= f.label :ジャンル %>
+    <%= f.text_field :genre_name %>
+  </div>
 
-  <% end %>
+  <div class="form-group">
+    <%= f.label :タグ %>
+    <%= f.text_field :tag_name %>
+  </div>
+
+<%= f.submit "投稿確認画面へ" %>
+
+<% end %>
 

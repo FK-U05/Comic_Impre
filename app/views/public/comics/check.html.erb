@@ -18,7 +18,19 @@
 <%= @comic.body %>
 <%= f.hidden_field :body, :value => @comic.body %>
 
-<%= f.submit "投稿する" %>
+<% @comic.genres.each do |genre| %>
+  <p>ジャンル</p>
+  <%= genre.genre_name %>
+  <%= f.hidden_field :genre_name, :value => genre.genre_name %>
+<% end %>
+
+<% @comic.tags.each do |tag| %>
+  <p>タグ</p>
+  <%= tag.tag_name %>
+  <%= f.hidden_field :tag_name, :value => tag.tag_name %>
+<% end %>
+
+<%= f.submit '投稿する' %>
 
 <% end %>
 
