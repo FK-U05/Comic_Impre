@@ -49,7 +49,7 @@ class Public::ComicsController < ApplicationController
 
   private
   def comic_params
-    params.require(:comic).permit(:title, :body, :name, :company_id, :release_date)
+    params.require(:comic).permit(:title, :body, :name, :company, :release_date)
   end
 
 end

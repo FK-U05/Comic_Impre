@@ -3,7 +3,7 @@ class CreateComics < ActiveRecord::Migration[6.1]
     create_table :comics do |t|
 
       t.integer :customer_id
-      t.integer :company_id
+      t.string :company, null: false
       t.string :title, null: false
       t.text :body, null: false
       t.string :name, null: false

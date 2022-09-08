@@ -76,18 +76,12 @@ ActiveRecord::Schema.define(version: 2022_09_06_064912) do
 
   create_table "comics", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "company_id"
+    t.string "company", null: false
     t.string "title", null: false
     t.text "body", null: false
     t.string "name", null: false
     t.date "release_date", null: false
     t.float "star"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "companies", force: :cascade do |t|
-    t.string "company_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

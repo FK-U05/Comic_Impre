@@ -2,9 +2,29 @@
 
 <% @comics.each do |comic| %>
 
-<%= comic.title %>
-<%= comic.name %>
-<%= comic.release_date %>
-<%= comic.body %>
+  <p>漫画のタイトル</p>
+  <%= comic.title %>
+
+  <p>漫画の著者名</p>
+  <%= comic.name %>
+
+  <p>出版社</p>
+  <%= comic.company %>
+
+  <p>発行年月日</p>
+  <%= comic.release_date %>
+
+  <p>本文</p>
+  <%= comic.body %>
+
+  <% comic.genres.each do |genre| %>
+    <p>ジャンル</p>
+    <%= genre.genre_name %>
+  <% end %>
+
+  <% comic.tags.each do |tag| %>
+    <p>タグ</p>
+    <%= tag.tag_name %>
+  <% end %>
 
 <% end %>

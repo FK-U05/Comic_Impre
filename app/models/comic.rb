@@ -7,14 +7,6 @@ class Comic < ApplicationRecord
   has_many :comic_tags, dependent: :destroy
   has_many :tags, through: :comic_tags
   belongs_to :customer
-  belongs_to :company
-
-  def companies_save(company_list)
-    if self.company != nil
-      comic_companies_records = ComicCompany.where(comic_id: self.id)
-      comic_companies_records.destroy_all
-    end
-  end
 
   def genres_save(genre_list)
     if self.genres != nil
