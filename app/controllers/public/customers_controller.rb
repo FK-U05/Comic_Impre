@@ -3,7 +3,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @comics = @customer.comics
-    @comic = Comic.order('id DESC').limit(1)
+    @comics = Comic.order('id DESC').limit(1)
   end
 
   def edit

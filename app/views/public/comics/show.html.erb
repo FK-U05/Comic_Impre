@@ -13,20 +13,32 @@
   <p>漫画の著者名</p>
   <%= @comic.name %>
 
+  <p>出版社</p>
+  <%= @comic.company %>
+
   <p>発行年月日</p>
   <%= @comic.release_date %>
 
-  <p>本文</p>
-  <%= @comic.body %>
-
   <p>ジャンル</p>
   <% @comic.genres.each do |genre| %>
-  <%= genre.name %>
+  <%= genre.genre_name %>
   <% end %>
 
   <p>タグ</p>
   <% @comic.tags.each do |tag| %>
-  <%= tag.name %>
+  <%= tag.tag_name %>
   <% end %>
 
+  <p>本文</p>
+  <%= @comic.body %>
+
+<% if @comic.customer == current_customer %>
+  <%= link_to "編集する", edit_public_comic_path(@comic) %>
+  <%= link_to "削除する", public_comic_path(@comic), method: :delete %>
+<% end %>
+
+  <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
+    <%= f.text_area :comment %>
+    <%= f.submit "送信する" %>
+  <% end %>
 

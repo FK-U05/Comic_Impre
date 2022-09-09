@@ -3,9 +3,12 @@ class Comic < ApplicationRecord
   #ジャンルの中間テーブルとアソシエーション
   has_many :comic_genres, dependent: :destroy
   has_many :genres, through: :comic_genres
+
   #タグの中間テーブルとアソシエーション
   has_many :comic_tags, dependent: :destroy
   has_many :tags, through: :comic_tags
+
+  has_many :comic_comments, dependent: :destroy
   belongs_to :customer
 
   def genres_save(genre_list)
