@@ -27,6 +27,7 @@ namespace :public do
  post 'customers/guest_sign_in', to: 'customers#guest_sign_in'
  get 'search'=>"searchs#search"
  post 'comics/check', to: 'comics#check', as: "comics/check"
+ post 'comics/back', to: 'comics#back', as: "comics/back"
  get 'customers/quit', to: 'customers#quit', as: "customers/quit"
  patch 'customers/withdrawal/:id', to: 'customers#withdrawal', as: "customers/withdrawal"
  resources :comics, only:[:index, :new, :create, :show, :edit, :destroy, :update] do

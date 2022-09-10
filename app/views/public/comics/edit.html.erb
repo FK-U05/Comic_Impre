@@ -26,6 +26,22 @@
     <%= f.text_area :body %>
   </div>
 
+   <!--星レビュー機能-->
+  <div class="form-group" id="star">
+    <%= f.hidden_field :star, id: :review_star %>
+  </div>
+
+   <script>
+     $('#star').raty({
+       size: 36,
+       starOff:  '<%= asset_path('star-off.png') %>',
+       starOn:   '<%= asset_path('star-on.png') %>',
+       starHalf: '<%= asset_path('star-half.png') %>',
+       half: true,
+        scoreName: 'comic[star]',
+     });
+   </script>
+
   <div class="form-group">
     <%= f.label :ジャンル %>
     <%= f.text_field :genre_name, :value => @genre_list %>

@@ -19,6 +19,21 @@
   <p>本文</p>
   <%= comic.body %>
 
+ <div class="star-rate">
+    <div id="star-rate-<%= comic.id %>"></div>
+
+     <script>
+     $('#star-rate-<%= comic.id %>').raty({
+       size      : 36,
+       starOff   : '<%= asset_path('star-off.png') %>',
+       starOn    : '<%= asset_path('star-on.png') %>',
+       half      : false,
+       readOnly: true,
+       score: <%= comic.star %>,
+     });
+     </script>
+  </div>
+
   <% comic.genres.each do |genre| %>
     <p>ジャンル</p>
     <%= genre.genre_name %>

@@ -34,6 +34,12 @@ class Public::ComicsController < ApplicationController
     @comic.tags_save(tag_list)
   end
 
+  #確認画面で戻るを選択
+  def back
+    @comic = Comic.new(comic_params)
+    render :new
+  end
+
   def show
     @comic = Comic.find(params[:id])
     @comic_comment = ComicComment.new
@@ -69,7 +75,7 @@ class Public::ComicsController < ApplicationController
 
   private
   def comic_params
-    params.require(:comic).permit(:title, :body, :name, :company, :release_date)
+    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star)
   end
 
 end

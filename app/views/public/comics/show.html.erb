@@ -19,6 +19,21 @@
   <p>発行年月日</p>
   <%= @comic.release_date %>
 
+ <div class="star-rate">
+    <div id="star-rate-<%= @comic.id %>"></div>
+
+     <script>
+     $('#star-rate-<%=@comic.id %>').raty({
+       size      : 36,
+       starOff   : '<%= asset_path('star-off.png') %>',
+       starOn    : '<%= asset_path('star-on.png') %>',
+       half      : false,
+       readOnly: true,
+       score: <%= @comic.star %>,
+     });
+     </script>
+  </div>
+
   <p>ジャンル</p>
   <% @comic.genres.each do |genre| %>
   <%= genre.genre_name %>
@@ -34,7 +49,8 @@
 
 <% if @comic.customer == current_customer %>
   <%= link_to "編集する", edit_public_comic_path(@comic) %>
-  <%= link_to "削除する", public_comic_path(@comic), method: :delete %>
+  <!--　jquery導入でlink_toが使えない -->
+  <%= button_to "削除する", public_comic_path(@comic), method: :delete %>
 <% end %>
 
   <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
