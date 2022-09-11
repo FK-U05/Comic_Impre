@@ -29,15 +29,23 @@
           <%= link_to "みんなの投稿", public_comics_path %>
 
         <% end %>
-        <form class="d-flex">
-           <input type="text" name="search" value="" placeholder="Search"/>
-        </form>
+
+       <!-- 検索フォーム -->
+        <div class="search_form">
+          <%= form_with url: public_search_path, local: true, method: :get do |f| %>
+          <%= f.text_field :word %>
+          <%= f.select :range, options_for_select([['Comic'], ['Genre'], ['Tag']]) %>
+          <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+          <%= f.submit "検索" %>
+          <% end %>
+        </div>
+
     </header>
 
     <%= yield %>
 
     <footer>
-
+      <%= link_to "管理者ログイン", admin_session_path %>
     </footer>
   </body>
 </html>

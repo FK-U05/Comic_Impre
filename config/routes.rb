@@ -15,7 +15,7 @@ root to: "public/homes#top"
 
 namespace :admin do
  get 'top'=>"homes#top"
- get 'search'=>"searchs#search"
+ get 'search'=>"searches#search"
  resources :comics, only:[:index, :show, :edit, :destroy, :update]
  resources :genres, only:[:index, :create, :edit, :update]
  resources :customers, only:[:index, :show, :edit, :update]
@@ -25,7 +25,7 @@ end
 
 namespace :public do
  post 'customers/guest_sign_in', to: 'customers#guest_sign_in'
- get 'search'=>"searchs#search"
+ get 'search'=>"searches#search"
  post 'comics/check', to: 'comics#check', as: "comics/check"
  post 'comics/back', to: 'comics#back', as: "comics/back"
  get 'customers/quit', to: 'customers#quit', as: "customers/quit"

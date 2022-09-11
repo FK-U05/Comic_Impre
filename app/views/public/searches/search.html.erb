@@ -1,0 +1,37 @@
+<h3><%= params[:word] %> の検索結果</h3>
+
+    <% @comics.each do |comic| %>
+        <%= comic.title %>
+        <p>著者名</p>:<%= comic.name %>
+        <p>出版社</p>:<%= comic.company %>
+        <p>投稿したユーザー</p>:<%= comic.customer.name %>
+        <div class="star-rate">
+        <div id="star-rate-<%= comic.id %>"></div>
+
+         <script>
+           $('#star-rate-<%= comic.id %>').raty({
+             size      : 36,
+             starOff   : '<%= asset_path('star-off.png') %>',
+             starOn    : '<%= asset_path('star-on.png') %>',
+             starHalf  : '<%= asset_path('star-half.png') %>',
+             half      : true,
+             readOnly: true,
+             score: <%= comic.star %>,
+           });
+         </script>
+
+        </div>
+
+        <% comic.genres.each do |genre| %>
+        <p>ジャンル</p>:<%= genre.genre_name %>
+        <% end %>
+
+        <% comic.tags.each do |tag| %>
+        <p>タグ</p>:<%= tag.tag_name %>
+        <% end %>
+
+        <p>コメント数</p>:<%= comic.comic_comments.count %>
+
+        <p>投稿日時</p>:<%= comic.created_at %>
+
+    <% end %>
