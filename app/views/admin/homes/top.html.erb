@@ -1,0 +1,15 @@
+<h3>設定一覧</h3>
+
+<h5>ジャンル一覧</h5>
+<%= link_to "追加する", admin_genres_path %>
+<% @genres.each do |genre| %>
+<%= genre.genre_name %>
+<%= link_to "編集する", edit_admin_genre_path(genre) %>
+<% end %>
+
+<h5>タグ一覧</h5>
+<%= link_to "追加する", admin_tags_path %>
+<% @tags.each do |tag| %>
+<%= tag.tag_name %>
+<%= link_to "編集する", edit_admin_tag_path(tag) %>
+<% end %>

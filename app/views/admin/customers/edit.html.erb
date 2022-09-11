@@ -1,0 +1,27 @@
+<h3><%= @customer.name %>の編集</h3>
+
+<p>会員ID</p>:
+<%= @customer.id %>
+
+<%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+
+     <%= f.label :ユーザー画像 %>
+     <%= f.file_field :profile_image, accept: "image/*" %>
+
+     <%= f.label :ユーザー名 %>
+     <%= f.text_field :name %>
+
+     <%= f.label :メールアドレス %>
+     <%= f.email_field :email %>
+
+     <%= f.label :会員ステータス %>
+     <%= f.radio_button :is_deleted, false %>
+     <%= f.label :is_deleted, '有効' %>
+     <%= f.radio_button :is_deleted, true %>
+     <%= f.label :is_deleted, '退会' %>
+
+     <%= f.submit "変更保存" %>
+
+<% end %>
+
+<%= link_to "戻る", admin_customer_path(@customer) %>

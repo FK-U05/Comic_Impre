@@ -1,0 +1,22 @@
+<h3><%= @customer.name %>の詳細</h3>
+
+<p><%= image_tag @customer.get_profile_image(100,100) %></p>
+
+<p>会員ID</p>:
+<%= @customer.id %>
+
+<p>ユーザー名</p>:
+<%= @customer.name %>
+
+<p>メールアドレス</p>:
+<%= @customer.email %>
+
+<p>会員ステータス</p>:
+<% if @customer.is_deleted %>
+<p>退会</p>
+<% else %>
+<p>有効</p>
+<% end %>
+
+<%= link_to "会員情報を編集する", edit_admin_customer_path(@customer) %>
+<%= link_to "投稿一覧", admin_comics_path %>

@@ -2,6 +2,8 @@ class Public::ComicsController < ApplicationController
 
   def index
     @comics = Comic.all
+    @tag_list = Tag.all
+    @genre_list = Genre.all
   end
 
   def new
@@ -42,6 +44,8 @@ class Public::ComicsController < ApplicationController
 
   def show
     @comic = Comic.find(params[:id])
+    @comic_tags = @comic.tags
+    @comic_genres = @comic.genres
     @comic_comment = ComicComment.new
   end
 

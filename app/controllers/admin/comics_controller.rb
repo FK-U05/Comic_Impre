@@ -4,8 +4,6 @@ class Admin::ComicsController < ApplicationController
   end
 
   def show
-
-
   end
 
   def edit
