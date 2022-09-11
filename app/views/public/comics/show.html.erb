@@ -19,15 +19,17 @@
   <p>発行年月日</p>
   <%= @comic.release_date %>
 
- <div class="star-rate">
-    <div id="star-rate-<%= @comic.id %>"></div>
+ <!--星レビュー機能-->
+    <div id="star-rate-<%= @comic.id %>">
 
      <script>
-     $('#star-rate-<%=@comic.id %>').raty({
+     $('#star-rate-<%= @comic.id %>').empty();
+     $('#star-rate-<%= @comic.id %>').raty({
        size      : 36,
        starOff   : '<%= asset_path('star-off.png') %>',
        starOn    : '<%= asset_path('star-on.png') %>',
-       half      : false,
+       starHalf  : '<%= asset_path('star-half.png') %>',
+       half      : true,
        readOnly: true,
        score: <%= @comic.star %>,
      });
@@ -49,7 +51,7 @@
 
 <% if @comic.customer == current_customer %>
   <%= link_to "編集する", edit_public_comic_path(@comic) %>
-  <!--　jquery導入でlink_toが使えない -->
+  <!-- jquery導入でlink_toが使えない -->
   <%= button_to "削除する", public_comic_path(@comic), method: :delete %>
 <% end %>
 

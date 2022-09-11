@@ -32,13 +32,14 @@
   </div>
 
    <script>
+     $('#star').empty();
      $('#star').raty({
        size: 36,
        starOff:  '<%= asset_path('star-off.png') %>',
        starOn:   '<%= asset_path('star-on.png') %>',
        starHalf: '<%= asset_path('star-half.png') %>',
-        scoreName: 'comic[star]',
-      half: true,
+       half: true,
+       scoreName: 'comic[star]',
      });
    </script>
 

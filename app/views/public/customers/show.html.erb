@@ -20,7 +20,23 @@
     <p>発行年月日</p>
     <%= comic.release_date %>
 
-  　<p>ジャンル</p>
+    <div class="star-rate">
+    <div id="star-rate-<%= comic.id %>"></div>
+
+     <script>
+     $('#star-rate-<%= comic.id %>').raty({
+       size      : 36,
+       starOff   : '<%= asset_path('star-off.png') %>',
+       starOn    : '<%= asset_path('star-on.png') %>',
+       starHalf  : '<%= asset_path('star-half.png') %>',
+       half      : true,
+       readOnly: true,
+       score: <%= comic.star %>,
+     });
+     </script>
+  </div>
+
+   <p>ジャンル</p>
     <% comic.genres.each do |genre| %>
       <%= genre.genre_name %>
     <% end %>
