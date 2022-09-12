@@ -1,7 +1,9 @@
 class Admin::ComicsController < ApplicationController
 
   def index
-    @comics = Comic.all
+    @comics = Comic.all.order(created_at: :desc)
+    @tag_list = Tag.all
+    @genre_list = Genre.all
   end
 
   def show
@@ -9,11 +11,6 @@ class Admin::ComicsController < ApplicationController
     @customer = @comic.customer
     @comic_tags = @comic.tags
     @comic_genres = @comic.genres
-  end
-
-  def comics
-    @customer = Customer.find(params[:id])
-    @comics = @customer.comics
   end
 
   def edit

@@ -1,15 +1,27 @@
 class Admin::GenresController < ApplicationController
 
   def index
+    @genres = Genre.all
   end
 
   def create
   end
 
   def edit
+    @genre = Genre.find(params[:id])
+    @genre_list = @genres
   end
 
   def update
+    @genre = Genre.find(params[:id])
+    @genre.update
+    redirect_to admin_top_path
+  end
+
+  def destroy
+    @genre = Genre.find(params[:id])
+    @genre.destroy
+    redirect_to admin_top_path
   end
 
 end

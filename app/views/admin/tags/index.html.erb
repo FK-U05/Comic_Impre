@@ -1,0 +1,6 @@
+<h1>タグ一覧</h1>
+
+<% @tag_list.each do |tag| %>
+<%= tag.tag_name %>
+<%= link_to "編集する", edit_admin_tag_path(tag) %>
+<% end %>

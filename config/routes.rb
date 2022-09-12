@@ -30,7 +30,7 @@ namespace :admin do
   end
  resources :customers, only:[:index, :show, :edit, :update]
  resources :genres, only:[:index, :create, :edit, :update]
- resources :tags, only:[:index, :create, :edit, :update]
+ resources :tags, only:[:index, :create, :edit, :update, :destroy]
 end
 
 namespace :public do
