@@ -16,11 +16,21 @@ root to: "public/homes#top"
 namespace :admin do
  get 'top'=>"homes#top"
  get 'search'=>"searches#search"
- resources :comics, only:[:index, :show, :edit, :destroy, :update]
- resources :genres, only:[:index, :create, :edit, :update]
+ get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
+ resources :comics, only:[:index, :show, :edit, :destroy, :update] do
+  resources :comic_comments, only:[:index, :create, :destroy]
+  end
+  #タグ絞り込み表示
+  resources :tags do
+    get 'comics_tag',to: 'comics#tag_search'
+  end
+  #ジャンル絞り込み表示
+  resources :genres do
+    get 'comics_genre',to: 'comics#genre_search'
+  end
  resources :customers, only:[:index, :show, :edit, :update]
+ resources :genres, only:[:index, :create, :edit, :update]
  resources :tags, only:[:index, :create, :edit, :update]
- resources :comic_comments, only:[:index, :create, :destroy]
 end
 
 namespace :public do

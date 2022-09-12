@@ -1,0 +1,57 @@
+<!-- ユーザーの情報 -->
+<%= image_tag @comic.customer.get_profile_image(50,50) %>
+<%= @comic.customer.name %>
+<%= link_to "ユーザー情報を編集する", edit_admin_customer_path(@comic.customer) %>
+<%= link_to "投稿一覧へ", admin_customers_comics_path(@comic.customer) %>
+
+<h3>投稿の詳細</h3>
+
+  <p>タイトル</p>
+    <%= @comic.title %>
+
+  <p>著者名</p>
+    <%= @comic.name %>
+
+  <p>出版社</p>
+    <%= @comic.company %>
+
+  <!--星レビュー機能-->
+  <div id="star-rate-<%= @comic.id %>">
+
+    <script>
+    $('#star-rate-<%= @comic.id %>').empty();
+    $('#star-rate-<%= @comic.id %>').raty({
+    size      : 36,
+    starOff   : '<%= asset_path('star-off.png') %>',
+    starOn    : '<%= asset_path('star-on.png') %>',
+    starHalf  : '<%= asset_path('star-half.png') %>',
+    half      : true,
+    readOnly: true,
+    score: <%= @comic.star %>,
+    });
+    </script>
+
+  </div>
+
+  <p>ジャンル</p>
+    <% @comic.genres.each do |genre| %>
+      <%= link_to admin_genre_comics_genre_path(genre_id: genre.id) do %>
+        <%= genre.genre_name %>
+      <% end %>
+    <% end %>
+
+  <p>タグ</p>
+    <% @comic.tags.each do |tag| %>
+      <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
+        <%= tag.tag_name %>
+      <% end %>
+    <% end %>
+
+  <p>本文</p>
+    <%= @comic.body %>
+
+  <%= link_to "コメント一覧", admin_comic_comic_comments_path(@comic) %>
+  <%= link_to "編集する", edit_admin_comic_path(@comic) %>
+  <%= link_to "削除する", admin_comic_path(@comic), method: :delete %>
+
+  <%= link_to "投稿一覧へ", admin_comics_path %>

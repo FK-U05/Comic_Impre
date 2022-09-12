@@ -1,0 +1,63 @@
+<h3>投稿編集</h3>
+
+<%= form_with model: @comic, url: admin_comic_path(@comic), method: :patch do |f| %>
+
+    <div class="form-group">
+      <%= f.label :漫画のタイトル %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :漫画の著者 %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :出版社 %>
+      <%= f.text_field :company %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :発行年月日 %>
+      <%= f.date_field :release_date %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :本文 %>
+      <%= f.text_area :body %>
+    </div>
+
+    <!--星レビュー機能-->
+    <div class="form-group" id="star">
+      <%= f.hidden_field :star, id: :review_star %>
+    </div>
+
+       <script>
+         $('#star').empty();
+         $('#star').raty({
+           size: 36,
+           starOff:  '<%= asset_path('star-off.png') %>',
+           starOn:   '<%= asset_path('star-on.png') %>',
+           starHalf: '<%= asset_path('star-half.png') %>',
+           half: true,
+            scoreName: 'comic[star]',
+         });
+       </script>
+
+    <div class="form-group">
+      <%= f.label :ジャンル %>
+      <%= f.text_field :genre_name, :value => @genre_list %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :タグ %>
+      <%= f.text_field :tag_name, :value => @tag_list %>
+    </div>
+
+    <%= f.submit "変更保存" %>
+
+<% end %>
+
+  <%= link_to "戻る", admin_comic_path(@comic) %>
+
+  <%= link_to "削除する", admin_comic_path(@comic), method: :delete %>
