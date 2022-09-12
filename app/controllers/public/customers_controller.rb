@@ -3,7 +3,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @comics = @customer.comics
-    @comics = Comic.order(created_at: :desc).limit(1)
+    @last_comic = Comic.where(customer_id: @customer).last
   end
 
   def comics

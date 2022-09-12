@@ -18,7 +18,7 @@ namespace :admin do
  get 'search'=>"searches#search"
  get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
  resources :comics, only:[:index, :show, :edit, :destroy, :update] do
-  resources :comic_comments, only:[:index, :create, :destroy]
+  resources :comic_comments, only:[:index, :destroy]
   end
   #タグ絞り込み表示
   resources :tags do

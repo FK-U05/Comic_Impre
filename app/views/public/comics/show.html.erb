@@ -55,6 +55,8 @@
   <p>本文</p>
     <%= @comic.body %>
 
+  <%= link_to "コメント一覧", public_comic_comic_comments_path(@comic) %>
+
   <% if @comic.customer == current_customer %>
     <%= link_to "編集する", edit_public_comic_path(@comic) %>
     <%= button_to "削除する", public_comic_path(@comic), method: :delete %>

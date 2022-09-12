@@ -1,12 +1,14 @@
 class Admin::ComicCommentsController < ApplicationController
 
  def index
- end
-
- def create
+  @comic = Comic.find(params[:comic_id])
+  @comic_comment = ComicComment.all
  end
 
  def destroy
+  @comic = Comic.find(params[:comic_id])
+  ComicComment.find(params[:id]).destroy
+  redirect_to admin_comic_comic_comments_path(@comic)
  end
 
 end
