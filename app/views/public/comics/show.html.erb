@@ -1,4 +1,4 @@
-
+<!-- 投稿したユーザーの情報 -->
 <%= image_tag @comic.customer.get_profile_image(100,100) %>
 <%= @comic.customer.name %>
 
@@ -7,20 +7,21 @@
 <% end %>
 
 <h3>投稿詳細</h3>
+
   <p>漫画のタイトル</p>
-  <%= @comic.title %>
+    <%= @comic.title %>
 
   <p>漫画の著者名</p>
-  <%= @comic.name %>
+    <%= @comic.name %>
 
   <p>出版社</p>
-  <%= @comic.company %>
+    <%= @comic.company %>
 
   <p>発行年月日</p>
-  <%= @comic.release_date %>
+    <%= @comic.release_date %>
 
- <!--星レビュー機能-->
-    <div id="star-rate-<%= @comic.id %>">
+  <!--星レビュー機能-->
+  <div id="star-rate-<%= @comic.id %>">
 
      <script>
      $('#star-rate-<%= @comic.id %>').empty();
@@ -34,26 +35,30 @@
        score: <%= @comic.star %>,
      });
      </script>
+
   </div>
 
   <p>ジャンル</p>
-  <% @comic.genres.each do |genre| %>
-  <%= genre.genre_name %>
-  <% end %>
+    <% @comic_genres.each do |genre| %>
+      <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+        <%= genre.genre_name %>
+      <% end %>
+    <% end %>
 
   <p>タグ</p>
-  <% @comic.tags.each do |tag| %>
-  <%= tag.tag_name %>
-  <% end %>
+    <% @comic_tags.each do |tag| %>
+      <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+        <%= tag.tag_name %>
+      <% end %>
+    <% end %>
 
   <p>本文</p>
-  <%= @comic.body %>
+    <%= @comic.body %>
 
-<% if @comic.customer == current_customer %>
-  <%= link_to "編集する", edit_public_comic_path(@comic) %>
-  <!-- jquery導入でlink_toが使えない -->
-  <%= button_to "削除する", public_comic_path(@comic), method: :delete %>
-<% end %>
+  <% if @comic.customer == current_customer %>
+    <%= link_to "編集する", edit_public_comic_path(@comic) %>
+    <%= button_to "削除する", public_comic_path(@comic), method: :delete %>
+  <% end %>
 
   <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
     <%= f.text_area :comment %>

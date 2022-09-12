@@ -12,37 +12,53 @@ class Comic < ApplicationRecord
   belongs_to :customer
 
   #ジャンルリスト
-  def genres_save(genre_list)
-    if self.genres != nil
-      comic_genres_records = ComicGenre.where(comic_id: self.id)
-      comic_genres_records.destroy_all
+  def genres_save(sent_genres)
+    #現在存在するジャンルの取得
+    current_genres = self.genres.pluck(:genre_name) unless self.genres.nil?
+    #古いジャンルの取得
+    old_genres = current_genres - sent_genres
+    #新しいジャンルの取得
+    new_genres = sent_genres - current_genres
+    #古いジャンルの削除
+    old_genres.each do |old|
+      self.genres.delete Genre.find_by(genre_name: old)
     end
-
-    genre_list.each do |genre|
-      inspected_genre = Genre.where(genre_name: genre).first_or_create
-      self.genres << inspected_genre
+    #新しいジャンルの保存
+    new_genres.each do |new|
+      new_genre = Genre.find_or_create_by(genre_name: new)
+      self.genres << new_genre
     end
   end
 
   #タグリスト
-  def tags_save(tag_list)
-    if self.tags != nil
-      comic_tags_records = ComicTag.where(comic_id: self.id)
-      comic_tags_records.destroy_all
+  def tags_save(sent_tags)
+    #現在存在するタグの取得
+    current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
+    #古いタグの取得
+    old_tags = current_tags - sent_tags
+    #新しいタグの取得
+    new_tags = sent_tags - current_tags
+    #古いタグの削除
+    old_tags.each do |old|
+      self.tags.delete Tag.find_by(tag_name: old)
     end
-
-    tag_list.each do |tag|
-      inspected_tag = Tag.where(tag_name: tag).first_or_create
-      self.tags << inspected_tag
+    #新しいタグの保存
+    new_tags.each do |new|
+      new_tag = Tag.find_or_create_by(tag_name: new)
+      self.tags << new_tag
     end
   end
 
-#タイトルを検索
+  #検索
   def self.looks(searches, words)
     if searches == "perfect_match"
-      @comic = Comic.where("title LIKE ?", "#{words}")
+      @comic = Comic.joins(:tags, :genres)
+                    .where(["title LIKE ? OR company LIKE ? OR name LIKE ? OR tag_name LIKE ? OR genre_name LIKE ?",\
+                    "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%"])
     else
-      @comic = Comic.where("title LIKE ?", "%#{words}%")
+      @comic = Comic.joins(:tags, :genres)
+                    .where(["title LIKE ? OR company LIKE ? OR name LIKE ? OR tag_name LiKE ? OR genre_name LIKE ?",\
+                    "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%"])
     end
   end
 

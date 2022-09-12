@@ -1,23 +1,20 @@
-<h3>投稿一覧</h3>
+<h5><%= @tag.tag_name %>の投稿一覧</h5>
 
   <% @comics.each do |comic| %>
 
-    <p>漫画のタイトル</p>
+    <p>漫画のタイトル</p>:
       <%= link_to public_comic_path(comic) do %>
         <%= comic.title %>
       <% end %>
 
-    <p>漫画の著者名</p>
+    <p>漫画の著者名</p>:
       <%= comic.name %>
 
-    <p>出版社</p>
+    <p>出版社</p>:
       <%= comic.company %>
 
-    <p>発行年月日</p>
+    <p>発行年月日</p>:
       <%= comic.release_date %>
-
-    <p>本文</p>
-      <%= comic.body %>
 
     <!--星レビュー機能-->
     <div class="star-rate">
@@ -52,3 +49,6 @@
       <% end %>
 
   <% end %>
+
+
+

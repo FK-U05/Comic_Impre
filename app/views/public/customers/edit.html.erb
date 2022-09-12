@@ -2,16 +2,16 @@
 
   <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
 
-     <%= f.label :ユーザー画像 %>
-     <%= f.file_field :profile_image, accept: "image/*" %>
+    <%= f.label :ユーザー画像 %>
+    <%= f.file_field :profile_image, accept: "image/*" %>
 
-     <%= f.label :ユーザー名 %>
-     <%= f.text_field :name %>
+    <%= f.label :ユーザー名 %>
+    <%= f.text_field :name %>
 
-     <%= f.label :メールアドレス %>
-     <%= f.email_field :email %>
+    <%= f.label :メールアドレス %>
+    <%= f.email_field :email %>
 
-     <%= f.submit "変更保存" %>
+    <%= f.submit "変更保存" %>
 
     <%= link_to "戻る", public_customer_path(current_customer) %>
     <%= link_to "退会する", public_customers_quit_path %>

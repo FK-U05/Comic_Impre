@@ -1,12 +1,21 @@
 <h3><%= params[:word] %> の検索結果</h3>
 
-    <% @comics.each do |comic| %>
-        <%= comic.title %>
-        <p>著者名</p>:<%= comic.name %>
-        <p>出版社</p>:<%= comic.company %>
-        <p>投稿したユーザー</p>:<%= comic.customer.name %>
-        <div class="star-rate">
-        <div id="star-rate-<%= comic.id %>"></div>
+  <% @comics.each do |comic| %>
+
+    <%= comic.title %>
+
+    <p>著者名</p>:
+      <%= comic.name %>
+
+    <p>出版社</p>:
+      <%= comic.company %>
+
+    <p>投稿したユーザー</p>:
+      <%= comic.customer.name %>
+
+    <!-- 星レビュー -->
+    <div class="star-rate">
+      <div id="star-rate-<%= comic.id %>"></div>
 
          <script>
            $('#star-rate-<%= comic.id %>').raty({
@@ -20,18 +29,26 @@
            });
          </script>
 
-        </div>
+    </div>
 
-        <% comic.genres.each do |genre| %>
-        <p>ジャンル</p>:<%= genre.genre_name %>
+    <p>ジャンル</p>:
+      <% comic.genres.each do |genre| %>
+        <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+          <%= genre.genre_name %>
         <% end %>
+      <% end %>
 
-        <% comic.tags.each do |tag| %>
-        <p>タグ</p>:<%= tag.tag_name %>
+    <p>タグ</p>:
+      <% comic.tags.each do |tag| %>
+        <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+          <%= tag.tag_name %>
         <% end %>
+      <% end %>
 
-        <p>コメント数</p>:<%= comic.comic_comments.count %>
+    <p>コメント数</p>:
+      <%= comic.comic_comments.count %>
 
-        <p>投稿日時</p>:<%= comic.created_at %>
+    <p>投稿日時</p>:
+      <%= comic.created_at %>
 
-    <% end %>
+  <% end %>

@@ -6,7 +6,7 @@
   <%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %>
 <% end %>
 
-<h3>最新の投稿</h3>
+<h3><%= @customer.name %>の投稿一覧</h3>
 
   <% @comics.each do |comic| %>
 
@@ -57,6 +57,6 @@
 
   <% end %>
 
-    <%= link_to "このユーザーの投稿一覧", public_customers_comics_path(@customer) %>
+    <%= link_to "戻る", public_customer_path(@customer) %>
 
     <%= link_to "投稿フォームへ", new_public_comic_path %>

@@ -28,14 +28,23 @@ namespace :public do
  get 'search'=>"searches#search"
  post 'comics/check', to: 'comics#check', as: "comics/check"
  post 'comics/back', to: 'comics#back', as: "comics/back"
+ get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
  get 'customers/quit', to: 'customers#quit', as: "customers/quit"
  patch 'customers/withdrawal/:id', to: 'customers#withdrawal', as: "customers/withdrawal"
  resources :comics, only:[:index, :new, :create, :show, :edit, :destroy, :update] do
-      resources :comic_comments, only: [:index, :create, :destroy]
- end
- resources :customers, only:[:show, :edit, :update]
+  resources :comic_comments, only: [:index, :create, :destroy]
+  end
+  #タグ絞り込み表示
+  resources :tags do
+    get 'comics_tag',to: 'comics#tag_search'
+  end
+  #ジャンル絞り込み表示
+  resources :genres do
+    get 'comics_genre',to: 'comics#genre_search'
+  end
+ resources :customers, only:[:show, :index, :edit, :update]
  resources :genres, only:[:create, :destroy, :edit, :update]
- resources :tags, only:[:create, :destroy, :edit, :update]
+ resources :tags, only:[:create, :destroy, :edit, :update, :index]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

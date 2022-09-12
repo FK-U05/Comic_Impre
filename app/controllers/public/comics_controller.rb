@@ -1,7 +1,7 @@
 class Public::ComicsController < ApplicationController
 
   def index
-    @comics = Comic.all
+    @comics = Comic.all.order(created_at: :desc)
     @tag_list = Tag.all
     @genre_list = Genre.all
   end
@@ -11,14 +11,15 @@ class Public::ComicsController < ApplicationController
   end
 
   def create
-    @comic = Comic.new(comic_params)
-    @comic.customer_id = current_customer.id
+    #ログインしているユーザーのIDがcomicテーブルに保存される
+    @comic = current_customer.comics.new(comic_params)
     @comic.save
     #入力されたジャンル名をgenre_listに追加する
-    genre_list = params[:comic][:genre_name].split(",")
+    #split(nil)で送信された値をスペースで区切って配列化する
+    genre_list = params[:comic][:genre_name].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_name].split(",")
+    tag_list = params[:comic][:tag_name].split(nil)
     @comic.tags_save(tag_list)
     if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
       render :new and return
@@ -27,12 +28,12 @@ class Public::ComicsController < ApplicationController
   end
 
   def check
-    @comic = Comic.new(comic_params)
+    @comic = current_customer.comics.new(comic_params)
     #入力されたジャンル名をgenre_listに追加する
-    genre_list = params[:comic][:genre_name].split(",")
+    genre_list = params[:comic][:genre_name].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_name].split(",")
+    tag_list = params[:comic][:tag_name].split(nil)
     @comic.tags_save(tag_list)
   end
 
@@ -54,17 +55,17 @@ class Public::ComicsController < ApplicationController
     if @comic.customer.id != current_customer.id
     redirect_to public_comics_path
     end
-    @genre_list = @comic.genres.pluck(:genre_name).join(',')
-    @tag_list = @comic.tags.pluck(:tag_name).join(',')
+    @genre_list = @comic.genres.pluck(:genre_name).join(nil)
+    @tag_list = @comic.tags.pluck(:tag_name).join(nil)
   end
 
   def update
     @comic = Comic.find(params[:id])
     #入力されたジャンル名をgenre_listに追加する
-    genre_list = params[:comic][:genre_name].split(",")
+    genre_list = params[:comic][:genre_name].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_name].split(",")
+    tag_list = params[:comic][:tag_name].split(nil)
     @comic.tags_save(tag_list)
     if @comic.update(comic_params)
       redirect_to public_comic_path(@comic)
@@ -75,6 +76,20 @@ class Public::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
     @comic.destroy
     redirect_to public_comics_path
+  end
+
+  #タグで絞り込んだ投稿一覧
+  def tag_search
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @comics = @tag.comics.all
+  end
+
+  #ジャンルで絞り込んだ投稿一覧
+  def genre_search
+    @genre_list = Genre.all
+    @genre = Genre.find(params[:genre_id])
+    @comics = @genre.comics.all
   end
 
   private
