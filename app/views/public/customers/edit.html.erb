@@ -2,7 +2,8 @@
 
   <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
 
-    <%= f.label :ユーザー画像 %>
+    <p>変更前の画像</p>
+    <%= image_tag @customer.get_profile_image(100,100) %>
     <%= f.file_field :profile_image, accept: "image/*" %>
 
     <%= f.label :ユーザー名 %>

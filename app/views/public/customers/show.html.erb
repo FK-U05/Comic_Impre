@@ -2,7 +2,8 @@
 <%= image_tag @customer.get_profile_image(100,100) %>
 <%= @customer.name %>
 
-<% if @customer == current_customer %>
+<!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクを表示-->
+<% if @customer == current_customer && @customer.email != 'guest@guest' %>
   <%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %>
 <% end %>
 
@@ -58,7 +59,10 @@
       <%= link_to "このユーザーの投稿一覧", public_customers_comics_path(@customer) %>
 
   <% else %>
-    <p>まだ投稿がありません</p>
+    <p>投稿がありません</p>
   <% end %>
 
+<% if @customer.email != 'guest@guest' %>
     <%= link_to "投稿フォームへ", new_public_comic_path %>
+<% end %>
+

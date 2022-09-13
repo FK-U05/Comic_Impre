@@ -33,7 +33,11 @@ class Public::CustomersController < ApplicationController
 
   #退会確認
   def quit
+    if current_customer.email == 'guest@guest'
+    redirect_to root_path, alert: "ゲストユーザーは削除できません。"
+    else
     @customer = current_customer
+    end
   end
 
   #退会処理

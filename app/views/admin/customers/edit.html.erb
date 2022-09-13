@@ -5,7 +5,7 @@
 
 <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
 
-     <%= f.label :ユーザー画像 %>
+     <%= image_tag @customer.get_profile_image(100,100) %>
      <%= f.file_field :profile_image, accept: "image/*" %>
 
      <%= f.label :ユーザー名 %>

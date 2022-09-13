@@ -1,17 +1,21 @@
 <!-- 投稿したユーザーの情報 -->
+<%= link_to public_customer_path(@comic.customer) do %>
 <%= image_tag @comic.customer.get_profile_image(100,100) %>
 <%= @comic.customer.name %>
+<% end %>
 
 <% if @comic.customer == current_customer %>
   <%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %>
 <% end %>
 
+<%= link_to "ユーザーの投稿一覧", public_customers_comics_path(@comic.customer) %>
+
 <h3>投稿詳細</h3>
 
-  <p>漫画のタイトル</p>
+  <p>タイトル</p>
     <%= @comic.title %>
 
-  <p>漫画の著者名</p>
+  <p>著者名</p>
     <%= @comic.name %>
 
   <p>出版社</p>
@@ -62,8 +66,9 @@
     <%= button_to "削除する", public_comic_path(@comic), method: :delete %>
   <% end %>
 
+  <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
   <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
     <%= f.text_area :comment %>
     <%= f.submit "送信する" %>
   <% end %>
-
+  <% end %>

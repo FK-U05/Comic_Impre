@@ -1,8 +1,11 @@
 <!-- ユーザーの情報 -->
-<%= image_tag @comic.customer.get_profile_image(50,50) %>
-<%= @comic.customer.name %>
-<%= link_to "ユーザー情報を編集する", edit_admin_customer_path(@comic.customer) %>
-<%= link_to "投稿一覧へ", admin_customers_comics_path(@comic.customer) %>
+<%= link_to admin_customer_path(@comic.customer) do %>
+  <%= image_tag @comic.customer.get_profile_image(50,50) %>
+  <%= @comic.customer.name %>
+<% end %>
+
+<%= link_to "ユーザー情報を変更する", edit_admin_customer_path(@comic.customer) %>
+<%= link_to "このユーザーの投稿一覧へ", admin_customers_comics_path(@comic.customer) %>
 
 <h3>投稿の詳細</h3>
 
@@ -14,6 +17,9 @@
 
   <p>出版社</p>
     <%= @comic.company %>
+
+  <p>発行年月日</p>
+    <%= @comic.release_date %>
 
   <!--星レビュー機能-->
   <div id="star-rate-<%= @comic.id %>">

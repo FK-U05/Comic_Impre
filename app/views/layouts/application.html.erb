@@ -20,16 +20,7 @@
           <%= link_to "投稿フォーム", new_public_comic_path %>
           <%= link_to "みんなの投稿", public_comics_path %>
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-
-            <!-- 検索フォーム -->
-            <div class="search_form">
-              <%= form_with url: public_search_path, local: true, method: :get do |f| %>
-              <%= f.text_field :word %>
-              <%= f.select :range, options_for_select(['Comic']) %>
-              <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-              <%= f.submit "検索" %>
-              <% end %>
-            </div>
+           <%= render 'layouts/search' %>
 
         <% elsif admin_signed_in? %>
 
@@ -37,16 +28,7 @@
           <%= link_to "投稿一覧", admin_comics_path %>
           <%= link_to "設定一覧", admin_top_path %>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-
-            <!-- 検索フォーム -->
-            <div class="search_form">
-              <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
-              <%= f.text_field :word %>
-              <%= f.select :range, options_for_select([['Comic'], ['Customer']]) %>
-              <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-              <%= f.submit "検索" %>
-              <% end %>
-            </div>
+           <%= render 'layouts/search' %>
 
         <% else %>
 
@@ -54,16 +36,7 @@
           <%= link_to "ログイン", new_customer_session_path %>
           <%= link_to "新規登録", new_customer_registration_path %>
           <%= link_to "みんなの投稿", public_comics_path %>
-
-            <!-- 検索フォーム -->
-            <div class="search_form">
-              <%= form_with url: public_search_path, local: true, method: :get do |f| %>
-              <%= f.text_field :word %>
-              <%= f.select :range, options_for_select(['Comic']) %>
-              <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-              <%= f.submit "検索" %>
-              <% end %>
-            </div>
+           <%= render 'layouts/search' %>
 
         <% end %>
 

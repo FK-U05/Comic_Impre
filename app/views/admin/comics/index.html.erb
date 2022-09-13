@@ -54,4 +54,7 @@
     <p>投稿日時</p>
       <%= comic.created_at %>
 
+    <p>本文</p>
+      <%= comic.body.truncate(10) %>
+
   <% end %>

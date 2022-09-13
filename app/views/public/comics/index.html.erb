@@ -1,54 +1,63 @@
 <h3>投稿一覧</h3>
 
   <% @comics.each do |comic| %>
+    <!-- 退会したユーザーの投稿は表示しない -->
+    <% if comic.customer.is_deleted == false %>
 
-    <p>漫画のタイトル</p>
-      <%= link_to public_comic_path(comic) do %>
-        <%= comic.title %>
-      <% end %>
-
-    <p>漫画の著者名</p>
-      <%= comic.name %>
-
-    <p>出版社</p>
-      <%= comic.company %>
-
-    <p>発行年月日</p>
-      <%= comic.release_date %>
-
-    <p>本文</p>
-      <%= comic.body %>
-
-    <!--星レビュー機能-->
-    <div class="star-rate">
-      <div id="star-rate-<%= comic.id %>"></div>
-
-         <script>
-           $('#star-rate-<%= comic.id %>').raty({
-             size      : 36,
-             starOff   : '<%= asset_path('star-off.png') %>',
-             starOn    : '<%= asset_path('star-on.png') %>',
-             starHalf  : '<%= asset_path('star-half.png') %>',
-             half      : true,
-             readOnly: true,
-             score: <%= comic.star %>,
-           });
-         </script>
-
-    </div>
-
-    <p>ジャンル</p>
-      <% comic.genres.each do |genre| %>
-        <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
-          <%= genre.genre_name %>
+      <p>タイトル</p>
+        <%= link_to public_comic_path(comic) do %>
+          <%= comic.title %>
         <% end %>
-      <% end %>
 
-    <p>タグ</p>
-      <% comic.tags.each do |tag| %>
-        <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
-          <%= tag.tag_name %>
+      <p>著者名</p>
+        <%= comic.name %>
+
+      <p>出版社</p>
+        <%= comic.company %>
+
+      <p>投稿したユーザー</p>
+        <%= comic.customer.name %>
+
+      <!--星レビュー機能-->
+      <div class="star-rate">
+        <div id="star-rate-<%= comic.id %>"></div>
+
+           <script>
+             $('#star-rate-<%= comic.id %>').raty({
+               size      : 36,
+               starOff   : '<%= asset_path('star-off.png') %>',
+               starOn    : '<%= asset_path('star-on.png') %>',
+               starHalf  : '<%= asset_path('star-half.png') %>',
+               half      : true,
+               readOnly: true,
+               score: <%= comic.star %>,
+             });
+           </script>
+
+      </div>
+
+      <p>ジャンル</p>
+        <% comic.genres.each do |genre| %>
+          <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+            <%= genre.genre_name %>
+          <% end %>
         <% end %>
-      <% end %>
 
+      <p>タグ</p>
+        <% comic.tags.each do |tag| %>
+          <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+            <%= tag.tag_name %>
+          <% end %>
+        <% end %>
+
+      <p>コメント数</p>
+        <%= comic.comic_comments.count %>
+
+      <p>投稿日時</p>
+        <%= comic.created_at %>
+
+      <p>本文</p>
+      <%= comic.body.truncate(10) %>
+
+    <% end %>
   <% end %>

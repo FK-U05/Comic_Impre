@@ -40,6 +40,12 @@ class Public::ComicsController < ApplicationController
   #確認画面で戻るを選択
   def back
     @comic = Comic.new(comic_params)
+    #入力されたジャンル名をgenre_listに追加する
+    genre_list = params[:comic][:genre_name].split(nil)
+    @comic.genres_save(genre_list)
+    #入力されたタグ名をtag_listに追加する
+    tag_list = params[:comic][:tag_name].split(nil)
+    @comic.tags_save(tag_list)
     render :new
   end
 
