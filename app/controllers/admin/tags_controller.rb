@@ -10,7 +10,7 @@ class Admin::TagsController < ApplicationController
 
   def update
     @tag = Tag.find(params[:id])
-    @tag.update
+    @tag.update(tag_params)
     redirect_to admin_top_path
   end
 
@@ -18,6 +18,10 @@ class Admin::TagsController < ApplicationController
     @tag = Tag.find(params[:id])
     @tag.destroy
     redirect_to admin_top_path
+  end
+
+  def tag_params
+    params.require(:tag).permit(:tag_name)
   end
 
 end

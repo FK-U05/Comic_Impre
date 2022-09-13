@@ -12,40 +12,55 @@
 
   <body>
     <header>
-        <h1>Comic Impre</h1>
+      <div class="container mt-5">
+        <div class="row">
 
-        <% if customer_signed_in? %>
+            <div class="col">
+              <%= link_to root_path do %>
+              <h1>Comic Impre</h1>
+              <% end %>
+            </div>
 
-          <%= link_to "マイページ", public_customer_path(current_customer.id) %>
-          <%= link_to "投稿フォーム", new_public_comic_path %>
-          <%= link_to "みんなの投稿", public_comics_path %>
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-           <%= render 'layouts/search' %>
+            <div class="col">
+                <% if customer_signed_in? %>
 
-        <% elsif admin_signed_in? %>
+                    <%= link_to "マイページ", public_customer_path(current_customer.id) %>
+                    <%= link_to "投稿フォーム", new_public_comic_path %>
+                    <%= link_to "みんなの投稿", public_comics_path %>
+                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
 
-          <%= link_to "会員一覧", admin_customers_path %>
-          <%= link_to "投稿一覧", admin_comics_path %>
-          <%= link_to "設定一覧", admin_top_path %>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-           <%= render 'layouts/search' %>
+                <% elsif admin_signed_in? %>
 
-        <% else %>
+                    <%= link_to "会員一覧", admin_customers_path %>
+                    <%= link_to "投稿一覧", admin_comics_path %>
+                    <%= link_to "設定一覧", admin_top_path %>
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
 
-          <%= link_to "ゲストログイン", public_customers_guest_sign_in_path, method: :post %>
-          <%= link_to "ログイン", new_customer_session_path %>
-          <%= link_to "新規登録", new_customer_registration_path %>
-          <%= link_to "みんなの投稿", public_comics_path %>
-           <%= render 'layouts/search' %>
+                <% else %>
 
-        <% end %>
+                    <%= link_to "ゲストログイン", public_customers_guest_sign_in_path, method: :post %>
+                    <%= link_to "ログイン", new_customer_session_path %>
+                    <%= link_to "新規登録", new_customer_registration_path %>
+                    <%= link_to "みんなの投稿", public_comics_path %>
 
+                <% end %>
+
+                  <%= render 'layouts/search' %>
+            </div>
+
+        </div>
+      </div>
     </header>
 
     <%= yield %>
 
     <footer>
-      <%= link_to "管理者ログイン", admin_session_path %>
+      <div class="container mt-5">
+        <div class="text-center">
+          <%= link_to "管理者ログイン", admin_session_path %>
+        </div>
+      </div>
     </footer>
+
   </body>
 </html>

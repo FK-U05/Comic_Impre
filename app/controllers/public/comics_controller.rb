@@ -16,10 +16,10 @@ class Public::ComicsController < ApplicationController
     @comic.save
     #入力されたジャンル名をgenre_listに追加する
     #split(nil)で送信された値をスペースで区切って配列化する
-    genre_list = params[:comic][:genre_name].split(nil)
+    genre_list = params[:comic][:genre_names][0].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_name].split(nil)
+    tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
     if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
       render :new and return
@@ -41,10 +41,10 @@ class Public::ComicsController < ApplicationController
   def back
     @comic = Comic.new(comic_params)
     #入力されたジャンル名をgenre_listに追加する
-    genre_list = params[:comic][:genre_name].split(nil)
+    genre_list = params[:comic][:genre_names][0].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_name].split(nil)
+    tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
     render :new
   end
@@ -99,8 +99,9 @@ class Public::ComicsController < ApplicationController
   end
 
   private
+
   def comic_params
-    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star)
+    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star, { genre_ids: []}, { tag_ids: []} )
   end
 
 end

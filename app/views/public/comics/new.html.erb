@@ -1,59 +1,67 @@
-<h3>投稿フォーム</h3>
+<div class="container">
+  <div class="text-center">
 
-<%= form_with model: @comic, url: public_comics_check_path(@comic), method: :post do |f| %>
+    <h3>投稿フォーム</h3>
 
-  <div class="form-group">
-    <%= f.label :漫画のタイトル %>
-    <%= f.text_field :title %>
+      <%= form_with model: @comic, url: public_comics_check_path(@comic), method: :post do |f| %>
+
+        <div class="form-group">
+          <%= f.label :漫画のタイトル %>
+          <%= f.text_field :title %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :漫画の著者 %>
+          <%= f.text_field :name %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :出版社 %>
+          <%= f.text_field :company %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :発行年月日 %>
+          <%= f.date_field :release_date %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :本文 %>
+          <%= f.text_area :body %>
+        </div>
+
+        <!--星レビュー機能-->
+        <div class="form-group" id="star">
+          <%= f.hidden_field :star, id: :review_star %>
+        </div>
+
+           <script>
+             $('#star').empty();
+             $('#star').raty({
+               size: 36,
+               starOff:  '<%= asset_path('star-off.png') %>',
+               starOn:   '<%= asset_path('star-on.png') %>',
+               starHalf: '<%= asset_path('star-half.png') %>',
+               half: true,
+               scoreName: 'comic[star]',
+             });
+           </script>
+
+        <div class="form-group">
+          <%= f.label :ジャンル %>
+          <%= f.text_field :genre_name %>
+          <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true }) %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :タグ %>
+          <%= f.text_field :tag_name %>
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %>
+        </div>
+
+        <%= f.submit "投稿確認画面へ" %>
+
+    <% end %>
+
   </div>
-
-  <div class="form-group">
-    <%= f.label :漫画の著者 %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :出版社 %>
-    <%= f.text_field :company %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :発行年月日 %>
-    <%= f.date_field :release_date %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :本文 %>
-    <%= f.text_area :body %>
-  </div>
-
-  <!--星レビュー機能-->
-  <div class="form-group" id="star">
-    <%= f.hidden_field :star, id: :review_star %>
-  </div>
-
-     <script>
-       $('#star').empty();
-       $('#star').raty({
-         size: 36,
-         starOff:  '<%= asset_path('star-off.png') %>',
-         starOn:   '<%= asset_path('star-on.png') %>',
-         starHalf: '<%= asset_path('star-half.png') %>',
-         half: true,
-         scoreName: 'comic[star]',
-       });
-     </script>
-
-  <div class="form-group">
-    <%= f.label :ジャンル %>
-    <%= f.text_field :genre_name %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :タグ %>
-    <%= f.text_field :tag_name %>
-  </div>
-
-  <%= f.submit "投稿確認画面へ" %>
-
-<% end %>
+</div>

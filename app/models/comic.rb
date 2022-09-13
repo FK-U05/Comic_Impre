@@ -53,11 +53,11 @@ class Comic < ApplicationRecord
   def self.looks(searches, words)
     if searches == "perfect_match"
       @comic = Comic.joins(:tags, :genres)
-                    .where(["title LIKE ? OR company LIKE ? OR name LIKE ? OR tag_name LIKE ? OR genre_name LIKE ?",\
-                    "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%"])
+                    .where(["title LIKE(?) OR company LIKE(?) OR name LIKE(?) OR tag_name LIKE(?) OR genre_name LIKE(?)",\
+                    "#{words}", "#{words}", "#{words}", "#{words}", "#{words}"])
     else
       @comic = Comic.joins(:tags, :genres)
-                    .where(["title LIKE ? OR company LIKE ? OR name LIKE ? OR tag_name LiKE ? OR genre_name LIKE ?",\
+                    .where(["title LIKE(?) OR company LIKE(?) OR name LIKE(? ) OR tag_name LiKE(?) OR genre_name LIKE(?)",\
                     "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%"])
     end
   end

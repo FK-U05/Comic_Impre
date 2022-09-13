@@ -1,96 +1,106 @@
-<h3>投稿内容の確認</h3>
+<div class="container">
+  <div class="text-center">
+    <h3>投稿内容の確認</h3>
 
-  <%= form_with model: @comic, url: public_comics_path, method: :post do |f| %>
+      <%= form_with model: @comic, url: public_comics_path, method: :post do |f| %>
 
-    <p>タイトル</p>
-      <%= @comic.title %>
-      <%= f.hidden_field :title, :value => @comic.title %>
+        <p>タイトル</p>
+          <%= @comic.title %>
+          <%= f.hidden_field :title, :value => @comic.title %>
 
-    <p>著者名</p>
-      <%= @comic.name %>
-      <%= f.hidden_field :name, :value => @comic.name %>
+        <p>著者名</p>
+          <%= @comic.name %>
+          <%= f.hidden_field :name, :value => @comic.name %>
 
-    <p>出版社名</p>
-      <%= @comic.company %>
-      <%= f.hidden_field :company, :value => @comic.company %>
+        <p>出版社名</p>
+          <%= @comic.company %>
+          <%= f.hidden_field :company, :value => @comic.company %>
 
-    <p>発行年月日</p>
-      <%= @comic.release_date %>
-      <%= f.hidden_field :release_date, :value => @comic.release_date %>
+        <p>発行年月日</p>
+          <%= @comic.release_date %>
+          <%= f.hidden_field :release_date, :value => @comic.release_date %>
 
-    <p>本文</p>
-      <%= @comic.body %>
-      <%= f.hidden_field :body, :value => @comic.body %>
+        <p>本文</p>
+          <%= @comic.body %>
+          <%= f.hidden_field :body, :value => @comic.body %>
 
-    <!--星レビュー機能-->
-    <div class="form-group" id="star">
-      <%= f.hidden_field :star, id: :review_star %>
-    </div>
+        <!--星レビュー機能-->
+        <div class="form-group" id="star">
+          <%= f.hidden_field :star, id: :review_star %>
+        </div>
 
-       <script>
-         $('#star').empty();
-         $('#star').raty({
-           size: 36,
-           starOff:  '<%= asset_path('star-off.png') %>',
-           starOn:   '<%= asset_path('star-on.png') %>',
-           starHalf: '<%= asset_path('star-half.png') %>',
-           half: true,
-            scoreName: 'comic[star]',
-         });
-       </script>
+           <script>
+             $('#star').empty();
+             $('#star').raty({
+               size: 36,
+               starOff:  '<%= asset_path('star-off.png') %>',
+               starOn:   '<%= asset_path('star-on.png') %>',
+               starHalf: '<%= asset_path('star-half.png') %>',
+               half: true,
+                scoreName: 'comic[star]',
+             });
+           </script>
 
-    <p>ジャンル</p>
-      <% @comic.genres.each do |genre| %>
-        <%= genre.genre_name %>
-        <%= f.hidden_field :genre_name, :value => genre.genre_name %>
+        <p>ジャンル</p>
+          <%# @comic.genres.each do |genre| %>
+            <%#= genre.genre_name %>
+            <%#= f.hidden_field 'genre_names[]', :value => genre.genre_name %>
+          <%# end %>
+
+          <%= f.hidden_field :genre_names, :value => @comic.genres.map(&:genre_name), :multiple => true %>
+
+        <p>タグ</p>
+          <%# @comic.tags.each do |tag| %>
+            <%#= tag.tag_name %>
+            <%#= f.hidden_field :tag_name, :value => tag.tag_name %>
+          <%# end %>
+          <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
+
+        <%= f.submit "投稿する" %>
+
       <% end %>
 
-    <p>タグ</p>
-      <% @comic.tags.each do |tag| %>
-        <%= tag.tag_name %>
-        <%= f.hidden_field :tag_name, :value => tag.tag_name %>
+      <%= form_with model: @comic, url: public_comics_back_path, method: :post do |f| %>
+
+        <%= f.hidden_field :title, :value => @comic.title %>
+        <%= f.hidden_field :name, :value => @comic.name %>
+        <%= f.hidden_field :company, :value => @comic.company %>
+        <%= f.hidden_field :release_date, :value => @comic.release_date %>
+        <%= f.hidden_field :body, :value => @comic.body %>
+
+        <!--星レビュー機能-->
+        <div class="form-group" id="star">
+            <%= f.hidden_field :star, id: :review_star %>
+        </div>
+
+           <script>
+             $('#star').empty();
+             $('#star').raty({
+               size: 36,
+               starOff:  '<%= asset_path('star-off.png') %>',
+               starOn:   '<%= asset_path('star-on.png') %>',
+               starHalf: '<%= asset_path('star-half.png') %>',
+               half: true,
+               readOnly: true,
+               score: <%= @comic.star %>,
+               scoreName: 'comic[star]',
+             });
+           </script>
+
+        <%# @comic.genres.each do |genre| %>
+          <%#= f.hidden_field :genre_name, :value => genre.genre_name %>
+
+        <%# end %>
+        <%= f.hidden_field :genre_names, :value => @comic.genres.map(&:genre_name), :multiple => true %>
+
+
+        <%#@comic.tags.each do |tag| %>
+          <%#= f.hidden_field :tag_name, :value => tag.tag_name %>
+        <%# end %>
+        <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
+
+        <%= f.submit "戻る", name: :back %>
+
       <% end %>
-
-    <%= f.submit "投稿する" %>
-
-  <% end %>
-
-  <%= form_with model: @comic, url: public_comics_back_path, method: :post do |f| %>
-
-    <%= f.hidden_field :title, :value => @comic.title %>
-    <%= f.hidden_field :name, :value => @comic.name %>
-    <%= f.hidden_field :company, :value => @comic.company %>
-    <%= f.hidden_field :release_date, :value => @comic.release_date %>
-    <%= f.hidden_field :body, :value => @comic.body %>
-
-    <!--星レビュー機能-->
-    <div class="form-group" id="star">
-        <%= f.hidden_field :star, id: :review_star %>
-    </div>
-
-       <script>
-         $('#star').empty();
-         $('#star').raty({
-           size: 36,
-           starOff:  '<%= asset_path('star-off.png') %>',
-           starOn:   '<%= asset_path('star-on.png') %>',
-           starHalf: '<%= asset_path('star-half.png') %>',
-           half: true,
-           readOnly: true,
-           score: <%= @comic.star %>,
-           scoreName: 'comic[star]',
-         });
-       </script>
-
-    <% @comic.genres.each do |genre| %>
-      <%= f.hidden_field :genre_name, :value => genre.genre_name %>
-    <% end %>
-
-    <% @comic.tags.each do |tag| %>
-      <%= f.hidden_field :tag_name, :value => tag.tag_name %>
-    <% end %>
-
-    <%= f.submit "戻る", name: :back %>
-
-  <% end %>
-
+  </div>
+</div>

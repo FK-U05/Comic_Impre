@@ -14,7 +14,7 @@ class Admin::GenresController < ApplicationController
 
   def update
     @genre = Genre.find(params[:id])
-    @genre.update
+    @genre.update(genre_params)
     redirect_to admin_top_path
   end
 
@@ -22,6 +22,10 @@ class Admin::GenresController < ApplicationController
     @genre = Genre.find(params[:id])
     @genre.destroy
     redirect_to admin_top_path
+  end
+
+  def genre_params
+    params.require(:genre).permit(:genre_name)
   end
 
 end

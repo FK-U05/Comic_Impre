@@ -2,7 +2,10 @@
 
   <% @comics.each do |comic| %>
 
+　　<p>タイトル</p>:
+　　<%= link_to public_comic_path(comic) do %>
     <%= comic.title %>
+    <% end %>
 
     <p>著者名</p>:
       <%= comic.name %>
