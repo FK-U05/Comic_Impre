@@ -1,68 +1,78 @@
 <div class="container">
-
+  <div class="row">
     <h3>投稿一覧</h3>
+  </div>
 
-      <% @comics.each do |comic| %>
-        <!-- 退会したユーザーの投稿は表示しない -->
-        <% if comic.customer.is_deleted == false %>
+    <% @comics.each do |comic| %>
+        <div class="row">
+          <!-- 退会したユーザーの投稿は表示しない -->
+          <% if comic.customer.is_deleted == false %>
+              <table class="table table-bordered">
+                <div class="col-md-1">
+                  <tr><th>タイトル</th></tr>
+                  <tr><td><%= link_to public_comic_path(comic) do %>
+                  <%= comic.title %>
+                  <% end %></td></tr>
+                </div>
+                  <tr><th>著者名</th>
+                    <td><%= comic.name %></td></tr>
 
-          <p>タイトル</p>
-            <%= link_to public_comic_path(comic) do %>
-              <%= comic.title %>
-            <% end %>
+                  <tr><th>出版社</th>
+                    <td><%= comic.company %></td></tr>
 
-          <p>著者名</p>
-            <%= comic.name %>
+                  <tr><th>投稿したユーザー</th>
+                    <td><%= comic.customer.name %></td></tr>
 
-          <p>出版社</p>
-            <%= comic.company %>
+                  <!--星レビュー機能-->
+                  <tr><th>おすすめ度</th>
+                  <td>
+                    <div class="star-rate">
+                    <div id="star-rate-<%= comic.id %>"></div>
 
-          <p>投稿したユーザー</p>
-            <%= comic.customer.name %>
+                      <script>
+                      $('#star-rate-<%= comic.id %>').empty();
+                      $('#star-rate-<%= comic.id %>').raty({
+                      size      : 36,
+                      starOff   : '<%= asset_path('star-off.png') %>',
+                      starOn    : '<%= asset_path('star-on.png') %>',
+                      starHalf  : '<%= asset_path('star-half.png') %>',
+                      half      : true,
+                      readOnly: true,
+                      score: <%= comic.star %>,
+                      });
+                      </script>
 
-          <!--星レビュー機能-->
-          <div class="star-rate">
-            <div id="star-rate-<%= comic.id %>"></div>
+                  </div>
+                  </td>
 
-               <script>
-                 $('#star-rate-<%= comic.id %>').empty();
-                 $('#star-rate-<%= comic.id %>').raty({
-                   size      : 36,
-                   starOff   : '<%= asset_path('star-off.png') %>',
-                   starOn    : '<%= asset_path('star-on.png') %>',
-                   starHalf  : '<%= asset_path('star-half.png') %>',
-                   half      : true,
-                   readOnly: true,
-                   score: <%= comic.star %>,
-                 });
-               </script>
+                  </tr>
 
-          </div>
+                  <tr><th>ジャンル</th>
+                    <td><% comic.genres.each do |genre| %>
+                      <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+                      <%= genre.genre_name %>
+                      <% end %>
+                    <% end %></td></tr>
 
-          <p>ジャンル</p>
-            <% comic.genres.each do |genre| %>
-              <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
-                <%= genre.genre_name %>
-              <% end %>
-            <% end %>
+                  <tr><th>タグ</th>
+                    <td><% comic.tags.each do |tag| %>
+                      <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+                      <%= tag.tag_name %>
+                      <% end %>
+                    <% end %></td></tr>
 
-          <p>タグ</p>
-            <% comic.tags.each do |tag| %>
-              <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
-                <%= tag.tag_name %>
-              <% end %>
-            <% end %>
+                  <tr><th>コメント数</th>
+                    <td><%= comic.comic_comments.count %></td></tr>
 
-          <p>コメント数</p>
-            <%= comic.comic_comments.count %>
+                  <tr><th>投稿日時</th>
+                    <td><%= comic.created_at.strftime("%Y年%m月%d日") %></td></tr>
 
-          <p>投稿日時</p>
-            <%= comic.created_at.strftime("%Y年%m月%d日") %>
+                  <tr><th>本文</th>
+                    <td><%= comic.body.truncate(10) %></td></tr>
 
-          <p>本文</p>
-          <%= comic.body.truncate(10) %>
-
+              </table>
         <% end %>
-      <% end %>
+        </div>
+    <% end %>
 
 </div>

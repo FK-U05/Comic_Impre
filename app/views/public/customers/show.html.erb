@@ -1,68 +1,111 @@
-<!-- ユーザー情報 -->
-<%= image_tag @customer.get_profile_image(100,100) %>
-<%= @customer.name %>
+<div class="container mt-5">
+  <div class="row">
+    <div class-"col-md-2">
+      <!-- ユーザー情報 -->
+      <table class="table table-bordered">
+        <tr>
+          <th><%= image_tag @customer.get_profile_image(100,100) %></th>
+        </tr>
+        <tr>
+          <th><%= @customer.name %></th>
+        </tr>
 
-<!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクを表示-->
-<% if @customer == current_customer && @customer.email != 'guest@guest' %>
-  <%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %>
-<% end %>
-
-<% if @customer.comics.exists? %>
-
-  <h3>最新の投稿</h3>
-
-      <p>漫画のタイトル</p>
-        <%= @last_comic.title %>
-
-      <p>漫画の著者名</p>
-        <%= @last_comic.name %>
-
-      <p>出版社</p>
-        <%= @last_comic.company %>
-
-      <p>発行年月日</p>
-        <%= @last_comic.release_date.strftime("%Y年%m月%d日") %>
-
-      <div class="star-rate">
-        <div id="star-rate-<%= @last_comic.id %>"></div>
-
-          <script>
-          $('#star-rate-<%= @last_comic.id %>').raty({
-          size      : 36,
-          starOff   : '<%= asset_path('star-off.png') %>',
-          starOn    : '<%= asset_path('star-on.png') %>',
-          starHalf  : '<%= asset_path('star-half.png') %>',
-          half      : true,
-          readOnly: true,
-          score: <%= @last_comic.star %>,
-          });
-          </script>
-
-      </div>
-
-      <p>ジャンル</p>
-        <% @last_comic.genres.each do |genre| %>
-          <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
-            <%= genre.genre_name %>
-          <% end %>
+        <!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクを表示-->
+        <% if @customer == current_customer && @customer.email != 'guest@guest' %>
+        <tr>
+          <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
+        </tr>
         <% end %>
 
-      <p>タグ</p>
-        <% @last_comic.tags.each do |tag| %>
-          <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
-            <%= tag.tag_name %>
-          <% end %>
-        <% end %>
+          <%= link_to "ブックマーク一覧", public_customers_bookmark_path(@customer) %>
 
-      <%= link_to "投稿詳細", public_comic_path(@last_comic) %>
+      </table>
 
-      <%= link_to "このユーザーの投稿一覧", public_customers_comics_path(@customer) %>
+    </div>
+
+  <% if @customer.comics.exists? %>
+    <div class="col">
+
+      <h3>最新の投稿</h3>
+        <table class="table table-bordered">
+          <tr>
+            <td>漫画のタイトル</td>
+            <td><%= @last_comic.title %></td>
+          </tr>
+
+          <tr>
+            <td>漫画の著者名</td>
+            <td> <%= @last_comic.name %></td>
+          </tr>
+
+          <tr>
+            <td>出版社</td>
+            <td><%= @last_comic.company %></td>
+          </tr>
+
+          <tr>
+            <td>発行年月日</td>
+            <td><%= @last_comic.release_date.strftime("%Y年%m月%d日") %></td>
+          </tr>
+
+          <!-- 星レビュー機能 -->
+          <tr>
+            <td>おすすめ度</td>
+            <td>
+              <div id="star-rate-<%= @last_comic.id %>">
+
+                  <script>
+                    $('#star-rate-<%= @last_comic.id %>').raty({
+                    size      : 36,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    starHalf  : '<%= asset_path('star-half.png') %>',
+                    half      : true,
+                    readOnly: true,
+                    score: <%= @last_comic.star %>,
+                    });
+                  </script>
+
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>ジャンル</td>
+            <td>
+              <% @last_comic.genres.each do |genre| %>
+                <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+                  <%= genre.genre_name %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>タグ</td>
+            <td>
+              <% @last_comic.tags.each do |tag| %>
+                <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+                  <%= tag.tag_name %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+
+        <%= link_to "投稿詳細", public_comic_path(@last_comic) %>
+
+        <%= link_to "このユーザーの投稿一覧", public_customers_comics_path(@customer) %>
 
   <% else %>
     <p>投稿がありません</p>
   <% end %>
 
-<% if @customer.email != 'guest@guest' %>
-    <%= link_to "投稿フォームへ", new_public_comic_path %>
-<% end %>
+    <% if @customer.email != 'guest@guest' %>
+        <%= link_to "投稿フォームへ", new_public_comic_path %>
+    <% end %>
+
+    </div>
+  </div>
+</div>
 

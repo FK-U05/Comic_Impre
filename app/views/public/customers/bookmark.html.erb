@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <div class="text-center">
+    <table>
+      <h3>ブックマーク一覧</h3>
+      <% @customer.bookmarks.each do |bookmark| %>
+        <tr>
+          <th>投稿者名</th>
+          <th>タイトル</th>
+          <th>著者名</th>
+          <th>本文</th>
+        </tr>
+
+
+          <tr>
+            <td><%= bookmark.comic.customer.name %></td>
+            <td><%= bookmark.comic.title %></td>
+            <td><%= bookmark.comic.name %></td>
+            <td><%= bookmark.comic.body.truncate(10) %></td>
+          </tr>
+        <% end %>
+
+    </table>
+</div>
+</div>

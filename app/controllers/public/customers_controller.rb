@@ -24,6 +24,12 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  def bookmark
+    @customer = Customer.find(params[:id])
+    bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:comic_id)
+    @bookmark_comics = Comic.find(bookmarks)
+  end
+
   #ゲストログイン
   def guest_sign_in
     customer = Customer.guest

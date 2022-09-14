@@ -67,14 +67,24 @@ class Public::ComicsController < ApplicationController
 
   def update
     @comic = Comic.find(params[:id])
+    #byebug
     if @comic.update(comic_params)
-    #入力されたジャンル名をgenre_listに追加する
-    genre_list = params[:comic][:genre_names][0].split(nil)
-    @comic.genres_save(genre_list)
-    #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_names][0].split(nil)
-    @comic.tags_save(tag_list)
-    redirect_to public_comic_path(@comic)
+      #入力されたジャンル名をgenre_listに追加する
+      #まずはからになっている配列を消す
+      genre_ids = params[:comic][:genre_ids].reject(&:empty?)
+      #予め選択されているジャンルを取り出す
+      genre_names_check_box = Genre.find(genre_ids).pluck(:genre_name)
+      #新たに作成したジャンル
+      genre_names_txt = params[:comic][:genre_names].split(nil)
+      #作成したジャンルと元からあるものを足す
+      genre_list = genre_names_check_box + genre_names_txt
+      @comic.genres_save(genre_list)
+      tag_ids = params[:comic][:tag_ids].reject(&:empty?)
+      tag_names_check_box = Tag.find(tag_ids).pluck(:tag_name)
+      tag_names_txt = params[:comic][:tag_names].split(nil)
+      tag_list = tag_names_check_box + tag_names_txt
+      @comic.tags_save(tag_list)
+      redirect_to public_comic_path(@comic)
     end
   end
 

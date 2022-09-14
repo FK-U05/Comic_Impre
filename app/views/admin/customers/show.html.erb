@@ -1,25 +1,41 @@
-<h3><%= @customer.name %>の詳細</h3>
+<div class="container mt-5">
+  <div class="row">
+    <div class-"center-block">
 
-  <p><%= image_tag @customer.get_profile_image(100,100) %></p>
+      <h3><%= @customer.name %>の詳細</h3>
+        <table>
+          <tr>
+            <td><%= image_tag @customer.get_profile_image(100,100) %></td>
+          </tr>
+          <tr>
+            <td>会員ID:<%= @customer.id %></td>
+          </tr>
 
-  <p>会員ID</p>:
-    <%= @customer.id %>
+          <tr>
+            <td>ユーザー名:<%= @customer.name %></td>
+          </tr>
 
-  <p>ユーザー名</p>:
-    <%= @customer.name %>
+          <tr>
+            <td>メールアドレス:<%= @customer.email %></td>
+          </tr>
 
-  <p>メールアドレス</p>:
-    <%= @customer.email %>
+          <tr>
+            <td>会員登録日:<%= @customer.created_at.strftime("%Y年%m月%d日") %></td>
+          </tr>
 
-  <p>会員登録日</p>:
-    <%= @customer.created_at.strftime("%Y年%m月%d日") %>
+          <tr>
+            <td>会員ステータス:
+              <% if @customer.is_deleted %></td>
+                <td>退会</td>
+              <% else %>
+                <td>有効</td>
+              <% end %>
+          </tr>
+        </table>
 
-  <p>会員ステータス</p>:
-    <% if @customer.is_deleted %>
-      <p>退会</p>
-    <% else %>
-      <p>有効</p>
-    <% end %>
+        <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer) %>
+        <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer) %>
 
-  <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer) %>
-  <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer) %>
+    </div>
+  </div>
+</div>

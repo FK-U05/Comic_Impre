@@ -39,10 +39,12 @@ namespace :public do
  post 'comics/check', to: 'comics#check', as: "comics/check"
  post 'comics/back', to: 'comics#back', as: "comics/back"
  get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
+ get 'customers/bookmark/:id', to:'customers#bookmark', as: "customers/bookmark"
  get 'customers/quit', to: 'customers#quit', as: "customers/quit"
  patch 'customers/withdrawal/:id', to: 'customers#withdrawal', as: "customers/withdrawal"
  resources :comics, only:[:index, :new, :create, :show, :edit, :destroy, :update] do
   resources :comic_comments, only: [:index, :create, :destroy]
+  resource :bookmark, only: [:create, :destroy]
   end
   #タグ絞り込み表示
   resources :tags do

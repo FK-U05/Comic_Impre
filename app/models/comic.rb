@@ -9,7 +9,13 @@ class Comic < ApplicationRecord
   has_many :tags, through: :comic_tags
 
   has_many :comic_comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   belongs_to :customer
+
+  #ブックマーク
+  def bookmarked_by?(customer)
+    bookmarks.exists?(customer_id: customer.id)
+  end
 
   #ジャンルリスト
   def genres_save(sent_genres)

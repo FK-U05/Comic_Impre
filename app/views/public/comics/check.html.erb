@@ -5,7 +5,7 @@
     <!--このまま投稿する-->
 
       <%= form_with model: @comic, url: public_comics_path, method: :post do |f| %>
-       <table align="center">
+       <table class="table table-bordered">
 
           <tr><th>タイトル</th></tr>
           <tr><th><%= @comic.title %></th></tr>
