@@ -61,20 +61,20 @@ class Public::ComicsController < ApplicationController
     if @comic.customer.id != current_customer.id
     redirect_to public_comics_path
     end
-    @genre_list = @comic.genres.pluck(:genre_name).join(nil)
-    @tag_list = @comic.tags.pluck(:tag_name).join(nil)
+    @genre_list = @comic.genres.pluck(:genre_names).join(nil)
+    @tag_list = @comic.tags.pluck(:tag_names).join(nil)
   end
 
   def update
     @comic = Comic.find(params[:id])
+    if @comic.update(comic_params)
     #入力されたジャンル名をgenre_listに追加する
-    genre_list = params[:comic][:genre_name].split(nil)
+    genre_list = params[:comic][:genre_names][0].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
-    tag_list = params[:comic][:tag_name].split(nil)
+    tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
-    if @comic.update(comic_params)
-      redirect_to public_comic_path(@comic)
+    redirect_to public_comic_path(@comic)
     end
   end
 

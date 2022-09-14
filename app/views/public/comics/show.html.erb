@@ -22,7 +22,7 @@
     <%= @comic.company %>
 
   <p>発行年月日</p>
-    <%= @comic.release_date %>
+    <%= @comic.release_date.strftime("%Y年%m月%d日") %>
 
   <!--星レビュー機能-->
   <div id="star-rate-<%= @comic.id %>">

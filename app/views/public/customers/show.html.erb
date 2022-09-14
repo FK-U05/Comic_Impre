@@ -21,7 +21,7 @@
         <%= @last_comic.company %>
 
       <p>発行年月日</p>
-        <%= @last_comic.release_date %>
+        <%= @last_comic.release_date.strftime("%Y年%m月%d日") %>
 
       <div class="star-rate">
         <div id="star-rate-<%= @last_comic.id %>"></div>

@@ -2,8 +2,8 @@
 
   <% @comics.each do |comic| %>
 
-　　<p>タイトル</p>:
-　　<%= link_to public_comic_path(comic) do %>
+   <p>タイトル</p>:
+    <%= link_to public_comic_path(comic) do %>
     <%= comic.title %>
     <% end %>
 
@@ -21,6 +21,7 @@
       <div id="star-rate-<%= comic.id %>"></div>
 
          <script>
+           $('#star-rate-<%= comic.id %>').empty();
            $('#star-rate-<%= comic.id %>').raty({
              size      : 36,
              starOff   : '<%= asset_path('star-off.png') %>',
@@ -52,6 +53,6 @@
       <%= comic.comic_comments.count %>
 
     <p>投稿日時</p>:
-      <%= comic.created_at %>
+      <%= comic.created_at.strftime("%Y年%m月%d日") %>
 
   <% end %>
