@@ -17,6 +17,7 @@ namespace :admin do
  get 'top'=>"homes#top"
  get 'search'=>"searches#search"
  get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
+ get 'customers/bookmark/:id', to:'customers#bookmark', as: "customers/bookmark"
  resources :comics, only:[:index, :show, :edit, :destroy, :update] do
   resources :comic_comments, only:[:index, :destroy]
   end

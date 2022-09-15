@@ -1,11 +1,21 @@
-<h1>ジャンル編集</h1>
+<div class="container mt-5">
 
-<%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch do |f| %>
-<%= f.label :ジャンル名 %>
-<%= f.text_field :genre_name %>
+  <div class="row">
+    <h1>ジャンル編集</h1>
+  </div>
 
-<%= f.submit "変更保存" %>
-<% end %>
+  <div class="row">
+    <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch do |f| %>
+      <%= f.label :ジャンル名 %>
+      <%= f.text_field :genre_name %>
 
-<%= link_to "削除する", admin_genre_path(@genre), method: :delete %>
-<%= link_to "戻る", admin_top_path %>
+      <%= f.submit "変更保存" %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <%= link_to "削除する", admin_genre_path(@genre), method: :delete %>
+    <%= link_to "戻る", admin_top_path %>
+  </div>
+
+</div>

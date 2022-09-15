@@ -1,9 +1,22 @@
-<h3>退会確認</h3>
+<div class="container mt-5">
+     <div class="row">
+<h3 class="text-center">退会確認</h3>
+</div>
+<div class="row">
 
-  <p>本当に退会しますか？<br>
+  <p class="text-center">本当に退会しますか？<br>
   退会すると、会員登録情報や<br>
   これまでの投稿、コメントは全て削除されます。<br>
   退会する場合は、「退会する」をクリックしてください。</p>
 
+  </div>
+  <div class="row">
+    <div class="col-md-3">
   <%= link_to "退会しない", public_customer_path(@customer) %>
+  </div>
+  <div class="col">
   <%= link_to "退会する", public_customers_withdrawal_path(@customer), method: :patch %>
+  </div>
+  </div>
+
+  </div>

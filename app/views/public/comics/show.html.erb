@@ -101,19 +101,21 @@
           </tr>
         </table>
 
-        <% if @comic.bookmarked_by?(current_customer) %>
-    <p>
-      <%= link_to public_comic_bookmark_path(@comic), method: :delete do %>
-      ブックマークを外す<%= @comic.bookmarks.count %>ブクマ
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to public_comic_bookmark_path(@comic), method: :post do %>
-        ブックマークする<%= @comic.bookmarks.count %>ブクマ
-      <% end %>
-    </p>
-  <% end %>
+        <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
+         <% if @comic.bookmarked_by?(current_customer) %>
+            <p>
+              <%= link_to public_comic_bookmark_path(@comic), method: :delete do %>
+              ブックマークを外す(<%= @comic.bookmarks.count %>)
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to public_comic_bookmark_path(@comic), method: :post do %>
+                ブックマークする(<%= @comic.bookmarks.count %>)
+              <% end %>
+            </p>
+         <% end %>
+        <% end %>
 
         <%= link_to "コメント一覧", public_comic_comic_comments_path(@comic) %>
 

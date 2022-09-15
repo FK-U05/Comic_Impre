@@ -24,6 +24,7 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  #ブックマーク一覧
   def bookmark
     @customer = Customer.find(params[:id])
     bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:comic_id)

@@ -1,51 +1,103 @@
-<h5><%= @genre.genre_name %>の投稿一覧</h5>
+<div class="container mt-5">
+
+  <div class="row">
+    <h5><%= @genre.genre_name %>の投稿一覧</h5>
+  </div>
 
   <% @comics.each do |comic| %>
+      <div class="row">
+        <table>
 
-    <p>漫画のタイトル</p>:
-      <%= link_to admin_comic_path(comic) do %>
-        <%= comic.title %>
-      <% end %>
+            <tr>
+              <th>タイトル</th>
+              <td>
+                <%= link_to admin_comic_path(comic) do %>
+                  <%= comic.title %>
+                <% end %>
+              </td>
+            </tr>
 
-    <p>漫画の著者名</p>:
-      <%= comic.name %>
+            <tr>
+              <th>漫画の著者名</th>
+              <td><%= comic.name %></td>
+            </tr>
 
-    <p>出版社</p>:
-      <%= comic.company %>
+            <tr>
+              <th>出版社</th>
+              <td><%= comic.company %></td>
+            </tr>
 
-    <p>発行年月日</p>:
-      <%= comic.release_date %>
+            <tr>
+              <th>発行年月日</th>
+              <td><%= comic.release_date %></td>
+            </tr>
 
-    <!--星レビュー機能-->
-    <div class="star-rate">
-      <div id="star-rate-<%= comic.id %>"></div>
+            <!--星レビュー機能-->
+            <tr>
+              <th>おすすめ度</th>
+              <td>
+                <div class="star-rate">
+                  <div id="star-rate-<%= comic.id %>"></div>
 
-         <script>
-           $('#star-rate-<%= comic.id %>').raty({
-             size      : 36,
-             starOff   : '<%= asset_path('star-off.png') %>',
-             starOn    : '<%= asset_path('star-on.png') %>',
-             starHalf  : '<%= asset_path('star-half.png') %>',
-             half      : true,
-             readOnly: true,
-             score: <%= comic.star %>,
-           });
-         </script>
+                     <script>
+                       $('#star-rate-<%= comic.id %>').raty({
+                         size      : 36,
+                         starOff   : '<%= asset_path('star-off.png') %>',
+                         starOn    : '<%= asset_path('star-on.png') %>',
+                         starHalf  : '<%= asset_path('star-half.png') %>',
+                         half      : true,
+                         readOnly: true,
+                         score: <%= comic.star %>,
+                       });
+                     </script>
 
-    </div>
+                </div>
+              </td>
+            </tr>
 
-    <p>ジャンル</p>
-      <% comic.genres.each do |genre| %>
-        <%= link_to admin_genre_comics_genre_path(genre_id: genre.id) do %>
-          <%= genre.genre_name %>
-        <% end %>
-      <% end %>
+            <tr>
+              <th>ジャンル</th>
+              <td>
+                <% comic.genres.each do |genre| %>
+                  <%= link_to admin_genre_comics_genre_path(genre_id: genre.id) do %>
+                    <%= genre.genre_name %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
 
-    <p>タグ</p>
-      <% comic.tags.each do |tag| %>
-        <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
-          <%= tag.tag_name %>
-        <% end %>
-      <% end %>
+            <tr>
+              <th>タグ</th>
+              <td>
+                <% comic.tags.each do |tag| %>
+                  <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
+                    <%= tag.tag_name %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
 
+
+            <tr>
+              <th>コメント数</th>
+              <td><%= comic.comic_comments.count %></td>
+            </tr>
+
+            <tr>
+              <th>ブクマ数</th>
+              <td><%= comic.bookmarks.count %></td>
+            </tr>
+
+            <tr>
+              <th>投稿日時</th>
+              <td><%= comic.created_at.strftime("%Y年%m月%d日") %></td>
+            </tr>
+
+            <tr>
+              <th>本文</th>
+              <td><%= comic.body.truncate(10) %></td>
+            </tr>
+        </table>
+      </div>
   <% end %>
+</div>

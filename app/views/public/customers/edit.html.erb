@@ -1,20 +1,35 @@
+<div class="container mt-5">
+     <div class="row">
+          <div class-"center-block">
 <h5>マイページ編集</h5>
 
   <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
+  <table>
 
-    <p>変更前の画像</p>
+    <tr><td>変更前の画像</td>
     <%= image_tag @customer.get_profile_image(100,100) %>
-    <%= f.file_field :profile_image, accept: "image/*" %>
+    <td><%= f.file_field :profile_image, accept: "image/*" %></td></tr>
 
-    <%= f.label :ユーザー名 %>
-    <%= f.text_field :name %>
+<tr>
+    <td><%= f.label :ユーザー名 %>
+    <%= f.text_field :name %></td>
+    </tr>
 
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email %>
+<tr>
+   <td> <%= f.label :メールアドレス %>
+    <%= f.email_field :email %></td>
+    </tr>
 
-    <%= f.submit "変更保存" %>
-
-    <%= link_to "戻る", public_customer_path(current_customer) %>
-    <%= link_to "退会する", public_customers_quit_path %>
+<tr>
+    <td><%= f.submit "変更保存" %></td>
+</tr>
+<tr>
+    <td><%= link_to "戻る", public_customer_path(current_customer) %></td>
+    <td><%= link_to "退会する", public_customers_quit_path %></td>
+    </tr>
+    </table>
 
   <% end %>
+  </div>
+  </div>
+  </div>

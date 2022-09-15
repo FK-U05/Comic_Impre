@@ -1,13 +1,29 @@
-<h3>設定一覧</h3>
+<div class="container mt-5">
 
-<h5>ジャンル一覧</h5>
-<% @genres.each do |genre| %>
-<%= genre.genre_name %>
-<%= link_to "編集する", edit_admin_genre_path(genre) %>
-<% end %>
+  <div class="row">
+    <h3>設定一覧</h3>
+  </div>
 
-<h5>タグ一覧</h5>
-<% @tags.each do |tag| %>
-<%= tag.tag_name %>
-<%= link_to "編集する", edit_admin_tag_path(tag) %>
-<% end %>
+  <div class="row">
+    <h5>ジャンル一覧</h5>
+  </div>
+
+    <% @genres.each do |genre| %>
+      <div class="row">
+        <%= genre.genre_name %>
+        <%= link_to "編集する", edit_admin_genre_path(genre) %>
+      </div>
+    <% end %>
+
+  <div class="row">
+    <h5>タグ一覧</h5>
+  </div>
+
+    <% @tags.each do |tag| %>
+      <div class="row">
+        <%= tag.tag_name %>
+        <%= link_to "編集する", edit_admin_tag_path(tag) %>
+      </div>
+    <% end %>
+
+</div>

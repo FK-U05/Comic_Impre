@@ -1,35 +1,55 @@
-<div class="container">
+<div class="container mt-5">
+
   <div class="row">
     <h3>投稿一覧</h3>
   </div>
 
-    <% @comics.each do |comic| %>
-        <div class="row">
-          <!-- 退会したユーザーの投稿は表示しない -->
-          <% if comic.customer.is_deleted == false %>
-              <table class="table table-bordered">
-                <div class="col-md-1">
-                  <tr><th>タイトル</th></tr>
-                  <tr><td><%= link_to public_comic_path(comic) do %>
+  <div class="row">
+     <%= link_to '新しい順', public_comics_path(latest: "true") %>
+    |<%= link_to '古い順', public_comics_path(old: "true") %>
+    |<%= link_to 'おすすめ度の高い順', public_comics_path(star_count: "true") %>
+    |<%= link_to 'コメントの多い順', public_comics_path(comic_comment: "true") %>
+    |<%= link_to 'ブックマークの多い順', public_comics_path(bookmark_count: "true") %>
+  </div>
+
+  <% @comics.each do |comic| %>
+    <div class="row">
+      <!-- 退会したユーザーの投稿は表示しない -->
+      <% if comic.customer.is_deleted == false %>
+        <table class="table table-bordered">
+
+            <tr>
+              <th>タイトル</th>
+              <td>
+                <%= link_to public_comic_path(comic) do %>
                   <%= comic.title %>
-                  <% end %></td></tr>
-                </div>
-                  <tr><th>著者名</th>
-                    <td><%= comic.name %></td></tr>
+                <% end %>
+              </td>
+            </tr>
 
-                  <tr><th>出版社</th>
-                    <td><%= comic.company %></td></tr>
+            <tr>
+              <th>著者名</th>
+              <td><%= comic.name %></td>
+            </tr>
 
-                  <tr><th>投稿したユーザー</th>
-                    <td><%= comic.customer.name %></td></tr>
+            <tr>
+              <th>出版社</th>
+              <td><%= comic.company %></td>
+            </tr>
 
-                  <!--星レビュー機能-->
-                  <tr><th>おすすめ度</th>
-                  <td>
-                    <div class="star-rate">
-                    <div id="star-rate-<%= comic.id %>"></div>
+            <tr>
+              <th>投稿したユーザー</th>
+              <td><%= comic.customer.name %></td>
+            </tr>
 
-                      <script>
+            <!--星レビュー機能-->
+            <tr>
+              <th>おすすめ度</th>
+              <td>
+                <div class="star-rate">
+                  <div id="star-rate-<%= comic.id %>"></div>
+
+                    <script>
                       $('#star-rate-<%= comic.id %>').empty();
                       $('#star-rate-<%= comic.id %>').raty({
                       size      : 36,
@@ -40,39 +60,60 @@
                       readOnly: true,
                       score: <%= comic.star %>,
                       });
-                      </script>
+                    </script>
 
-                  </div>
-                  </td>
+                </div>
+              </td>
+            </tr>
 
-                  </tr>
+            <tr>
+              <th>ジャンル</th>
+              <td>
+                <% comic.genres.each do |genre| %>
+                  <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+                    <%= genre.genre_name %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
 
-                  <tr><th>ジャンル</th>
-                    <td><% comic.genres.each do |genre| %>
-                      <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
-                      <%= genre.genre_name %>
-                      <% end %>
-                    <% end %></td></tr>
+            <tr>
+              <th>タグ</th>
+              <td>
+                <% comic.tags.each do |tag| %>
+                  <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+                    <%= tag.tag_name %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
 
-                  <tr><th>タグ</th>
-                    <td><% comic.tags.each do |tag| %>
-                      <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
-                      <%= tag.tag_name %>
-                      <% end %>
-                    <% end %></td></tr>
+            <tr>
+              <th>コメント数</th>
+              <td><%= comic.comic_comments.count %></td>
+            </tr>
 
-                  <tr><th>コメント数</th>
-                    <td><%= comic.comic_comments.count %></td></tr>
+            <tr>
+              <th>ブックマーク数</th>
+              <td><%= comic.bookmarks.count %></td>
+            </tr>
 
-                  <tr><th>投稿日時</th>
-                    <td><%= comic.created_at.strftime("%Y年%m月%d日") %></td></tr>
+            <tr>
+              <th>投稿日時</th>
+              <td><%= comic.created_at.strftime("%Y年%m月%d日") %></td>
+            </tr>
 
-                  <tr><th>本文</th>
-                    <td><%= comic.body.truncate(10) %></td></tr>
+            <tr>
+              <th>本文</th>
+              <td><%= comic.body.truncate(10) %></td>
+            </tr>
 
-              </table>
-        <% end %>
-        </div>
-    <% end %>
+        </table>
+      <% end %>
+    </div>
+  <% end %>
+    <div class="row">
+      <%= paginate @comics %>
+    </div>
 
 </div>

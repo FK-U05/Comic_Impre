@@ -1,9 +1,20 @@
 class Public::ComicsController < ApplicationController
-
   def index
-    @comics = Comic.all.order(created_at: :desc)
-    @tag_list = Tag.all
-    @genre_list = Genre.all
+    if  params[:latest]
+        @comics = Comic.latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @comics = Comic.old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @comics = Comic.star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @comics = Comic.comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @comics = Comic.bookmark_count.page(params[:page]).per(3)
+    else
+        @comics = Comic.all.order(created_at: :desc).page(params[:page]).per(3)
+        @tag_list = Tag.all
+        @genre_list = Genre.all
+    end
   end
 
   def new
@@ -22,7 +33,7 @@ class Public::ComicsController < ApplicationController
     tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
     if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
-      render :new and return
+       render :new and return
     end
     redirect_to public_comics_path
   end
@@ -59,7 +70,7 @@ class Public::ComicsController < ApplicationController
   def edit
     @comic = Comic.find(params[:id])
     if @comic.customer.id != current_customer.id
-    redirect_to public_comics_path
+       redirect_to public_comics_path
     end
     @genre_list = @comic.genres.pluck(:genre_names).join(nil)
     @tag_list = @comic.tags.pluck(:tag_names).join(nil)
@@ -67,7 +78,6 @@ class Public::ComicsController < ApplicationController
 
   def update
     @comic = Comic.find(params[:id])
-    #byebug
     if @comic.update(comic_params)
       #入力されたジャンル名をgenre_listに追加する
       #まずはからになっている配列を消す

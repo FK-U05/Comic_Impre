@@ -1,27 +1,42 @@
+<div class="container mt-5">
+     <div class="row">
+          <div class-"center-block">
+
+
 <h3><%= @customer.name %>の編集</h3>
 
-<p>会員ID</p>:
-<%= @customer.id %>
+          <tr><td>会員ID:<%= @customer.id %></td></tr>
 
 <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+<table>
+     <tr>
+     <td><%= image_tag @customer.get_profile_image(100,100) %>
+     <td><%= f.file_field :profile_image, accept: "image/*" %></td></tr>
 
-     <%= image_tag @customer.get_profile_image(100,100) %>
-     <%= f.file_field :profile_image, accept: "image/*" %>
+<tr>
+     <td><%= f.label :ユーザー名 %></td>
+     <td><%= f.text_field :name %></td>
+     </tr>
 
-     <%= f.label :ユーザー名 %>
-     <%= f.text_field :name %>
+<tr>
+     <td><%= f.label :メールアドレス %></td>
+     <td><%= f.email_field :email %></td>
+     </tr>
 
-     <%= f.label :メールアドレス %>
-     <%= f.email_field :email %>
-
-     <%= f.label :会員ステータス %>
-     <%= f.radio_button :is_deleted, false %>
+<tr>
+     <td><%= f.label :会員ステータス %></td>
+     <td><%= f.radio_button :is_deleted, false %>
      <%= f.label :is_deleted, '有効' %>
      <%= f.radio_button :is_deleted, true %>
-     <%= f.label :is_deleted, '退会' %>
+     <%= f.label :is_deleted, '退会' %></td>
+     </tr>
 
-     <%= f.submit "変更保存" %>
+     <tr><td><%= f.submit "変更保存" %></td></tr>
+</table>
 
 <% end %>
 
 <%= link_to "戻る", admin_customer_path(@customer) %>
+</div>
+ </div>
+</div>

@@ -24,7 +24,6 @@
         <h3>ブックマーク一覧</h3>
           <% @customer.bookmarks.each do |bookmark| %>
             <table class="table table-bordered">
-
               <tr>
                 <th>タイトル</th>
                 <td><%= bookmark.comic.title %></td>
@@ -100,9 +99,8 @@
               </tr>
 
             </table>
-          <% end %>
-
-      </div>
+        <% end %>
+    </div>
 
   </div>
 </div>

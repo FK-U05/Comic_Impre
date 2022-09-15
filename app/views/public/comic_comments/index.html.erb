@@ -1,29 +1,61 @@
- <!-- コメントした漫画を投稿したユーザーの情報 -->
-  <%= image_tag @comic.customer.get_profile_image(50,50) %>
-  <%= @comic.customer.name %>
+ <div class="container mt-5">
+  <div class="row">
 
-  <% if @comic.customer == current_customer %>
-    <%= link_to "ユーザー情報を編集する", edit_public_customer_path(@comic.customer) %>
-  <% end %>
+    <div class="col-md-2">
+       <!-- コメントした漫画を投稿したユーザーの情報 -->
+        <table class="table table-bordered">
+          <tr>
+            <th><%= image_tag @comic.customer.get_profile_image(50,50) %></th>
+          </tr>
+          <tr>
+            <th><%= @comic.customer.name %></th>
+          </tr>
 
-  <h3><%= @comic.title %>へのコメント一覧</h3>
+          <% if @comic.customer == current_customer %>
+            <tr>
+              <th>
+                <%= link_to "ユーザー情報を編集する", edit_public_customer_path(@comic.customer) %>
+              </th>
+            </tr>
+          <% end %>
+        </table>
+    </div>
 
-      <% if @comic.comic_comments.exists? %>
+    <div class="col">
+      <h3><%= @comic.title %>へのコメント一覧</h3>
+          <% if @comic.comic_comments.exists? %>
+            <% @comic.comic_comments.each do |comment| %>
+              <table class="table table-bordered">
+                  <tr>
+                    <td><%= image_tag comment.customer.get_profile_image(50,50) %></td>
+                    <td><%= comment.customer.name %></td>
+                  </tr>
+                  <tr>
+                    <td>コメント</td>
+                    <td><%= comment.comment %></td>
+                  </tr>
 
-          <% @comic.comic_comments.each do |comment| %>
+                    <% if comment.customer == current_customer %>
+                      <tr>
+                        <td>
+                          <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete %>
+                        </td>
+                      </tr>
+                    <% end %>
+              </table>
+            <% end %>
 
-            <%= image_tag comment.customer.get_profile_image(50,50) %>
-            <%= comment.customer.name %>
-            <p>コメント</p>:<%= comment.comment %>
-
-              <% if comment.customer == current_customer %>
-                <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete %>
-              <% end %>
-
+          <% else %>
+            <p>コメントはありません</p>
           <% end %>
 
-      <% else %>
-        <p>コメントはありません</p>
-      <% end %>
+    </div>
 
-  <%= link_to "戻る", public_comic_path(@comic) %>
+  </div>
+  <div class="row">
+    <div class="col">
+        <%= link_to "戻る", public_comic_path(@comic) %>
+    </div>
+  </div>
+
+</div>

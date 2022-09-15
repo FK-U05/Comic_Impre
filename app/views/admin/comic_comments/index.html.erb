@@ -1,19 +1,49 @@
- <!-- コメントした漫画を投稿したユーザーの情報 -->
-  <%= image_tag @comic.customer.get_profile_image(50,50) %>
-  <%= @comic.customer.name %>
+<div class="container mt-5">
+  <div class="row">
 
-  <%= link_to "ユーザー情報を編集する", edit_admin_customer_path(@comic.customer) %>
+    <div class="col-md-2">
+     <!-- コメントした漫画を投稿したユーザーの情報 -->
+      <table class="table table-bordered">
+        <tr>
+          <th><%= image_tag @comic.customer.get_profile_image(50,50) %></th>
+        </tr>
+        <tr>
+          <th><%= @comic.customer.name %></th>
+        </tr>
+        <tr>
+          <th><%= link_to "ユーザー情報を編集する", edit_admin_customer_path(@comic.customer) %></th>
+        </tr>
+      </table>
+    </div>
 
-  <h3><%= @comic.title %>へのコメント一覧</h3>
+    <div class="col">
+      <h3><%= @comic.title %>へのコメント一覧</h3>
+            <% if @comic.comic_comments.exists? %>
+              <% @comic.comic_comments.each do |comment| %>
+                <table>
+                   <tr>
+                      <td><%= image_tag comment.customer.get_profile_image(50,50) %></td>
+                      <td><%= comment.customer.name %></td>
+                    </tr>
+                    <tr>
+                      <td>コメント</td>
+                      <td><%= comment.comment %></td>
+                    </tr>
+                    <tr>
+                      <td><%= link_to "削除", admin_comic_comic_comment_path(comment.comic, comment), method: :delete %></td>
+                    </tr>
+                </table>
+              <% end %>
 
-    <% @comic.comic_comments.each do |comment| %>
+            <% else %>
+              <p>コメントはありません</p>
+            <% end %>
 
-      <%= image_tag comment.customer.get_profile_image(50,50) %>
-      <%= comment.customer.name %>
-      <%= comment.comment %>
-
-      <%= link_to "削除", admin_comic_comic_comment_path(comment.comic, comment), method: :delete %>
-
-    <% end %>
-
-    <%= link_to "投稿詳細へ戻る", admin_comic_path(@comic) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <%= link_to "投稿詳細へ戻る", admin_comic_path(@comic) %>
+    </div>
+  </div>
+</div>

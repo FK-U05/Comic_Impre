@@ -12,6 +12,13 @@ class Comic < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   belongs_to :customer
 
+  #並び替え
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :star_count, -> {order(star: :desc)}
+  scope :comic_comment_count, -> { includes(:comic_comments).sort {|a,b| b.comic_comments.size <=> a.comic_comments.size}}
+  scope :bookmark_count, -> { includes(:bookmarks).sort {|a,b| b.bookmarks.size <=> a.bookmarks.size}}
+
   #ブックマーク
   def bookmarked_by?(customer)
     bookmarks.exists?(customer_id: customer.id)

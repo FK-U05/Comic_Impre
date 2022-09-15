@@ -1,63 +1,71 @@
-<h3>投稿編集</h3>
+<div class="container mt-5">
+  <div class="row">
 
-<%= form_with model: @comic, url: admin_comic_path(@comic), method: :patch do |f| %>
+    <h3>投稿編集</h3>
 
-    <div class="form-group">
-      <%= f.label :漫画のタイトル %>
-      <%= f.text_field :title %>
-    </div>
+      <%= form_with model: @comic, url: admin_comic_path(@comic), method: :patch do |f| %>
 
-    <div class="form-group">
-      <%= f.label :漫画の著者 %>
-      <%= f.text_field :name %>
-    </div>
+          <div class="form-group">
+            <%= f.label :漫画のタイトル %>
+            <p><%= f.text_field :title %></p>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :出版社 %>
-      <%= f.text_field :company %>
-    </div>
+          <div class="form-group">
+            <%= f.label :漫画の著者 %>
+            <p><%= f.text_field :name %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :発行年月日 %>
-      <%= f.date_field :release_date %>
-    </div>
+          <div class="form-group">
+            <%= f.label :出版社 %>
+            <p><%= f.text_field :company %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :本文 %>
-      <%= f.text_area :body %>
-    </div>
+          <div class="form-group">
+            <%= f.label :発行年月日 %>
+            <p><%= f.date_field :release_date %>
+          </div>
 
-    <!--星レビュー機能-->
-    <div class="form-group" id="star">
-      <%= f.hidden_field :star, id: :review_star %>
-    </div>
+          <div class="form-group">
+            <%= f.label :本文 %>
+            <p><%= f.text_area :body %>
+          </div>
 
-       <script>
-         $('#star').empty();
-         $('#star').raty({
-           size: 36,
-           starOff:  '<%= asset_path('star-off.png') %>',
-           starOn:   '<%= asset_path('star-on.png') %>',
-           starHalf: '<%= asset_path('star-half.png') %>',
-           half: true,
-            scoreName: 'comic[star]',
-         });
-       </script>
+          <!--星レビュー機能-->
+          <p>おすすめ度
+          <div class="form-group" id="star">
+            <%= f.hidden_field :star, id: :review_star %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :ジャンル %>
-      <%= f.text_field :genre_name, :value => @genre_list %>
-    </div>
+             <script>
+               $('#star').empty();
+               $('#star').raty({
+                 size: 36,
+                 starOff:  '<%= asset_path('star-off.png') %>',
+                 starOn:   '<%= asset_path('star-on.png') %>',
+                 starHalf: '<%= asset_path('star-half.png') %>',
+                 half: true,
+                  scoreName: 'comic[star]',
+               });
+             </script>
 
-    <div class="form-group">
-      <%= f.label :タグ %>
-      <%= f.text_field :tag_name, :value => @tag_list %>
-    </div>
+          <div class="form-group">
+            <%= f.label :ジャンル %>
+            <p><%= f.text_field :genre_names %></p>
+            <p><%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true }) %></p>
+          </div>
 
-    <%= f.submit "変更保存" %>
+          <div class="form-group">
+            <%= f.label :タグ %>
+            <p><%= f.text_field :tag_names %></p>
+            <p><%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %></p>
+          </div>
 
-<% end %>
+          <%= f.submit "変更保存" %>
 
-  <%= link_to "戻る", admin_comic_path(@comic) %>
+      <% end %>
 
-  <%= link_to "削除する", admin_comic_path(@comic), method: :delete %>
+        <%= link_to "戻る", admin_comic_path(@comic) %>
+
+        <%= link_to "削除する", admin_comic_path(@comic), method: :delete %>
+  </div>
+</div>
