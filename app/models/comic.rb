@@ -64,14 +64,15 @@ class Comic < ApplicationRecord
 
   #検索
   def self.looks(searches, words)
+    #重複を防ぐuniq
     if searches == "perfect_match"
       @comic = Comic.joins(:tags, :genres)
                     .where(["title LIKE(?) OR company LIKE(?) OR name LIKE(?) OR tag_name LIKE(?) OR genre_name LIKE(?)",\
-                    "#{words}", "#{words}", "#{words}", "#{words}", "#{words}"])
+                    "#{words}", "#{words}", "#{words}", "#{words}", "#{words}"]).uniq
     else
       @comic = Comic.joins(:tags, :genres)
                     .where(["title LIKE(?) OR company LIKE(?) OR name LIKE(? ) OR tag_name LiKE(?) OR genre_name LIKE(?)",\
-                    "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%"])
+                    "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%"]).uniq
     end
   end
 
