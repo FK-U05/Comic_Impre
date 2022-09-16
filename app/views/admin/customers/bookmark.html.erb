@@ -2,22 +2,7 @@
   <div class="row">
 
       <div class="col-md-2">
-        <!-- ユーザー情報 -->
-        <table class="table table-bordered">
-          <tr>
-            <th><%= image_tag @customer.get_profile_image(100,100) %></th>
-          </tr>
-
-          <tr>
-            <th><%= @customer.name %></th>
-          </tr>
-
-          <tr>
-            <% if @customer == current_customer %>
-              <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
-            <% end %>
-          </tr>
-        </table>
+        <%= render 'admin/customers/customer', customer: @customer %>
       </div>
 
       <div class="col">
@@ -26,7 +11,11 @@
             <table class="table table-bordered">
               <tr>
                 <th>タイトル</th>
-                <td><%= bookmark.comic.title %></td>
+                <td>
+                  <%= link_to admin_comic_path(bookmark.comic) do %>
+                  <%= bookmark.comic.title %>
+                  <% end %>
+                </td>
               </tr>
 
               <tr>
@@ -41,7 +30,11 @@
 
               <tr>
                 <th>投稿したユーザー</th>
-                <td><%= bookmark.comic.customer.name %></td>
+                <td>
+                  <%= link_to admin_customer_path(bookmark.comic.customer) do %>
+                  <%= bookmark.comic.customer.name %>
+                  <% end %>
+                </td>
               </tr>
 
               <tr>

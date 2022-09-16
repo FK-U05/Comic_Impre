@@ -5,16 +5,16 @@
   </div>
 
   <div class="text-center">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_with model: @customer, url: customer_session_path do |f| %>
 
         <div class="field">
           <%= f.label :メールアドレス %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "name@example.com" %>
         </div>
 
         <div class="field">
           <%= f.label :パスワード %>
-          <%= f.password_field :password, autocomplete: "current-password" %>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "password"%>
         </div>
 
         <% if devise_mapping.rememberable? %>
@@ -25,12 +25,11 @@
         <% end %>
 
         <div class="actions">
-          <%= f.submit "ログイン" %>
+          <%= f.submit "ログインする", class:"btn btn-info btn-sm" %>
         </div>
 
       <% end %>
 
-    <%= render "public/shared/links" %>
   </div>
 </div>
 

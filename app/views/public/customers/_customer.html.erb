@@ -1,0 +1,23 @@
+<!-- ユーザー情報 -->
+<table class="table table-bordered">
+  <tr>
+    <th><%= image_tag customer.get_profile_image(100,100) %></th>
+  </tr>
+  <tr>
+    <th><%= customer.name %></th>
+  </tr>
+
+<!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクを表示-->
+  <% if customer == current_customer && customer.email != 'guest@guest' %>
+    <tr>
+      <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
+    </tr>
+  <% end %>
+    <tr>
+      <th><%= link_to "ユーザーの投稿一覧", public_customers_comics_path(customer) %></th>
+    </tr>
+
+    <tr>
+      <th><%= link_to "ブックマーク一覧", public_customers_bookmark_path(customer) %></th>
+    </tr>
+</table>

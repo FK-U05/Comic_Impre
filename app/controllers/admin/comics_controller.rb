@@ -1,9 +1,23 @@
 class Admin::ComicsController < ApplicationController
 
   def index
-    @comics = Comic.all.order(created_at: :desc)
     @tag_list = Tag.all
     @genre_list = Genre.all
+    if  params[:latest]
+        @comics = Comic.latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @comics = Comic.old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @comics = Comic.star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        comics = Comic.comic_comment_count
+        @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        comics = Comic.bookmark_count
+        @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
+    else
+        @comics = Comic.all.order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   def show

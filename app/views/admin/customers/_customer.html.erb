@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+  <tr>
+    <th>
+      <%= link_to admin_customer_path(customer) do %>
+      <%= image_tag customer.get_profile_image(100,100) %>
+      <% end %>
+    </th>
+  </tr>
+
+  <tr>
+    <th><%= customer.name %></th>
+  </tr>
+
+  <tr>
+    <th><%= link_to "会員情報を編集する", edit_admin_customer_path(customer) %></th>
+  </tr>
+
+  <tr>
+    <th><%= link_to "このユーザーの投稿一覧へ", admin_customers_comics_path(@comic.customer) %></th>
+  </tr>
+
+  <tr>
+    <th><%= link_to "このユーザーのブックマーク一覧へ", admin_customers_bookmark_path(@comic.customer) %></th>
+  </tr>
+</table>

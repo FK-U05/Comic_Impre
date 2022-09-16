@@ -3,7 +3,7 @@
 
     <h2>新規会員登録</h2>
 
-      <%= form_with model: @customer, url: customer_registration_path, local: true do |f| %>
+      <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer' do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
 
           <div class="field">
@@ -13,12 +13,12 @@
 
           <div class="field">
             <%= f.label :ユーザー名 %><br />
-            <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "name" %>
           </div>
 
           <div class="field">
             <%= f.label :メールアドレス %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "name@example.com" %>
           </div>
 
           <div class="field">
@@ -26,16 +26,16 @@
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %>文字以上)</em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
           </div>
 
           <div class="field">
             <%= f.label :パスワード確認%><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password" %>
           </div>
 
           <div class="actions">
-            <%= f.submit "新規登録" %>
+            <%= f.submit "新規登録", class:"btn btn-primary btn-sm"%>
           </div>
 
       <% end %>

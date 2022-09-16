@@ -2,22 +2,7 @@
   <div class="row">
 
       <div class="col-md-2">
-        <!-- ユーザー情報 -->
-        <table class="table table-bordered">
-          <tr>
-            <th><%= image_tag @customer.get_profile_image(100,100) %></th>
-          </tr>
-
-          <tr>
-            <th><%= @customer.name %></th>
-          </tr>
-
-          <tr>
-            <% if @customer == current_customer %>
-              <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
-            <% end %>
-          </tr>
-        </table>
+        <%= render 'customer', customer: @customer %>
       </div>
 
       <div class="col">

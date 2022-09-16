@@ -1,34 +1,28 @@
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row">
     <div class="col-md-2">
-      <!-- 投稿したユーザーの情報 -->
-      <table class="table table-bordered">
-        <tr>
-          <th>
-            <%= link_to public_customer_path(@comic.customer) do %>
-              <%= image_tag @comic.customer.get_profile_image(100,100) %>
-            <% end %>
-          </th>
-        </tr>
-
-        <tr>
-          <th><%= @comic.customer.name %></th>
-        </tr>
-
-        <% if @comic.customer == current_customer %>
-          <tr>
-            <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
-          </tr>
-        <% end %>
-
-        <tr>
-          <th><%= link_to "ユーザーの投稿一覧", public_customers_comics_path(@comic.customer) %></th>
-        </tr>
-      </table>
+      <%= render 'public/customers/customer', customer: @comic.customer %>
     </div>
 
     <div class="col">
-      <h3>投稿詳細</h3>
+      <h3 class="text-center">投稿詳細</h3>
+
+        <div class="text-right">
+          <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
+              <% if @comic.bookmarked_by?(current_customer) %>
+                  <%= link_to public_comic_bookmark_path(@comic), method: :delete, class:"btn btn-info btn-sm" do %>
+                    <i class="fas fa-bookmark"></i>
+                    ブックマークを外す(<%= @comic.bookmarks.count %>)
+                  <% end %>
+              <% else %>
+                  <%= link_to public_comic_bookmark_path(@comic), method: :post, class:"btn btn-secondary btn-sm" do %>
+                    <i class="fas fa-bookmark"></i>
+                    ブックマークする(<%= @comic.bookmarks.count %>)
+                  <% end %>
+             <% end %>
+          <% end %>
+        </div>
+
         <table class="table table-bordered">
           <tr>
             <td>タイトル</td>
@@ -96,42 +90,48 @@
           </tr>
 
           <tr>
+            <td>投稿日時</td>
+            <td><%= @comic.created_at.strftime("%Y年%m月%d日") %></td>
+          </tr>
+
+          <tr>
             <td>本文</td>
             <td><%= @comic.body %></td>
           </tr>
         </table>
-
-        <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
-         <% if @comic.bookmarked_by?(current_customer) %>
-            <p>
-              <%= link_to public_comic_bookmark_path(@comic), method: :delete do %>
-              ブックマークを外す(<%= @comic.bookmarks.count %>)
-              <% end %>
-            </p>
-            <% else %>
-            <p>
-              <%= link_to public_comic_bookmark_path(@comic), method: :post do %>
-                ブックマークする(<%= @comic.bookmarks.count %>)
-              <% end %>
-            </p>
-         <% end %>
-        <% end %>
-
-        <%= link_to "コメント一覧", public_comic_comic_comments_path(@comic) %>
-
-        <% if @comic.customer == current_customer %>
-          <%= link_to "内容を編集する", edit_public_comic_path(@comic) %>
-          <%= button_to "この投稿を削除する", public_comic_path(@comic), method: :delete %>
-        <% end %>
-
-        <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
-          <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
-            <%= f.text_area :comment %>
-            <%= f.submit "コメントを送信する" %>
-          <% end %>
-        <% end %>
-
-        <%= link_to "みんなの投稿一覧へ", public_comics_path %>
+      </div>
     </div>
-  </div>
+      <div class="row text-right">
+          <div class="col">
+            <%= link_to public_comic_comic_comments_path(@comic), class:"btn btn-primary btn-sm" do %>
+              コメント一覧(<%= @comic.comic_comments.count %>)
+            <% end %>
+          </div>
+
+            <% if @comic.customer == current_customer %>
+
+              <div class="col">
+                  <%= link_to "内容を編集する", edit_public_comic_path(@comic), class:"btn btn-success btn-sm" %>
+              </div>
+
+              <div class="col">
+                  <%= button_to "この投稿を削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-sm" %>
+              </div>
+
+            <% end %>
+
+        </div>
+        <div class="row mt-3 text-right">
+          <div class="col">
+            <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
+
+              <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
+                <%= f.text_area :comment, size:"80x3" %>
+                <%= f.submit "コメントを送信する", class:"btn btn-warning btn-sm" %>
+              <% end %>
+
+            <% end %>
+          </div>
+        </div>
+
 </div>

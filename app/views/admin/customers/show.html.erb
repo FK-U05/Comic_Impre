@@ -1,42 +1,54 @@
 <div class="container mt-5">
+
   <div class="row">
-    <div class-"center-block">
+    <div class="col">
+      <h3 class="text-center"><%= @customer.name %>の詳細</h3>
+    </div>
+  </div>
 
-      <h3><%= @customer.name %>の詳細</h3>
-        <table>
-          <tr>
-            <td><%= image_tag @customer.get_profile_image(100,100) %></td>
-          </tr>
-          <tr>
-            <td>会員ID:<%= @customer.id %></td>
-          </tr>
+  <div class="row">
+    <div class="col">
+    <table class="table table-bordered">
+      <tr>
+        <td><%= image_tag @customer.get_profile_image(100,100) %></td>
+      </tr>
+      <tr>
+        <th>会員ID</th>
+        <td><%= @customer.id %></td>
+      </tr>
 
-          <tr>
-            <td>ユーザー名:<%= @customer.name %></td>
-          </tr>
+      <tr>
+        <th>ユーザー名</th>
+        <td><%= @customer.name %></td>
+      </tr>
 
-          <tr>
-            <td>メールアドレス:<%= @customer.email %></td>
-          </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
 
-          <tr>
-            <td>会員登録日:<%= @customer.created_at.strftime("%Y年%m月%d日") %></td>
-          </tr>
+      <tr>
+        <th>会員登録日</th>
+        <td><%= @customer.created_at.strftime("%Y年%m月%d日") %></td>
+      </tr>
 
-          <tr>
-            <td>会員ステータス:
-              <% if @customer.is_deleted %></td>
-                <td>退会</td>
-              <% else %>
-                <td>有効</td>
-              <% end %>
-          </tr>
-        </table>
+      <tr>
+        <th>会員ステータス</th>
+          <% if @customer.is_deleted %>
+            <td>退会</td>
+          <% else %>
+            <td>有効</td>
+          <% end %>
+      </tr>
+    </table>
 
-        <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer) %>
-        <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer) %>
-        <%= link_to "ブックマーク一覧", admin_customers_bookmark_path(@customer) %>
+    <div class="text-right">
+
+        <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer), class:"btn btn-success btn-sm" %>
+        <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer), class:"btn btn-warning btn-sm" %>
+        <%= link_to "ブックマーク一覧", admin_customers_bookmark_path(@customer), class:"btn btn-info btn-sm" %>
 
     </div>
+</div>
   </div>
 </div>

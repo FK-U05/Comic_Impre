@@ -2,23 +2,7 @@
   <div class="row">
 
     <div class="col-md-2">
-       <!-- コメントした漫画を投稿したユーザーの情報 -->
-        <table class="table table-bordered">
-          <tr>
-            <th><%= image_tag @comic.customer.get_profile_image(50,50) %></th>
-          </tr>
-          <tr>
-            <th><%= @comic.customer.name %></th>
-          </tr>
-
-          <% if @comic.customer == current_customer %>
-            <tr>
-              <th>
-                <%= link_to "ユーザー情報を編集する", edit_public_customer_path(@comic.customer) %>
-              </th>
-            </tr>
-          <% end %>
-        </table>
+      <%= render 'public/customers/customer', customer: @comic.customer %>
     </div>
 
     <div class="col">
@@ -27,7 +11,11 @@
             <% @comic.comic_comments.each do |comment| %>
               <table class="table table-bordered">
                   <tr>
-                    <td><%= image_tag comment.customer.get_profile_image(50,50) %></td>
+                    <td>
+                      <%= link_to public_customer_path(comment.customer) do %>
+                      <%= image_tag comment.customer.get_profile_image(50,50) %>
+                      <% end %>
+                    </td>
                     <td><%= comment.customer.name %></td>
                   </tr>
                   <tr>

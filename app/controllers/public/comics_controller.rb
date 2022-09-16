@@ -1,5 +1,7 @@
 class Public::ComicsController < ApplicationController
   def index
+    @tag_list = Tag.all
+    @genre_list = Genre.all
     if  params[:latest]
         @comics = Comic.latest.page(params[:page]).per(3)
     elsif params[:old]
@@ -14,8 +16,6 @@ class Public::ComicsController < ApplicationController
         @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
     else
         @comics = Comic.all.order(created_at: :desc).page(params[:page]).per(3)
-        @tag_list = Tag.all
-        @genre_list = Genre.all
     end
   end
 

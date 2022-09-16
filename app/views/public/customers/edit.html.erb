@@ -1,35 +1,52 @@
-<div class="container mt-5">
-     <div class="row">
-          <div class-"center-block">
-<h5>マイページ編集</h5>
+<div class="container mt-3">
 
-  <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
-  <table>
-
-    <tr><td>変更前の画像</td>
-    <%= image_tag @customer.get_profile_image(100,100) %>
-    <td><%= f.file_field :profile_image, accept: "image/*" %></td></tr>
-
-<tr>
-    <td><%= f.label :ユーザー名 %>
-    <%= f.text_field :name %></td>
-    </tr>
-
-<tr>
-   <td> <%= f.label :メールアドレス %>
-    <%= f.email_field :email %></td>
-    </tr>
-
-<tr>
-    <td><%= f.submit "変更保存" %></td>
-</tr>
-<tr>
-    <td><%= link_to "戻る", public_customer_path(current_customer) %></td>
-    <td><%= link_to "退会する", public_customers_quit_path %></td>
-    </tr>
-    </table>
-
-  <% end %>
+  <div class="row">
+    <div class="col">
+      <h5 class="text-center">マイページ編集</h5>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
+        <table>
+
+          <tr>
+            <td>変更前の画像</td>
+              <%= image_tag @customer.get_profile_image(100,100) %>
+            <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+          </tr>
+
+          <tr>
+            <td>
+              <%= f.label :ユーザー名 %>
+              <%= f.text_field :name %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <%= f.label :メールアドレス %>
+              <%= f.email_field :email %>
+            </td>
+          </tr>
+
+          <tr>
+            <td><%= f.submit "変更保存", class:"btn btn-success btn-sm" %></td>
+          </tr>
+
+        </table>
+      <% end %>
+    </div>
   </div>
+
+  <div class="row text-center">
+    <div class="col">
+      <%= link_to "戻る", public_customer_path(current_customer), class:"btn btn-warning btn-sm" %>
+    </div>
+    <div class="col">
+      <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-sm" %>
+    </div>
   </div>
+
+</div>

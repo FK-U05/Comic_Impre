@@ -2,103 +2,19 @@
   <div class="row">
 
     <div class="col-md-2">
-      <!-- ユーザー情報 -->
-      <table class="table table-bordered">
-        <tr>
-          <th><%= image_tag @customer.get_profile_image(100,100) %></th>
-        </tr>
-
-        <tr>
-          <th><%= @customer.name %></th>
-        </tr>
-
-        <tr>
-          <% if @customer == current_customer %>
-            <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
-          <% end %>
-        </tr>
-      </table>
+      <%= render 'public/customers/customer', customer: @customer %>
+      <%= link_to "ブックマーク一覧", public_customers_bookmark_path(@customer) %>
     </div>
 
     <div class="col">
       <h3><%= @customer.name %>の投稿一覧</h3>
-            <% @comics.each do |comic| %>
-              <table class="table table-bordered">
-
-                <tr>
-                  <th>タイトル</th>
-                  <td><%= comic.title %></td>
-                </tr>
-
-                <tr>
-                  <th>漫画の著者名</th>
-                  <td><%= comic.name %></td>
-                </tr>
-
-                <tr>
-                  <th>出版社</th>
-                  <td><%= comic.company %></td>
-                </tr>
-
-                <tr>
-                  <th>発行年月日</th>
-                  <td><%= comic.release_date.strftime("%Y年%m月%d日") %></td>
-                </tr>
-
-                <tr>
-                  <th>おすすめ度</th>
-                  <td>
-                    <div class="star-rate">
-                      <div id="star-rate-<%= comic.id %>"></div>
-
-                        <script>
-                          $('#star-rate-<%= comic.id %>').raty({
-                          size      : 36,
-                          starOff   : '<%= asset_path('star-off.png') %>',
-                          starOn    : '<%= asset_path('star-on.png') %>',
-                          starHalf  : '<%= asset_path('star-half.png') %>',
-                          half      : true,
-                          readOnly: true,
-                          score: <%= comic.star %>,
-                          });
-                        </script>
-
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <th>ジャンル</th>
-                  <td>
-                    <% comic.genres.each do |genre| %>
-                      <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
-                        <%= genre.genre_name %>
-                      <% end %>
-                    <% end %>
-                  </td>
-                </tr>
-
-                <tr>
-                  <th>タグ</th>
-                  <td>
-                    <% comic.tags.each do |tag| %>
-                      <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
-                        <%= tag.tag_name %>
-                      <% end %>
-                    <% end %>
-                  </td>
-                </tr>
-
-                <tr>
-                  <th></th>
-                  <td><%= link_to "投稿詳細", public_comic_path(comic) %></td>
-                </tr>
-
-              </table>
-            <% end %>
-
-            <%= link_to "戻る", public_customer_path(@customer) %>
-            <%= link_to "投稿フォームへ", new_public_comic_path %>
+      <%= render 'public/comics/comic', comics: @comics %>
     </div>
+
+    <div class="row">
+      <%= link_to "戻る", public_customer_path(@customer) %>
+      <%= link_to "投稿フォームへ", new_public_comic_path %>
+    </div>
+
   </div>
 </div>

@@ -1,42 +1,38 @@
 <div class="container mt-5">
   <div class="row">
+
     <div class-"col-md-2">
-      <!-- ユーザー情報 -->
-      <table class="table table-bordered">
-        <tr>
-          <th><%= image_tag @customer.get_profile_image(100,100) %></th>
-        </tr>
-        <tr>
-          <th><%= @customer.name %></th>
-        </tr>
-
-        <!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクを表示-->
-        <% if @customer == current_customer && @customer.email != 'guest@guest' %>
-        <tr>
-          <th><%= link_to "会員情報を編集する", edit_public_customer_path(current_customer) %></th>
-        </tr>
-        <% end %>
-
-        <tr>
-          <th><%= link_to "ブックマーク一覧", public_customers_bookmark_path(@customer) %></th>
-        </tr>
-
-      </table>
-
+      <%= render 'customer', customer: @customer %>
     </div>
 
   <% if @customer.comics.exists? %>
     <div class="col">
+      <h3 class="text-center">最新の投稿</h3>
 
-      <h3>最新の投稿</h3>
+        <div class="text-right">
+          <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
+              <% if @last_comic.bookmarked_by?(current_customer) %>
+                  <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-sm" do %>
+                    <i class="fas fa-bookmark"></i>
+                    ブックマークを外す(<%= @last_comic.bookmarks.count %>)
+                  <% end %>
+              <% else %>
+                  <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-sm" do %>
+                    <i class="fas fa-bookmark"></i>
+                    ブックマークする(<%= @last_comic.bookmarks.count %>)
+                  <% end %>
+             <% end %>
+          <% end %>
+        </div>
+
         <table class="table table-bordered">
           <tr>
-            <td>漫画のタイトル</td>
+            <td>タイトル</td>
             <td><%= @last_comic.title %></td>
           </tr>
 
           <tr>
-            <td>漫画の著者名</td>
+            <td>著者名</td>
             <td> <%= @last_comic.name %></td>
           </tr>
 
@@ -93,19 +89,32 @@
               <% end %>
             </td>
           </tr>
+
+          <tr>
+            <td>投稿日時</td>
+            <td><%= @last_comic.created_at.strftime("%Y年%m月%d日") %></td>
+          </tr>
+
+          <tr>
+            <td>本文</td>
+            <td><%= @last_comic.body %></td>
+          </tr>
         </table>
+    </div>
+  </div>
+  <div class="row text-right">
+    <div class="col">
+        <%= link_to "投稿詳細", public_comic_path(@last_comic), class:"btn btn-info btn-sm" %>
 
-        <%= link_to "投稿詳細", public_comic_path(@last_comic) %>
-
-        <%= link_to "このユーザーの投稿一覧", public_customers_comics_path(@customer) %>
+        <% if @customer.email != 'guest@guest' %>
+          <%= link_to "投稿フォームへ", new_public_comic_path, class:"btn btn-success btn-sm" %>
+        <% end %>
+    </div>
+  </div>
 
   <% else %>
     <p>投稿がありません</p>
   <% end %>
-
-    <% if @customer.email != 'guest@guest' %>
-        <%= link_to "投稿フォームへ", new_public_comic_path %>
-    <% end %>
 
     </div>
   </div>

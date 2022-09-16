@@ -1,42 +1,56 @@
-<div class="container mt-5">
-     <div class="row">
-          <div class-"center-block">
+<div class="container mt-3">
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center"><%= @customer.name %> の編集</h3>
+    </div>
+  </div>
 
+  <div class="row text-center">
+     <div class="col">
+       <table>
+          <thead>
+               <tr>
+                 <td>会員ID:<%= @customer.id %></td>
+                 <td><%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %></td>
+               </tr>
+          </thead>
+          <tbody>
+               <tr>
+                 <td><%= image_tag @customer.get_profile_image(100,100) %>
+                 <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+               </tr>
+               <tr>
+                 <td><%= f.label :ユーザー名 %></td>
+                 <td><%= f.text_field :name %></td>
+               </tr>
+               <tr>
+                 <td><%= f.label :メールアドレス %></td>
+                 <td><%= f.email_field :email %></td>
+               </tr>
 
-<h3><%= @customer.name %>の編集</h3>
+               <tr>
+                 <td><%= f.label :会員ステータス %></td>
+                 <td>
+                     <%= f.radio_button :is_deleted, false %>
+                     <%= f.label :is_deleted, '有効' %>
+                     <%= f.radio_button :is_deleted, true %>
+                     <%= f.label :is_deleted, '退会' %>
+                 </td>
+               </tr>
 
-          <tr><td>会員ID:<%= @customer.id %></td></tr>
+               <tr>
+                 <td><%= f.submit "変更保存", class:"btn btn-success btn-sm" %></td></tr>
 
-<%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
-<table>
-     <tr>
-     <td><%= image_tag @customer.get_profile_image(100,100) %>
-     <td><%= f.file_field :profile_image, accept: "image/*" %></td></tr>
+                     <% end %>
+          </tbody>
+       </table>
+     </div>
+  </div>
 
-<tr>
-     <td><%= f.label :ユーザー名 %></td>
-     <td><%= f.text_field :name %></td>
-     </tr>
+  <div class="row text-center">
+     <div class="col">
+       <%= link_to "戻る", admin_customer_path(@customer), class:"btn btn-warning btn-sm" %>
+     </div>
+  </div>
 
-<tr>
-     <td><%= f.label :メールアドレス %></td>
-     <td><%= f.email_field :email %></td>
-     </tr>
-
-<tr>
-     <td><%= f.label :会員ステータス %></td>
-     <td><%= f.radio_button :is_deleted, false %>
-     <%= f.label :is_deleted, '有効' %>
-     <%= f.radio_button :is_deleted, true %>
-     <%= f.label :is_deleted, '退会' %></td>
-     </tr>
-
-     <tr><td><%= f.submit "変更保存" %></td></tr>
-</table>
-
-<% end %>
-
-<%= link_to "戻る", admin_customer_path(@customer) %>
-</div>
- </div>
 </div>

@@ -1,7 +1,14 @@
-<div class="container mt-5">
-  <div class="row">
-    <h3>投稿編集</h3>
+<div class="container mt-3">
 
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center">投稿編集</h3>
+    </div>
+  </div>
+
+  <div class="row text-center">
+
+    <div class="col">
         <%= form_with model: @comic, url: public_comic_path(@comic), method: :patch do |f| %>
 
           <div class="form-group">
@@ -26,7 +33,7 @@
 
           <div class="form-group">
             <%= f.label :本文 %>
-            <p><%= f.text_area :body %></p>
+            <p><%= f.text_area :body, size:"60x10" %></p>
           </div>
 
           <!--星レビュー機能-->
@@ -59,14 +66,22 @@
             <p><%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %></p>
           </div>
 
-        <%= f.submit "変更保存" %>
+        <%= f.submit "変更保存", class:"btn btn-success btn-sm" %>
 
       <% end %>
-
-        <%= link_to "戻る", public_comic_path(@comic) %>
-
-        <%= link_to "削除する", public_comic_path(@comic), method: :delete %>
+    </div>
+    
   </div>
+
+  <div class="row text-center">
+    <div class="col">
+        <%= link_to "戻る", public_comic_path(@comic), class:"btn btn-warning btn-sm" %>
+    </div>
+    <div class="col">
+        <%= link_to "削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-sm" %>
+    </div>
+  </div>
+
 </div>
 
 
