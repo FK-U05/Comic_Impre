@@ -1,130 +1,40 @@
 <div class="container mt-5">
   <div class="row">
-    <h3><%= params[:word] %> の検索結果</h3>
+    <div class="col">
+      <h3 class="text-center"><%= params[:word] %> の検索結果</h3>
+    </div>
   </div>
+
   <div class="row">
+    <div class="col">
 
-    <% if @range == "Comic" %>
+      <% if @range == "Comic" %>
 
-      <% @comics.each do |comic| %>
-          <table>
+        <%= render 'admin/comics/comic', comics: @comics %>
 
-            <tr>
-            <th>タイトル</th>
-            <td><%= comic.title %></td>
-            </tr>
+      <% elsif @range == "Customer" %>
 
-            <tr>
-              <th>著者名</th>
-              <td><%= comic.name %></td>
-            </tr>
-
-            <tr>
-              <th>出版社</th>
-              <td><%= comic.company %></td>
-            </tr>
-
-            <tr>
-              <th>投稿したユーザー</th>
-              <td><%= comic.customer.name %></td>
-            </tr>
-
-            <!-- 星レビュー -->
-            <tr>
-              <th>おすすめ度</th>
-              <td>
-                <div class="star-rate">
-                  <div id="star-rate-<%= comic.id %>"></div>
-
-                    <script>
-                      $('#star-rate-<%= comic.id %>').empty();
-                      $('#star-rate-<%= comic.id %>').raty({
-                      size      : 36,
-                      starOff   : '<%= asset_path('star-off.png') %>',
-                      starOn    : '<%= asset_path('star-on.png') %>',
-                      starHalf  : '<%= asset_path('star-half.png') %>',
-                      half      : true,
-                      readOnly: true,
-                      score: <%= comic.star %>,
-                      });
-                    </script>
-
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th>ジャンル</th>
-              <td>
-                <% comic.genres.each do |genre| %>
-                  <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
-                    <%= genre.genre_name %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-
-            <tr>
-              <th>タグ</th>
-              <td>
-                <% comic.tags.each do |tag| %>
-                  <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
-                    <%= tag.tag_name %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-
-            <tr>
-              <th>コメント数</th>
-              <td><%= comic.comic_comments.count %></td>
-            </tr>
-
-            <tr>
-              <th>投稿日時</th>
-              <td><%= comic.created_at.strftime("%Y年%m月%d日") %></td>
-            </tr>
-          </table>
+          <% @customers.each do |customer| %>
+            <table class="table table-bordered">
+                <tr>
+                  <th><%= image_tag customer.get_profile_image(50,50) %>
+                      会員ID: <%= customer.id %>
+                  </th>
+                  <td>ユーザー名:<%= customer.name %></td>
+                  <td>会員ステータス:
+                    <% if customer.is_deleted %>
+                      退会
+                    <% else %>
+                      有効
+                    <% end %>
+                  </td>
+                  <td>会員登録日:<%= customer.created_at.strftime("%Y年%m月%d日") %></td>
+                  <td><%= link_to "詳細", admin_customer_path(customer), class:"btn btn-info btn-sm" %></td>
+                </tr>
+            </table>
+          <% end %>
 
       <% end %>
 
-    <% elsif @range == "Customer" %>
-
-        <% @customers.each do |customer| %>
-          <table>
-            <div class-"col">
-              <tr>
-                <td><%= image_tag customer.get_profile_image(50,50) %></td>
-              </tr>
-
-              <tr>
-                <th>会員ID</th>
-                <td><%= customer.id %></td>
-              </tr>
-            </div>
-            <div class="col">
-
-              <tr>
-                <th>ユーザー名</th>
-                <td><%= customer.name %></td>
-              </tr>
-
-              <tr>
-                <th>会員ステータス</th>
-                  <% if customer.is_deleted %>
-                    <td>退会</td>
-                  <% else %>
-                    <td>有効</td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td><%= link_to "詳細", admin_customer_path(customer) %></td>
-              </tr>
-            </div>
-          </table>
-        <% end %>
-
-
-    <% end %>
   </div>
 </div>

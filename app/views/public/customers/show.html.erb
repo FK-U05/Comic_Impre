@@ -28,7 +28,11 @@
         <table class="table table-bordered">
           <tr>
             <td>タイトル</td>
-            <td><%= @last_comic.title %></td>
+            <td>
+              <%= link_to public_comic_path(@last_comic) do %>
+                <%= @last_comic.title %>
+              <% end %>
+            </td>
           </tr>
 
           <tr>

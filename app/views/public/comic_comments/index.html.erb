@@ -1,49 +1,42 @@
- <div class="container mt-5">
+<div class="container mt-5">
   <div class="row">
 
     <div class="col-md-2">
       <%= render 'public/customers/customer', customer: @comic.customer %>
+        <div class="text-center">
+        <%= link_to "投稿詳細へ戻る", public_comic_path(@comic), class:"btn btn-warning btn-sm" %>
+        </div>
     </div>
 
     <div class="col">
-      <h3><%= @comic.title %>へのコメント一覧</h3>
+      <h3 class="text-center"><%= @comic.title %> へのコメント一覧</h3>
           <% if @comic.comic_comments.exists? %>
             <% @comic.comic_comments.each do |comment| %>
               <table class="table table-bordered">
                   <tr>
-                    <td>
+                    <th class="text-center" width="10%">
                       <%= link_to public_customer_path(comment.customer) do %>
-                      <%= image_tag comment.customer.get_profile_image(50,50) %>
+                        <%= image_tag comment.customer.get_profile_image(50,50) %>
                       <% end %>
-                    </td>
-                    <td><%= comment.customer.name %></td>
-                  </tr>
-                  <tr>
-                    <td>コメント</td>
+                      <%= comment.customer.name %>
+                    </th>
                     <td><%= comment.comment %></td>
-                  </tr>
 
                     <% if comment.customer == current_customer %>
-                      <tr>
-                        <td>
-                          <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete %>
-                        </td>
-                      </tr>
+                      <td class="text-center" width="10%">
+                        <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-sm" %>
+                      </td>
                     <% end %>
               </table>
             <% end %>
 
           <% else %>
-            <p>コメントはありません</p>
+            <div class="text-center mt-5">
+              <h5>コメントはありません</h5>
+            </div>
           <% end %>
 
     </div>
 
   </div>
-  <div class="row">
-    <div class="col">
-        <%= link_to "戻る", public_comic_path(@comic) %>
-    </div>
-  </div>
-
 </div>
