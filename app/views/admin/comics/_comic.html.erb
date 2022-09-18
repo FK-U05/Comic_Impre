@@ -1,13 +1,12 @@
  <% comics.each do |comic| %>
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
         <tr>
-          <th>タイトル</th>
-        </tr>
-
-        <tr>
-          <td><%= link_to admin_comic_path(comic) do %>
-                <%= comic.title %>
-              <% end %></td>
+          <th width="20%">タイトル</th>
+          <td>
+            <%= link_to admin_comic_path(comic) do %>
+              <%= comic.title %>
+            <% end %>
+          </td>
         </tr>
 
         <tr>

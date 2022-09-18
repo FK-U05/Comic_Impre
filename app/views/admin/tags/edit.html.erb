@@ -1,21 +1,27 @@
 <div class="container mt-5">
 
   <div class="row">
-    <h1>タグ編集</h1>
+    <div class="col">
+      <h3 class="text-center"><strong>タグ編集</strong></h3>
+    </div>
   </div>
 
-  <div class="row">
-    <%= form_with model: @tag, url: admin_tag_path(@tag), method: :patch do |f| %>
-      <%= f.label :タグ名 %>
-      <%= f.text_field :tag_name %>
+  <div class="row text-center mt-5">
+    <div class="col">
+      <%= form_with model: @tag, url: admin_tag_path(@tag), method: :patch do |f| %>
+        <strong><%= f.label :タグ名 %></strong>
+        <%= f.text_field :tag_name %>
 
-      <%= f.submit "変更保存" %>
-    <% end %>
+        <%= f.submit "変更保存", class:"btn btn-success btn-sm" %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="row">
-    <%= link_to "削除する", admin_tag_path(@tag), method: :delete %>
-    <%= link_to "戻る", admin_top_path %>
+  <div class="row text-center mt-3">
+    <div class="col">
+      <%= link_to "戻る", admin_top_path, class:"btn btn-warning btn-sm" %>
+      <%= link_to "削除する", admin_tag_path(@tag), method: :delete, class:"btn btn-danger btn-sm" %>
+    </div>
   </div>
 
 </div>

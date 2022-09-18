@@ -1,48 +1,74 @@
 <div class="container mt-5">
-  <div class="text-center">
 
-    <h2>新規会員登録</h2>
+  <div class="row text-center">
+    <div class="col">
+        <h2><strong>新規会員登録</strong></h2>
+    </div>
+  </div>
 
-      <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer' do |f| %>
-        <%= render "public/shared/error_messages", resource: resource %>
+    <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer' do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
 
-          <div class="field">
-            <%= f.label :ユーザー画像 %>
+      <div class="field row text-center mt-5">
+        <div class="col">
+          <strong><%= f.label :ユーザー画像 %></strong>
             <%= f.file_field :profile_image, accept: "image/*" %>
-          </div>
+        </div>
+      </div>
 
-          <div class="field">
-            <%= f.label :ユーザー名 %><br />
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "name" %>
-          </div>
+      <div class="field row text-center mt-5">
+        <div class="col">
+          <strong><%= f.label :ユーザー名 %></strong>
+        </div>
+        <div class="col">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "name" %>
+        </div>
+      </div>
 
-          <div class="field">
-            <%= f.label :メールアドレス %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "name@example.com" %>
-          </div>
+      <div class="field row text-center mt-3">
+        <div class="col">
+          <strong><%= f.label :メールアドレス %></strong>
+        </div>
+        <div class="col">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "name@example.com" %>
+        </div>
+      </div>
 
-          <div class="field">
-            <%= f.label :パスワード %>
+      <div class="field row text-center mt-3">
+        <div class="col">
+          <strong><%= f.label :パスワード %></strong>
             <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %>文字以上)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
+              <em>(<%= @minimum_password_length %>文字以上)</em>
+            <% end %>
           </div>
+        <div class="col">
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
+        </div>
+      </div>
 
-          <div class="field">
-            <%= f.label :パスワード確認%><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password" %>
-          </div>
+      <div class="field row text-center mt-3">
+        <div class="col">
+          <strong><%= f.label :パスワード確認%></strong>
+        </div>
+        <div class="col">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password" %>
+        </div>
+      </div>
 
-          <div class="actions">
-            <%= f.submit "新規登録", class:"btn btn-primary btn-sm"%>
-          </div>
+      <div class="row text-center mt-3">
+        <div class="col">
+          <%= f.submit "新規登録", class:"btn btn-info btn-bg" %>
+        </div>
+      </div>
 
-      <% end %>
+    <% end %>
 
-    <%= link_to "既に登録済みの方はこちら", new_customer_session_path %>
+      <div class="row text-center mt-3">
+        <div class="col">
+          <%= link_to "既に登録済みの方はこちら", new_customer_session_path, class:"btn btn-warning btn-sm" %>
+        </div>
+      </div>
 
- </div>
 </div>
 
 

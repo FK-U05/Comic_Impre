@@ -2,10 +2,10 @@
 
       <!-- 退会したユーザーの投稿は表示しない -->
       <% if comic.customer.is_deleted == false %>
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
 
             <tr>
-              <th>タイトル</th>
+              <th width="20%">タイトル</th>
               <td>
                 <%= link_to public_comic_path(comic) do %>
                   <%= comic.title %>

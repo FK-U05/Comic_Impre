@@ -1,37 +1,43 @@
 <div class="container mt-5">
-  <div class="row">
 
-    <h3>投稿フォーム</h3>
+  <div class="row">
+    <div class="col">
+    <h3 class="text-center"><strong>投稿フォーム</strong></h3>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col mt-3">
 
       <%= form_with model: @comic, url: public_comics_check_path(@comic), method: :post do |f| %>
 
         <div class="form-group">
-          <%= f.label :漫画のタイトル %>
-          <p><%= f.text_field :title %></p>
+          <strong><%= f.label :タイトル %></strong>
+          <%= f.text_field :title, placeholder: "作品のタイトル" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :漫画の著者名 %>
-          <p><%= f.text_field :name %></p>
+          <strong><%= f.label :著者名 %></strong>
+          <%= f.text_field :name, placeholder: "作者名" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :出版社 %>
-          <p><%= f.text_field :company %></p>
+          <strong><%= f.label :出版社 %></strong>
+          <%= f.text_field :company, placeholder: "出版社名" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :発行年月日 %>
-          <p><%= f.date_field :release_date %></p>
+          <strong><%= f.label :発行年月日 %></strong>
+          <%= f.date_field :release_date %>
         </div>
 
         <div class="form-group">
-          <%= f.label :本文 %>
-          <p><%= f.text_area :body, size:"60x10" %></p>
+          <strong><%= f.label :本文 %></strong>
+          <p><%= f.text_area :body, size:"60x10", placeholder: "作品の良かったところやおすすめしたいところ" %></p>
         </div>
 
         <!--星レビュー機能-->
-        <p>おすすめ度</p>
+        <strong>おすすめ度(☆いくつかをお選び下さい)</strong>
         <div class="form-group" id="star">
           <%= f.hidden_field :star, id: :review_star %>
         </div>
@@ -49,20 +55,21 @@
            </script>
 
         <div class="form-group">
-          <%= f.label :ジャンル %>
-          <p><%= f.text_field :genre_name %></p>
+          <strong><%= f.label :ジャンル %></strong>
           <p><%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true }) %></p>
+          <p><%= f.text_field :genre_name, placeholder: "その他" %></p>
         </div>
 
         <div class="form-group">
-          <%= f.label :タグ %>
-          <p><%= f.text_field :tag_name %></p>
+          <strong><%= f.label :タグ %></strong>
           <p><%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %></p>
+          <p><%= f.text_field :tag_name, placeholder: "その他" %></p>
         </div>
 
-        <%= f.submit "投稿確認画面へ" %>
+        <%= f.submit "投稿確認画面へ", class:"btn btn-info btn-bg" %>
 
     <% end %>
 
+    </div>
   </div>
 </div>

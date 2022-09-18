@@ -5,12 +5,12 @@
         <%= render 'admin/customers/customer', customer: @customer %>
       </div>
 
-      <div class="col">
-        <h3>ブックマーク一覧</h3>
+      <div class="col text-center">
+        <h3><strong>ブックマーク一覧</strong></h3>
           <% @customer.bookmarks.each do |bookmark| %>
-            <table class="table table-bordered">
+            <table class="table table-bordered mt-3">
               <tr>
-                <th>タイトル</th>
+                <th width="30%">タイトル</th>
                 <td>
                   <%= link_to admin_comic_path(bookmark.comic) do %>
                   <%= bookmark.comic.title %>
@@ -63,7 +63,7 @@
                   <th>ジャンル</th>
                   <td>
                     <% bookmark.comic.genres.each do |genre| %>
-                      <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+                      <%= link_to admin_genre_comics_genre_path(genre_id: genre.id) do %>
                         <%= genre.genre_name %>
                       <% end %>
                     <% end %>
@@ -74,7 +74,7 @@
                   <th>タグ</th>
                   <td>
                     <% bookmark.comic.tags.each do |tag| %>
-                      <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+                      <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
                         <%= tag.tag_name %>
                       <% end %>
                     <% end %>

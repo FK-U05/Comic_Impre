@@ -12,78 +12,109 @@
 
   <body>
     <header>
-      <div class="container mt-5">
-        <div class="row">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container mt-4">
 
-            <div class="col-md-3">
-              <strong>
+          <h1 class="navbar">
+            <strong>
               <%= link_to root_path do %>
                 <i class="fas fa-house-user"></i>
                   Comic Impre
                 <i class="fas fa-book"></i>
               <% end %>
-              </strong>
-            </div>
+            </strong>
+          </h1>
 
-            <div class="col-md-5">
-                <% if customer_signed_in? %>
+           <div class="collapse navbar-collapse" id="navbarNavDropdown">
+           <ul class="navbar-nav ml-5">
+            <% if customer_signed_in? %>
 
-                    <%= link_to public_customer_path(current_customer.id) do %>
-                      <i class="fas fa-user"></i>マイページ
-                    <% end %>
+              <li class ="rounded mr-4">
+                <%= link_to public_customer_path(current_customer.id) do %>
+                  <i class="fas fa-user"></i>マイページ
+                <% end %>
+              </li>
+              <li class ="rounded mr-4">
                     <%= link_to new_public_comic_path do %>
                       <i class="fas fa-plus"></i>投稿フォーム
                     <% end %>
+              </li>
+              <li class ="rounded mr-4">
                     <%= link_to public_comics_path do %>
                       <i class="fas fa-book-open"></i>みんなの投稿
                     <% end %>
+              </li>
+              <li class ="rounded mr-4">
                     <%= link_to destroy_customer_session_path, method: :delete do %>
                       <i class="fas fa-sign-out-alt"></i>ログアウト
                     <% end %>
+              </li>
 
                 <% elsif admin_signed_in? %>
 
-                    <%= link_to admin_customers_path do %>
-                      <i class="fas fa-users"></i>会員一覧
-                    <% end %>
-                    <%= link_to admin_comics_path do %>
-                      <i class="fas fa-book-open"></i>投稿一覧
-                    <% end %>
-                    <%= link_to admin_top_path do %>
-                      <i class="fas fa-cogs"></i>設定一覧
-                    <% end %>
-                    <%= link_to destroy_admin_session_path, method: :delete do %>
-                      <i class="fas fa-sign-out-alt"></i>ログアウト
-                    <% end %>
+              <li class ="rounded mr-5">
+                <%= link_to admin_customers_path do %>
+                  <i class="fas fa-users"></i>会員一覧
+                <% end %>
+              </li>
+              <li class ="rounded mr-5">
+                <%= link_to admin_comics_path do %>
+                  <i class="fas fa-book-open"></i>投稿一覧
+                <% end %>
+              </li>
+              <li class ="rounded mr-5">
+                <%= link_to admin_top_path do %>
+                  <i class="fas fa-cogs"></i>設定一覧
+                <% end %>
+              </li>
+              <li class ="rounded mr-5">
+                <%= link_to destroy_admin_session_path, method: :delete do %>
+                  <i class="fas fa-sign-out-alt"></i>ログアウト
+                <% end %>
+              </li>
 
                 <% else %>
-
+                  <li class ="rounded mr-4">
                     <%= link_to public_customers_guest_sign_in_path, method: :post do %>
                       <i class="fas fa-users"></i>ゲストログイン
                     <% end %>
+                  </li>
+                  <li class ="rounded mr-4">
                     <%= link_to new_customer_session_path do %>
                       <i class="fas fa-sign-in-alt"></i>ログイン
                     <% end %>
+                  </li>
+                  <li class ="rounded mr-4">
                     <%= link_to new_customer_registration_path do %>
                       <i class="fas fa-user-plus"></i>新規登録
                     <% end %>
+                  </li>
+                  <li class ="rounded mr-4">
                     <%= link_to public_comics_path do %>
                       <i class="fas fa-book-open"></i>みんなの投稿
                     <% end %>
+                  </li>
 
                 <% end %>
+              </ul>
             </div>
-            <div class="col-md-3">
+            </div>
+            </nav>
+
+            <div class="container">
+              <div class="row text-center">
+                <div class="col">
                 <%= render 'layouts/search' %>
+                </div>
+              </div>
             </div>
 
-        </div>
-      </div>
     </header>
 
     <%= yield %>
 
     <footer>
+      <div class="container mt-4">
         <div class="text-center">
           <%= link_to admin_session_path do %>
             <i class="fas fa-user-lock"></i>管理者ログイン

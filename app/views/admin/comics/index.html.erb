@@ -2,23 +2,24 @@
 
   <div class="row">
     <div class="col">
-      <h3 class="text-center">投稿一覧</h3>
+      <h3 class="text-center"><strong>投稿一覧</strong></h3>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-10 text-center">
+  <div class="row mt-3 text-center">
+    <div class="col">
+
       <%= link_to '新しい順', admin_comics_path(latest: "true") %> /
       <%= link_to '古い順', admin_comics_path(old: "true") %> /
       <%= link_to 'おすすめ度の高い順', admin_comics_path(star_count: "true") %> /
       <%= link_to 'コメントの多い順', admin_comics_path(comic_comment: "true") %> /
       <%= link_to 'ブックマークの多い順', admin_comics_path(bookmark_count: "true") %>
-    </div>
-    <div class="col text-right">
-      <%= paginate @comics %>
-    </div>
 
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-2">
+
       <table class="table table-bordered">
         <thead>
           <th>ジャンルリスト</th>
@@ -34,28 +35,33 @@
           </tr>
           <% end %>
         </tbody>
-
-      <thead>
-        <th>タグリスト</th>
-      </thead>
-      <tbody>
-        <% @tag_list.each do |tag| %>
-          <tr>
-            <th>
-              <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
-                <%= tag.tag_name %>
-              <% end %>
-            </th>
-          </tr>
-        <% end %>
-      </tbody>
       </table>
+
+      <table class="table table-bordered">
+        <thead>
+          <th>タグリスト</th>
+        </thead>
+        <tbody>
+          <% @tag_list.each do |tag| %>
+            <tr>
+              <th>
+                <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
+                  <%= tag.tag_name %>
+                <% end %>
+              </th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col mt-4">
+      <div class="col text-right">
+        <%= paginate @comics %>
       </div>
 
-      <div class="col">
-
-      <%= render 'comic', comics: @comics %>
-      </div>
+        <%= render 'comic', comics: @comics %>
+    </div>
 
   </div>
 

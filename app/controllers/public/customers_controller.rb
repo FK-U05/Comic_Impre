@@ -6,11 +6,6 @@ class Public::CustomersController < ApplicationController
     @last_comic = Comic.where(customer_id: @customer).last
   end
 
-  def comics
-    @customer = Customer.find(params[:id])
-    @comics = @customer.comics
-  end
-
   def edit
     @customer = Customer.find(params[:id])
   end
@@ -24,11 +19,17 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  #投稿一覧
+  def comics
+    @customer = Customer.find(params[:id])
+    @comics = @customer.comics.order(created_at: :desc).page(params[:page]).per(3)
+  end
   #ブックマーク一覧
   def bookmark
     @customer = Customer.find(params[:id])
     bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:comic_id)
     @bookmark_comics = Comic.find(bookmarks)
+    @bookmark_comics = Comic.order(created_at: :desc).page(params[:page]).per(3)
   end
 
   #ゲストログイン

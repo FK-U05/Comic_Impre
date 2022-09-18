@@ -1,51 +1,57 @@
 <div class="container mt-3">
 
-  <div class="row">
+  <div class="row text-center">
     <div class="col">
-      <h5 class="text-center">マイページ編集</h5>
+      <h3><strong>マイページ編集</strong></h3>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
       <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
-        <table>
 
-          <tr>
-            <td>変更前の画像</td>
-              <%= image_tag @customer.get_profile_image(100,100) %>
-            <td><%= f.file_field :profile_image, accept: "image/*" %></td>
-          </tr>
+        <div class="row text-center mt-5">
+          <div class="col">
+            <p>変更前の画像<%= image_tag @customer.get_profile_image(100,100) %></p>
+          </div>
+        </div>
 
-          <tr>
-            <td>
-              <%= f.label :ユーザー名 %>
-              <%= f.text_field :name %>
-            </td>
-          </tr>
+        <div class="form-group row text-center mt-3">
+          <div class="col">
+            <%= f.file_field :profile_image, accept: "image/*" %>
+          </div>
+        </div>
 
-          <tr>
-            <td>
-              <%= f.label :メールアドレス %>
-              <%= f.email_field :email %>
-            </td>
-          </tr>
+        <div class="form-group row text-center mt-2">
+          <div class="col">
+            <strong><%= f.label :ユーザー名 %></strong>
+          </div>
+          <div class="col">
+            <%= f.text_field :name %>
+          </div>
+        </div>
 
-          <tr>
-            <td><%= f.submit "変更保存", class:"btn btn-success btn-sm" %></td>
-          </tr>
+        <div class="form-group row text-center mt-2">
+          <div class="col">
+            <strong><%= f.label :メールアドレス %></strong>
+          </div>
+          <div class="col">
+            <%= f.email_field :email %>
+          </div>
+        </div>
 
-        </table>
+        <div class="row text-center mt-2">
+          <div class="col">
+            <%= f.submit "変更保存", class:"btn btn-success btn-bg" %>
+          </div>
+        </div>
+
       <% end %>
-    </div>
-  </div>
 
   <div class="row text-center">
     <div class="col">
       <%= link_to "戻る", public_customer_path(current_customer), class:"btn btn-warning btn-sm" %>
     </div>
     <div class="col">
-      <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-sm" %>
+      <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-bg" %>
     </div>
   </div>
 

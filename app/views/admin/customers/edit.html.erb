@@ -1,51 +1,64 @@
-<div class="container mt-3">
-  <div class="row">
+<div class="container mt-4">
+  <div class="row text-center">
     <div class="col">
-      <h3 class="text-center"><%= @customer.name %> の編集</h3>
+      <h3><strong><%= @customer.name %> の編集</strong></h3>
     </div>
   </div>
 
-  <div class="row text-center">
-     <div class="col">
-       <table>
-          <thead>
-               <tr>
-                 <td>会員ID:<%= @customer.id %></td>
-                 <td><%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %></td>
-               </tr>
-          </thead>
-          <tbody>
-               <tr>
-                 <td><%= image_tag @customer.get_profile_image(100,100) %>
-                 <td><%= f.file_field :profile_image, accept: "image/*" %></td>
-               </tr>
-               <tr>
-                 <td><%= f.label :ユーザー名 %></td>
-                 <td><%= f.text_field :name %></td>
-               </tr>
-               <tr>
-                 <td><%= f.label :メールアドレス %></td>
-                 <td><%= f.email_field :email %></td>
-               </tr>
-
-               <tr>
-                 <td><%= f.label :会員ステータス %></td>
-                 <td>
-                     <%= f.radio_button :is_deleted, false %>
-                     <%= f.label :is_deleted, '有効' %>
-                     <%= f.radio_button :is_deleted, true %>
-                     <%= f.label :is_deleted, '退会' %>
-                 </td>
-               </tr>
-
-               <tr>
-                 <td><%= f.submit "変更保存", class:"btn btn-success btn-sm" %></td></tr>
-
-                     <% end %>
-          </tbody>
-       </table>
-     </div>
+  <div class="row text-center mt-5">
+    <div class="col">
+      <p><strong>会員ID: <%= @customer.id %></strong></p>
+    </div>
   </div>
+
+    <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+
+      <div class="form-group row text-center mt-3">
+        <div class="col">
+          <%= image_tag @customer.get_profile_image(100,100) %>
+        </div>
+        <div class="col">
+          <%= f.file_field :profile_image, accept: "image/*" %>
+        </div>
+      </div>
+
+      <div class="form-group row text-center mt-3">
+        <div class="col">
+          <strong><%= f.label :ユーザー名 %></strong>
+        </div>
+        <div class="col">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+
+      <div class="form-group row text-center mt-3">
+        <div class="col">
+          <strong><%= f.label :メールアドレス %></strong>
+        </div>
+        <div class="col">
+          <%= f.email_field :email %>
+        </div>
+      </div>
+
+      <div class="form-group row text-center mt-3">
+        <div class="col">
+          <strong><%= f.label :会員ステータス %></strong>
+        </div>
+        <div class="col">
+          <%= f.radio_button :is_deleted, false %>
+          <%= f.label :is_deleted, '有効' %>
+          <%= f.radio_button :is_deleted, true %>
+          <%= f.label :is_deleted, '退会' %>
+        </div>
+      </div>
+
+      <div class="form-group row text-center mt-3">
+        <div class="col">
+          <%= f.submit "変更保存", class:"btn btn-success btn-bg" %>
+        </div>
+      </div>
+
+    <% end %>
 
   <div class="row text-center">
      <div class="col">

@@ -8,11 +8,6 @@ class Admin::CustomersController < ApplicationController
    @customer = Customer.find(params[:id])
   end
 
-  def comics
-    @customer = Customer.find(params[:id])
-    @comics = @customer.comics
-  end
-
   def edit
     @customer = Customer.find(params[:id])
   end
@@ -21,6 +16,12 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
     redirect_to admin_customer_path(@customer)
+  end
+
+  #投稿一覧
+  def comics
+    @customer = Customer.find(params[:id])
+    @comics = @customer.comics.order(created_at: :desc).page(params[:page]).per(3)
   end
 
   #ブックマーク一覧

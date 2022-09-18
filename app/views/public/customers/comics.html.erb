@@ -1,19 +1,25 @@
 <div class="container mt-5">
   <div class="row">
 
-    <div class="col-md-2">
+    <div class="col-md-2 text-center">
       <%= render 'public/customers/customer', customer: @customer %>
-      <%= link_to "ブックマーク一覧", public_customers_bookmark_path(@customer) %>
+      <%= link_to "会員詳細へ戻る", public_customer_path(@customer), class:"btn btn-warning btn-sm" %>
     </div>
 
     <div class="col">
-      <h3><%= @customer.name %>の投稿一覧</h3>
-      <%= render 'public/comics/comic', comics: @comics %>
-    </div>
+      <h3 class="text-center"><strong><%= @customer.name %> の投稿一覧</strong></h3>
+        <% if @customer.comics.exists? %>
+          <div class="col text-right">
+            <%= paginate @comics %>
+          </div>
 
-    <div class="row">
-      <%= link_to "戻る", public_customer_path(@customer) %>
-      <%= link_to "投稿フォームへ", new_public_comic_path %>
+          <%= render 'public/comics/comic', comics: @comics %>
+
+        <% else %>
+
+          <h5 class="text-center mt-5">投稿がありません。新規投稿は<%= link_to "こちら", new_public_comic_path %></h5>
+
+      　<% end %>
     </div>
 
   </div>

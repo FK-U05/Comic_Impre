@@ -1,55 +1,42 @@
 <div class="container mt-5">
 
   <div class="row">
-    <h3>会員一覧</h3>
+    <div class="col">
+      <h3 class="text-center"><strong>会員一覧</strong></h3>
+    </div>
   </div>
 
+<div class="row mt-3">
+  <div class="col text-center">
     <% @customers.each do |customer| %>
-      <div class="row">
+
+
         <table class="table table-bordered">
-          <div class="col-md-1">
             <tr>
-              <th>会員ID</th>
-              <td><%= customer.id %></td>
-            </tr>
-          </div>
-
-          <div class="col-md-1">
-            <tr>
-              <td>
+              <th>
                 <%= link_to admin_customer_path(customer) do %>
-                  <%= image_tag customer.get_profile_image(50,50) %>
+                  <%= image_tag customer.get_profile_image(100,100) %>
                 <% end %>
-              </td>
-            </tr>
-          </div>
-
-            <tr>
+                 会員ID: <%= customer.id %>
+              </th>
               <th>ユーザー名</th>
               <td><%= customer.name %></td>
-            </tr>
-
-            <tr>
-              <th>メールアドレス</th>
-              <td><%= customer.email %></td>
-            </tr>
-
-            <tr>
+              <th>会員登録日</th>
+              <td><%= customer.created_at.strftime("%Y年%m月%d日") %></td>
               <th>会員ステータス</th>
                 <% if customer.is_deleted %>
                   <td>退会</td>
                 <% else %>
                   <td>有効</td>
                 <% end %>
-            </tr>
-
-            <tr>
               <td>
-                <%= link_to "会員詳細へ", admin_customer_path(customer) %>
+                <%= link_to "会員詳細へ", admin_customer_path(customer), class:"btn btn-info btn-bg" %>
               </td>
             </tr>
         </table>
-       </div>
-    <% end %>
+        <% end %>
+      </div>
+     </div>
+
 
 </div>

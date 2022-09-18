@@ -6,13 +6,22 @@
       </div>
 
       <div class="col">
-        <h3>ブックマーク一覧</h3>
+        <h3 class="text-center"><strong>ブックマーク一覧</strong></h3>
+        <% if @customer.bookmarks.exists? %>
+          <div class="col text-right">
+            <%= paginate @bookmark_comics %>
+          </div>
+
           <% @customer.bookmarks.each do |bookmark| %>
-            <table class="table table-bordered">
+            <table class="table table-bordered text-center">
 
               <tr>
-                <th>タイトル</th>
-                <td><%= bookmark.comic.title %></td>
+                <th width="20%">タイトル</th>
+                <td>
+                  <%= link_to public_comic_path(bookmark.comic) do %>
+                    <%= bookmark.comic.title %>
+                  <% end %>
+                </td>
               </tr>
 
               <tr>
@@ -27,7 +36,11 @@
 
               <tr>
                 <th>投稿したユーザー</th>
-                <td><%= bookmark.comic.customer.name %></td>
+                <td>
+                  <%= link_to public_customer_path(bookmark.comic.customer) do %>
+                    <%= bookmark.comic.customer.name %>
+                  <% end %>
+                </td>
               </tr>
 
               <tr>
@@ -87,6 +100,13 @@
             </table>
           <% end %>
 
+        <% else %>
+
+          <div class="col mt-5">
+            <h5 class="text-center">まだブックマークしていません</h5>
+          </div>
+
+        <% end %>
       </div>
 
   </div>

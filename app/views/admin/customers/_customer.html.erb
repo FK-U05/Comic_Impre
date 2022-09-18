@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered text-center">
   <tr>
     <th>
       <%= link_to admin_customer_path(customer) do %>
@@ -12,14 +12,18 @@
   </tr>
 
   <tr>
-    <th><%= link_to "会員情報を編集する", edit_admin_customer_path(customer) %></th>
+    <th><%= link_to "会員情報を編集", edit_admin_customer_path(customer) %></th>
   </tr>
 
   <tr>
-    <th><%= link_to "このユーザーの投稿一覧へ", admin_customers_comics_path(customer) %></th>
+    <th>
+      <%= link_to admin_customers_comics_path(customer) do %>
+        <%= customer.name %>の投稿一覧
+      <% end %>
+    </th>
   </tr>
 
   <tr>
-    <th><%= link_to "このユーザーのブックマーク一覧へ", admin_customers_bookmark_path(customer) %></th>
+    <th><%= link_to "ブックマーク一覧", admin_customers_bookmark_path(customer) %></th>
   </tr>
 </table>
