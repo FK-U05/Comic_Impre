@@ -18,6 +18,12 @@ class Admin::CustomersController < ApplicationController
     redirect_to admin_customer_path(@customer)
   end
 
+   #下書き一覧
+  def draft
+    @customer = Customer.find(params[:id])
+    @comics = @customer.comics.where(status: :draft).order('created_at DESC').page(params[:page]).per(3)
+  end
+
   #投稿一覧
   def comics
     @customer = Customer.find(params[:id])

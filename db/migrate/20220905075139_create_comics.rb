@@ -9,6 +9,7 @@ class CreateComics < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.date :release_date, null: false
       t.float :star
+      t.integer :status, default: 0,null: false
 
       t.timestamps
     end

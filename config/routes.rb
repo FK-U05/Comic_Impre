@@ -29,7 +29,11 @@ namespace :admin do
   resources :genres do
     get 'comics_genre',to: 'comics#genre_search'
   end
- resources :customers, only:[:index, :show, :edit, :update]
+ resources :customers, only:[:index, :show, :edit, :update] do
+   member do
+     get :draft
+   end
+ end
  resources :genres, only:[:index, :create, :edit, :update]
  resources :tags, only:[:index, :create, :edit, :update, :destroy]
 end
@@ -55,7 +59,11 @@ namespace :public do
   resources :genres do
     get 'comics_genre',to: 'comics#genre_search'
   end
- resources :customers, only:[:show, :index, :edit, :update]
+ resources :customers, only:[:show, :index, :edit, :update] do
+   member do
+     get :draft
+   end
+ end
  resources :genres, only:[:create, :destroy, :edit, :update]
  resources :tags, only:[:create, :destroy, :edit, :update, :index]
 end

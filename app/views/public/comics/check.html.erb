@@ -33,7 +33,7 @@
 
           <tr>
             <th>発行年月日</th>
-            <th><%= @comic.release_date %></th>
+            <th><%= @comic.release_date.strftime("%Y年%m月%d日") %></th>
           </tr>
           <%= f.hidden_field :release_date, :value => @comic.release_date %>
 
@@ -84,6 +84,12 @@
           </tr>
           <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
 
+         <tr>
+           <th><%= f.label"公開範囲を選択" %></th>
+           <td><%= f.select :status, [["公開", "published"], ["下書き", "draft"]], required: true %>
+               下書きで設定したものは、マイページの下書き一覧から編集することができます</td>
+        </tr>
+
         </table>
 
       </div>
@@ -91,7 +97,7 @@
 
     <div class="row">
       <div class="col text-center">
-          <%= f.submit "投稿する", class:"btn btn-info btn-bg" %>
+        <%= f.submit "保存 / 投稿する", class:"btn btn-info btn-bg" %>
       <% end %>
       </div>
     </div>

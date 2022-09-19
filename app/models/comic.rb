@@ -12,6 +12,9 @@ class Comic < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   belongs_to :customer
 
+  #下書き保存(１）か公開か（０）か
+  enum status: {draft: 1,published: 0}
+
   #並び替え
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}

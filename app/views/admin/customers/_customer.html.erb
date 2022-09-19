@@ -16,6 +16,10 @@
   </tr>
 
   <tr>
+    <th><%= link_to "下書き一覧", draft_admin_customer_path(customer) %></th>
+  </tr>
+
+  <tr>
     <th>
       <%= link_to admin_customers_comics_path(customer) do %>
         <%= customer.name %>の投稿一覧

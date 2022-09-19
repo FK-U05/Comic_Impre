@@ -4,19 +4,19 @@ class Admin::ComicsController < ApplicationController
     @tag_list = Tag.all
     @genre_list = Genre.all
     if  params[:latest]
-        @comics = Comic.latest.page(params[:page]).per(3)
+        @comics = Comic.where(status: :published).latest.page(params[:page]).per(3)
     elsif params[:old]
-        @comics = Comic.old.page(params[:page]).per(3)
+        @comics = Comic.where(status: :published).old.page(params[:page]).per(3)
     elsif params[:star_count]
-        @comics = Comic.star_count.page(params[:page]).per(3)
+        @comics = Comic.where(status: :published).star_count.page(params[:page]).per(3)
     elsif params[:comic_comment]
-        comics = Comic.comic_comment_count
+        comics = Comic.where(status: :published).comic_comment_count
         @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
     elsif params[:bookmark_count]
-        comics = Comic.bookmark_count
+        comics = Comic.where(status: :published).bookmark_count
         @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
     else
-        @comics = Comic.all.order(created_at: :desc).page(params[:page]).per(3)
+        @comics = Comic.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
   end
 
@@ -65,19 +65,19 @@ class Admin::ComicsController < ApplicationController
   def tag_search
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @comics = @tag.comics.all
+    @comics = @tag.comics.where(status: :published)
   end
 
   #ジャンルで絞り込んだ投稿一覧
   def genre_search
     @genre_list = Genre.all
     @genre = Genre.find(params[:genre_id])
-    @comics = @genre.comics.all
+    @comics = @genre.comics.where(status: :published)
   end
 
   private
   def comic_params
-    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star)
+    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star, :status)
   end
 
 end

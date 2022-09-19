@@ -7,11 +7,15 @@
     <th><%= customer.name %></th>
   </tr>
 
-<!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクを表示-->
+<!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクと下書きを表示-->
   <% if customer == current_customer && customer.email != 'guest@guest' %>
     <tr>
       <th><%= link_to "会員情報を編集", edit_public_customer_path(current_customer) %></th>
     </tr>
+    <tr>
+      <th><%= link_to "下書き一覧", draft_public_customer_path(customer) %></th>
+    </tr>
+
   <% end %>
     <tr>
       <th><%= link_to public_customers_comics_path(customer) do %>
@@ -23,4 +27,5 @@
     <tr>
       <th><%= link_to "ブックマーク一覧", public_customers_bookmark_path(customer) %></th>
     </tr>
+
 </table>
