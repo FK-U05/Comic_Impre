@@ -22,13 +22,13 @@
 
       <table class="table table-bordered">
         <thead>
-          <th>ジャンルリスト</th>
+          <th class="bg-light">ジャンルリスト</th>
         </thead>
         <tbody>
           <% @genre_list.each do |genre| %>
           <tr>
             <th>
-              <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+              <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
                 <%= genre.genre_name %>
               <% end %>
             </th>
@@ -39,13 +39,13 @@
 
       <table class="table table-bordered">
         <thead>
-          <th>タグリスト</th>
+          <th class="bg-light">タグリスト</th>
         </thead>
         <tbody>
           <% @tag_list.each do |tag| %>
             <tr>
               <th>
-                <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+                <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
                   <%= tag.tag_name %>
                 <% end %>
               </th>

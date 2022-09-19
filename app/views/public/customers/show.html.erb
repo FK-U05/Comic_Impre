@@ -26,33 +26,33 @@
         </div>
 
         <table class="table table-bordered text-center">
-          <tr>
+          <tr class="bg-info">
             <th width="20%">タイトル</th>
             <td>
-              <%= link_to public_comic_path(@last_comic) do %>
+              <%= link_to public_comic_path(@last_comic), class:"text-light" do %>
                 <%= @last_comic.title %>
               <% end %>
             </td>
           </tr>
 
           <tr>
-            <th>著者名</th>
+            <th class="bg-light">著者名</th>
             <td> <%= @last_comic.name %></td>
           </tr>
 
           <tr>
-            <th>出版社</th>
+            <th class="bg-light">出版社</th>
             <td><%= @last_comic.company %></td>
           </tr>
 
           <tr>
-            <th>発行年月日</th>
+            <th class="bg-light">発行年月日</th>
             <td><%= @last_comic.release_date.strftime("%Y年%m月%d日") %></td>
           </tr>
 
           <!-- 星レビュー機能 -->
           <tr>
-            <th>おすすめ度</th>
+            <th class="bg-light">おすすめ度</th>
             <td>
               <div id="star-rate-<%= @last_comic.id %>">
 
@@ -73,10 +73,10 @@
           </tr>
 
           <tr>
-            <th>ジャンル</th>
+            <th class="bg-light">ジャンル</th>
             <td>
               <% @last_comic.genres.each do |genre| %>
-                <%= link_to public_genre_comics_genre_path(genre_id: genre.id) do %>
+                <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
                   <%= genre.genre_name %>
                 <% end %>
               <% end %>
@@ -84,10 +84,10 @@
           </tr>
 
           <tr>
-            <th>タグ</th>
+            <th class="bg-light">タグ</th>
             <td>
               <% @last_comic.tags.each do |tag| %>
-                <%= link_to public_tag_comics_tag_path(tag_id: tag.id) do %>
+                <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
                   <%= tag.tag_name %>
                 <% end %>
               <% end %>
@@ -95,12 +95,12 @@
           </tr>
 
           <tr>
-            <th>投稿日時</th>
+            <th class="bg-light">投稿日時</th>
             <td><%= @last_comic.created_at.strftime("%Y年%m月%d日") %></td>
           </tr>
 
           <tr>
-            <th>本文</th>
+            <th class="bg-light">本文</th>
             <td><%= @last_comic.body %></td>
           </tr>
         </table>

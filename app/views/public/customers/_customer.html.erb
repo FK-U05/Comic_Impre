@@ -10,22 +10,22 @@
 <!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクと下書きを表示-->
   <% if customer == current_customer && customer.email != 'guest@guest' %>
     <tr>
-      <th><%= link_to "会員情報を編集", edit_public_customer_path(current_customer) %></th>
+      <th><%= link_to "会員情報を編集", edit_public_customer_path(current_customer), class:"text-success" %></th>
     </tr>
     <tr>
-      <th><%= link_to "下書き一覧", draft_public_customer_path(customer) %></th>
+      <th><%= link_to "下書き一覧", draft_public_customer_path(customer), class:"text-secondary" %></th>
     </tr>
 
   <% end %>
     <tr>
-      <th><%= link_to public_customers_comics_path(customer) do %>
+      <th><%= link_to public_customers_comics_path(customer), class:"text-warning" do %>
           <%= customer.name %>の投稿一覧
           <% end %>
       </th>
     </tr>
 
     <tr>
-      <th><%= link_to "ブックマーク一覧", public_customers_bookmark_path(customer) %></th>
+      <th><%= link_to "ブックマーク一覧", public_customers_bookmark_path(customer), class:"text-info" %></th>
     </tr>
 
 </table>

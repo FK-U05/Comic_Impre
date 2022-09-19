@@ -110,14 +110,14 @@ class Public::ComicsController < ApplicationController
   def tag_search
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @comics = @tag.comics.where(status: :published)
+    @comics = @tag.comics.where(status: :published).page(params[:page]).per(3)
   end
 
   #ジャンルで絞り込んだ投稿一覧
   def genre_search
     @genre_list = Genre.all
     @genre = Genre.find(params[:genre_id])
-    @comics = @genre.comics.where(status: :published)
+    @comics = @genre.comics.where(status: :published).page(params[:page]).per(3)
   end
 
   private

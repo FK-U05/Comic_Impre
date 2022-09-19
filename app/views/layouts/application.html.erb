@@ -17,7 +17,7 @@
 
           <h1 class="navbar">
             <strong>
-              <%= link_to root_path do %>
+              <%= link_to root_path, class:"text-secondary" do %>
                 <i class="fas fa-house-user"></i>
                   Comic Impre
                 <i class="fas fa-book"></i>
@@ -30,68 +30,68 @@
             <% if customer_signed_in? %>
 
               <li class ="rounded mr-4">
-                <%= link_to public_customer_path(current_customer.id) do %>
-                  <i class="fas fa-user"></i>マイページ
+                <%= link_to public_customer_path(current_customer.id), class:"btn btn-info btn-bg" do %>
+                  <i class="fas fa-user"></i> マイページ
                 <% end %>
               </li>
               <li class ="rounded mr-4">
-                    <%= link_to new_public_comic_path do %>
-                      <i class="fas fa-plus"></i>投稿フォーム
+                    <%= link_to new_public_comic_path, class:"btn btn-success btn-bg" do %>
+                      <i class="fas fa-plus"></i> 投稿フォーム
                     <% end %>
               </li>
               <li class ="rounded mr-4">
-                    <%= link_to public_comics_path do %>
-                      <i class="fas fa-book-open"></i>みんなの投稿
+                    <%= link_to public_comics_path, class:"btn btn-warning btn-bg" do %>
+                      <i class="fas fa-book-open"></i> みんなの投稿
                     <% end %>
               </li>
               <li class ="rounded mr-4">
-                    <%= link_to destroy_customer_session_path, method: :delete do %>
-                      <i class="fas fa-sign-out-alt"></i>ログアウト
+                    <%= link_to destroy_customer_session_path, method: :delete, class:"btn btn-secondary btn-bg" do %>
+                      <i class="fas fa-sign-out-alt"></i> ログアウト
                     <% end %>
               </li>
 
                 <% elsif admin_signed_in? %>
 
               <li class ="rounded mr-5">
-                <%= link_to admin_customers_path do %>
-                  <i class="fas fa-users"></i>会員一覧
+                <%= link_to admin_customers_path, class:"btn btn-info btn-bg" do %>
+                  <i class="fas fa-users"></i> 会員一覧
                 <% end %>
               </li>
               <li class ="rounded mr-5">
-                <%= link_to admin_comics_path do %>
-                  <i class="fas fa-book-open"></i>投稿一覧
+                <%= link_to admin_comics_path, class:"btn btn-warning btn-bg" do %>
+                  <i class="fas fa-book-open"></i> 投稿一覧
                 <% end %>
               </li>
               <li class ="rounded mr-5">
-                <%= link_to admin_top_path do %>
-                  <i class="fas fa-cogs"></i>設定一覧
+                <%= link_to admin_top_path, class:"btn btn-success btn-bg" do %>
+                  <i class="fas fa-cogs"></i> 設定一覧
                 <% end %>
               </li>
               <li class ="rounded mr-5">
-                <%= link_to destroy_admin_session_path, method: :delete do %>
-                  <i class="fas fa-sign-out-alt"></i>ログアウト
+                <%= link_to destroy_admin_session_path, method: :delete, class:"btn btn-secondary btn-bg" do %>
+                  <i class="fas fa-sign-out-alt"></i> ログアウト
                 <% end %>
               </li>
 
                 <% else %>
                   <li class ="rounded mr-4">
-                    <%= link_to public_customers_guest_sign_in_path, method: :post do %>
-                      <i class="fas fa-users"></i>ゲストログイン
+                    <%= link_to public_customers_guest_sign_in_path, method: :post, class:"btn btn-secondary btn-bg" do %>
+                      <i class="fas fa-users"></i> ゲストログイン
                     <% end %>
                   </li>
                   <li class ="rounded mr-4">
-                    <%= link_to new_customer_session_path do %>
-                      <i class="fas fa-sign-in-alt"></i>ログイン
+                    <%= link_to new_customer_session_path, class:"btn btn-success btn-bg" do %>
+                      <i class="fas fa-sign-in-alt"></i> ログイン
                     <% end %>
                   </li>
                   <li class ="rounded mr-4">
-                    <%= link_to new_customer_registration_path do %>
-                      <i class="fas fa-user-plus"></i>新規登録
+                    <%= link_to new_customer_registration_path, class:"btn btn-primary btn-bg" do %>
+                      <i class="fas fa-user-plus"></i> 新規登録
                     <% end %>
                   </li>
                   <li class ="rounded mr-4">
-                    <%= link_to public_comics_path do %>
-                      <i class="fas fa-book-open"></i>みんなの投稿
+                    <%= link_to public_comics_path, class:"btn btn-warning btn-bg" do %>
+                      <i class="fas fa-book-open"></i> みんなの投稿
                     <% end %>
                   </li>
 
@@ -116,8 +116,8 @@
     <footer>
       <div class="container mt-4">
         <div class="text-center">
-          <%= link_to admin_session_path do %>
-            <i class="fas fa-user-lock"></i>管理者ログイン
+          <%= link_to admin_session_path, class:"btn btn-dark btn-sm" do %>
+            <i class="fas fa-user-lock"></i> 管理者ログイン
           <% end %>
         </div>
       </div>
