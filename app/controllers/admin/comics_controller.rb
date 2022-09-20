@@ -1,4 +1,5 @@
 class Admin::ComicsController < ApplicationController
+   before_action :authenticate_admin!
 
   def index
     @tag_list = Tag.all

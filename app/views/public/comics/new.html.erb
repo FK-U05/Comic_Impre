@@ -9,33 +9,37 @@
   <div class="row text-center">
     <div class="col mt-3">
 
-      <% if @comic.errors.any? %>
-        <p class="red">必要事項を入力してください。</p>
-      <% end %>
-
       <%= form_with model: @comic, url: public_comics_check_path(@comic), method: :post do |f| %>
 
         <div class="form-group">
+
+          <p class="btn bg-danger btn-sm text-light">必須</p>
           <strong><%= f.label :タイトル %></strong>
+
           <%= f.text_field :title, placeholder: "作品のタイトル" %>
+
         </div>
 
         <div class="form-group">
+          <p class="btn bg-danger btn-sm text-light">必須</p>
           <strong><%= f.label :著者名 %></strong>
           <%= f.text_field :name, placeholder: "作者名" %>
         </div>
 
         <div class="form-group">
+          <p class="btn bg-danger btn-sm text-light">必須</p>
           <strong><%= f.label :出版社 %></strong>
           <%= f.text_field :company, placeholder: "出版社名" %>
         </div>
 
         <div class="form-group">
-          <strong><%= f.label :発行年月日 %></strong>
+          <p class="btn bg-danger btn-sm text-light">必須</p>
+          <strong><%= f.label :発行年月日%></strong>
           <%= f.date_field :release_date %>
         </div>
 
         <div class="form-group">
+          <p class="btn bg-danger btn-sm text-light">必須</p>
           <strong><%= f.label :本文 %></strong>
           <p><%= f.text_area :body, size:"60x10", placeholder: "作品の良かったところやおすすめしたいところ" %></p>
         </div>
@@ -70,7 +74,7 @@
           <p><%= f.text_field :tag_name, placeholder: "その他" %></p>
         </div>
 
-        <%= f.submit "投稿確認画面へ", class:"btn btn-info btn-bg" %>
+        <%= f.submit "投稿確認画面へ", class:"btn btn-info btn-lg" %>
 
     <% end %>
 

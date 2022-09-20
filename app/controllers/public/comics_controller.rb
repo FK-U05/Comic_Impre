@@ -1,4 +1,6 @@
 class Public::ComicsController < ApplicationController
+  before_action :authenticate_customer!, except:[:index, :show, :tag_search, :genre_search]
+
   def index
     @tag_list = Tag.all
     @genre_list = Genre.all
@@ -20,13 +22,17 @@ class Public::ComicsController < ApplicationController
   end
 
   def new
+    if current_customer.email == 'guest@guest'
+      redirect_to root_path, alert: "ゲストユーザーは投稿できません。会員新規登録をお願いします。"
+    else
     @comic = Comic.new
+    end
   end
 
   def create
     #ログインしているユーザーのIDがcomicテーブルに保存される
     @comic = current_customer.comics.new(comic_params)
-    if @comic.save
+    @comic.save
     #入力されたジャンル名をgenre_listに追加する
     #split(nil)で送信された値をスペースで区切って配列化する
     genre_list = params[:comic][:genre_names][0].split(nil)
@@ -35,7 +41,7 @@ class Public::ComicsController < ApplicationController
     tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
     redirect_to public_comics_path, notice: "投稿 / 保存できました！"
-    elsif params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
+    if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
      render :new and return
     end
   end
@@ -48,6 +54,10 @@ class Public::ComicsController < ApplicationController
     #入力されたタグ名をtag_listに追加する
     tag_list = params[:comic][:tag_name].split(nil)
     @comic.tags_save(tag_list)
+    if @comic.invalid? #必須項目に空のものがあれば入力画面に遷移
+       flash.now[:alert] = "必要項目を入力してください"
+       render :new
+    end
   end
 
   #確認画面で戻るを選択

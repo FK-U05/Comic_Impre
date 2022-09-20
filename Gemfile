@@ -60,7 +60,7 @@ gem 'kaminari'
 gem 'image_processing', '~>1.2'
 gem 'jquery-rails'
 gem "enum_help"
-
+gem 'rails-i18n'
 
 gem 'dotenv-rails'
 group :production do

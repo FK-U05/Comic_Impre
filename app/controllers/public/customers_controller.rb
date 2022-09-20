@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!,except:[:show, :comics, :bookmark, :guest_sign_in]
 
   def show
     @customer = Customer.find(params[:id])
@@ -8,6 +9,9 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
+    if current_customer.email == 'guest@guest'
+       redirect_to root_path, alert: "ゲストユーザーは会員情報を編集できません。"
+    end
   end
 
   def update
@@ -28,7 +32,11 @@ class Public::CustomersController < ApplicationController
   #下書き一覧
   def draft
     @customer = Customer.find(params[:id])
+    if @customer.id == current_customer.id
     @comics = @customer.comics.where(status: :draft).order('created_at DESC').page(params[:page]).per(3)
+    else
+    redirect_to root_path
+    end
   end
 
   #ブックマーク一覧
@@ -43,13 +51,13 @@ class Public::CustomersController < ApplicationController
   def guest_sign_in
     customer = Customer.guest
     sign_in customer   # ユーザーをログインさせる
-    redirect_to root_path, notice: "ゲストユーザーとしてログインしました！"
+    redirect_to root_path, notice: "ゲストユーザーとしてログインしました。"
   end
 
   #退会確認
   def quit
     if current_customer.email == 'guest@guest'
-    redirect_to root_path, alert: "ゲストユーザーは削除できません。"
+    redirect_to root_path, alert: "ゲストユーザーは退会できません。"
     else
     @customer = current_customer
     end
