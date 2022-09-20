@@ -19,7 +19,7 @@
   <div class="row text-center mt-3">
     <div class="col">
       <%= link_to "戻る", admin_top_path, class:"btn btn-warning btn-sm" %>
-      <%= link_to "削除する", admin_genre_path(@genre), method: :delete, class:"btn btn-danger btn-sm" %>
+      <%= link_to "削除する", admin_genre_path(@genre), method: :delete, class:"btn btn-danger btn-sm", data: {confirm: "ジャンル名を削除しますか？"} %>
     </div>
   </div>
 

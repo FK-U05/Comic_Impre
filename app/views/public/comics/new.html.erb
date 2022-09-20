@@ -9,6 +9,10 @@
   <div class="row text-center">
     <div class="col mt-3">
 
+      <% if @comic.errors.any? %>
+        <p class="red">必要事項を入力してください。</p>
+      <% end %>
+
       <%= form_with model: @comic, url: public_comics_check_path(@comic), method: :post do |f| %>
 
         <div class="form-group">

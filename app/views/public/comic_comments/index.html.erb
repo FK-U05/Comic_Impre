@@ -24,7 +24,7 @@
 
                     <% if comment.customer == current_customer %>
                       <td class="text-center" width="10%">
-                        <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-sm" %>
+                        <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-sm", data: {confirm: "コメントを削除しますか？"} %>
                       </td>
                     <% end %>
               </table>

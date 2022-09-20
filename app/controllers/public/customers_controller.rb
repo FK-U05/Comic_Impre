@@ -13,7 +13,7 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to public_customer_path(@customer)
+      redirect_to public_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
     else
       render "edit"
     end
@@ -43,7 +43,7 @@ class Public::CustomersController < ApplicationController
   def guest_sign_in
     customer = Customer.guest
     sign_in customer   # ユーザーをログインさせる
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to root_path, notice: "ゲストユーザーとしてログインしました！"
   end
 
   #退会確認
@@ -60,7 +60,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.update(is_deleted: true)
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: "退会しました。"
   end
 
 private

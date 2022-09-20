@@ -4,3 +4,11 @@ ja:
       status:
         draft: "下書き"
         published: "公開中"
+
+  activerecord:
+    models:
+      customer: 会員
+    attributes:
+      customer:
+        name: ユーザー名
+

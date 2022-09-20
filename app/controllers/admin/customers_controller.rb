@@ -15,7 +15,7 @@ class Admin::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
-    redirect_to admin_customer_path(@customer)
+    redirect_to admin_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
   end
 
    #下書き一覧

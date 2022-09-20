@@ -8,7 +8,7 @@ class Admin::ComicCommentsController < ApplicationController
  def destroy
   @comic = Comic.find(params[:comic_id])
   ComicComment.find(params[:id]).destroy
-  redirect_to admin_comic_comic_comments_path(@comic)
+  redirect_to admin_comic_comic_comments_path(@comic), notice: "コメントを削除しました。"
  end
 
 end

@@ -12,6 +12,12 @@ class Comic < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   belongs_to :customer
 
+  validates :company, presence: true
+  validates :title, presence: true
+  validates :body, presence: true, length: { minimum: 1 }
+  validates :name, presence: true
+  validates :release_date, presence: true
+
   #下書き保存(１）か公開か（０）か
   enum status: {draft: 1,published: 0}
 

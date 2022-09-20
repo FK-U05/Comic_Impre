@@ -26,7 +26,7 @@ class Public::ComicsController < ApplicationController
   def create
     #ログインしているユーザーのIDがcomicテーブルに保存される
     @comic = current_customer.comics.new(comic_params)
-    @comic.save
+    if @comic.save
     #入力されたジャンル名をgenre_listに追加する
     #split(nil)で送信された値をスペースで区切って配列化する
     genre_list = params[:comic][:genre_names][0].split(nil)
@@ -34,15 +34,15 @@ class Public::ComicsController < ApplicationController
     #入力されたタグ名をtag_listに追加する
     tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
-    if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
-       render :new and return
+    redirect_to public_comics_path, notice: "投稿 / 保存できました！"
+    elsif params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
+     render :new and return
     end
-    redirect_to public_comics_path
   end
 
   def check
     @comic = current_customer.comics.new(comic_params)
-    #入力されたジャンル名をgenre_listに追加する
+     #入力されたジャンル名をgenre_listに追加する
     genre_list = params[:comic][:genre_name].split(nil)
     @comic.genres_save(genre_list)
     #入力されたタグ名をtag_listに追加する
@@ -96,14 +96,14 @@ class Public::ComicsController < ApplicationController
       tag_names_txt = params[:comic][:tag_names].split(nil)
       tag_list = tag_names_check_box + tag_names_txt
       @comic.tags_save(tag_list)
-      redirect_to public_comic_path(@comic)
+      redirect_to public_comic_path(@comic), notice: "投稿を編集 / 保存しました。"
     end
   end
 
   def destroy
     @comic = Comic.find(params[:id])
     @comic.destroy
-    redirect_to public_comics_path
+    redirect_to public_comics_path, notice: "投稿を削除しました。"
   end
 
   #タグで絞り込んだ投稿一覧

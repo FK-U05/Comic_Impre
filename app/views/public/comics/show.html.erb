@@ -120,7 +120,7 @@
     </div>
 
     <div class="col mr-1">
-      <%= button_to "この投稿を削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-sm" %>
+      <%= button_to "この投稿を削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-sm", data: {confirm: "この投稿を削除しますか？"} %>
     </div>
 
       <% end %>

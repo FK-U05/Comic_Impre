@@ -19,12 +19,10 @@
 
   <div class="row text-center mt-5">
     <div class="col">
-
-          <%= link_to "退会しない", public_customer_path(@customer), class:"btn btn-info btn-bg" %>
+      <%= link_to "退会しない", public_customer_path(@customer), class:"btn btn-info btn-bg" %>
     </div>
     <div class="col">
-          <%= link_to "退会する", public_customers_withdrawal_path(@customer), method: :patch, class:"btn btn-danger btn-bg"  %>
-
+      <%= link_to "退会する", public_customers_withdrawal_path(@customer), method: :patch, class:"btn btn-danger btn-bg", data: {confirm: "退会処理をします。よろしいですか？"} %>
     </div>
   </div>
 

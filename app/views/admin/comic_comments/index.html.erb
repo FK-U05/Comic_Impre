@@ -21,7 +21,7 @@
                         <%= comment.customer.name %></th>
                       <td><%= comment.comment %></td>
                       <td class="text-center" width="10%">
-                        <%= link_to "削除", admin_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-sm" %>
+                        <%= link_to "削除", admin_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-sm", data: {confirm: "コメントを削除しますか？"} %>
                       </td>
                     </tr>
                 </table>

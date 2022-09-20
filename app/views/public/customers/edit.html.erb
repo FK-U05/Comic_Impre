@@ -51,7 +51,7 @@
       <%= link_to "戻る", public_customer_path(current_customer), class:"btn btn-warning btn-sm" %>
     </div>
     <div class="col">
-      <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-bg" %>
+      <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-bg", data: {confirm: "退会確認画面に移動しますか？"} %>
     </div>
   </div>
 

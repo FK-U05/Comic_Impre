@@ -51,14 +51,14 @@ class Admin::ComicsController < ApplicationController
       tag_names_txt = params[:comic][:tag_names].split(nil)
       tag_list = tag_names_check_box + tag_names_txt
       @comic.tags_save(tag_list)
-      redirect_to admin_comic_path(@comic)
+      redirect_to admin_comic_path(@comic), notice: "投稿を編集 / 保存しました。"
     end
   end
 
   def destroy
     @comic = Comic.find(params[:id])
     @comic.destroy
-    redirect_to admin_comics_path
+    redirect_to admin_comics_path, notice: "投稿を削除しました。"
   end
 
    #タグで絞り込んだ投稿一覧

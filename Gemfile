@@ -57,10 +57,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'kaminari'
-gem 'net-smtp'
 gem 'image_processing', '~>1.2'
 gem 'jquery-rails'
 gem "enum_help"
+
 
 gem 'dotenv-rails'
 group :production do
