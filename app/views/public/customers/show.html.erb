@@ -12,12 +12,12 @@
         <div class="text-right">
           <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
               <% if @last_comic.bookmarked_by?(current_customer) %>
-                  <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-sm" do %>
+                  <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg" do %>
                     <i class="fas fa-bookmark"></i>
                     ブックマークを外す(<%= @last_comic.bookmarks.count %>)
                   <% end %>
               <% else %>
-                  <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-sm" do %>
+                  <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
                     <i class="fas fa-bookmark"></i>
                     ブックマークする(<%= @last_comic.bookmarks.count %>)
                   <% end %>
@@ -25,35 +25,38 @@
           <% end %>
         </div>
 
-        <table class="table table-bordered text-center">
+        <table class="table table-bordered text-center ml-4">
           <tr class="bg-info">
             <th width="20%">タイトル</th>
-            <td>
+            <td colspan="3">
               <%= link_to public_comic_path(@last_comic), class:"text-light" do %>
-                <%= @last_comic.title %>
+                <strong><%= @last_comic.title %></strong>
               <% end %>
             </td>
           </tr>
 
           <tr>
             <th class="bg-light">著者名</th>
-            <td> <%= @last_comic.name %></td>
-          </tr>
+            <td><%= @last_comic.name %></td>
 
-          <tr>
-            <th class="bg-light">出版社</th>
+            <th class="bg-light" width="20%">出版社</th>
             <td><%= @last_comic.company %></td>
           </tr>
 
           <tr>
             <th class="bg-light">発行年月日</th>
             <td><%= @last_comic.release_date.strftime("%Y年%m月%d日") %></td>
+
+            <th class="bg-light">投稿日時</th>
+            <td><%= @last_comic.created_at.strftime("%Y年%m月%d日") %></td>
+          </tr>
+
           </tr>
 
           <!-- 星レビュー機能 -->
           <tr>
             <th class="bg-light">おすすめ度</th>
-            <td>
+            <td colspan="3">
               <div id="star-rate-<%= @last_comic.id %>">
 
                   <script>
@@ -77,31 +80,25 @@
             <td>
               <% @last_comic.genres.each do |genre| %>
                 <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
-                  <%= genre.genre_name %>
+                  <strong><%= genre.genre_name %></strong>
                 <% end %>
               <% end %>
             </td>
-          </tr>
 
-          <tr>
             <th class="bg-light">タグ</th>
             <td>
               <% @last_comic.tags.each do |tag| %>
                 <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
-                  <%= tag.tag_name %>
+                  <strong><%= tag.tag_name %></strong>
                 <% end %>
               <% end %>
             </td>
           </tr>
 
-          <tr>
-            <th class="bg-light">投稿日時</th>
-            <td><%= @last_comic.created_at.strftime("%Y年%m月%d日") %></td>
-          </tr>
 
           <tr>
             <th class="bg-light">本文</th>
-            <td><%= @last_comic.body %></td>
+            <td colspan="3"><%= @last_comic.body %></td>
           </tr>
         </table>
     </div>
@@ -109,10 +106,10 @@
 
   <div class="row text-right">
     <div class="col">
-        <%= link_to "投稿詳細", public_comic_path(@last_comic), class:"btn btn-info btn-sm" %>
+        <%= link_to "投稿詳細", public_comic_path(@last_comic), class:"btn btn-info btn-bg" %>
 
         <% if @customer.email != 'guest@guest' %>
-          <%= link_to "投稿フォームへ", new_public_comic_path, class:"btn btn-success btn-sm" %>
+          <%= link_to "投稿フォームへ", new_public_comic_path, class:"btn btn-success btn-bg" %>
         <% end %>
     </div>
   </div>

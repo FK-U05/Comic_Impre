@@ -7,8 +7,8 @@
             <tr class="bg-info">
               <th width="20%">タイトル</th>
               <td colspan="3">
-                <%= link_to public_comic_path(comic), class:"text-light" do %>
-                  <%= comic.title %>
+                <%= link_to public_comic_path(comic), class:"text-light mr-5" do %>
+                  <strong><%= comic.title %></strong>
                 <% end %>
               </td>
             </tr>
@@ -16,13 +16,18 @@
             <tr>
               <th class="bg-light">著者名</th>
               <td><%= comic.name %></td>
+
               <th class="bg-light" width="20%">出版社</th>
               <td><%= comic.company %></td>
             </tr>
 
             <tr>
               <th class="bg-light">投稿したユーザー</th>
-              <td><%= comic.customer.name %></td>
+              <td>
+                <%= link_to public_customer_path(comic.customer) do %>
+                <strong><%= comic.customer.name %></strong>
+                <% end %>
+              </td>
 
               <th class="bg-light">投稿日時</th>
               <td><%= comic.created_at.strftime("%Y年%m月%d日") %></td>
@@ -57,7 +62,7 @@
               <td>
                 <% comic.genres.each do |genre| %>
                   <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
-                    <%= genre.genre_name %>
+                    <strong><%= genre.genre_name %></strong>
                   <% end %>
                 <% end %>
               </td>
@@ -66,7 +71,7 @@
               <td>
                 <% comic.tags.each do |tag| %>
                   <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
-                    <%= tag.tag_name %>
+                    <strong><%= tag.tag_name %></strong>
                   <% end %>
                 <% end %>
               </td>
@@ -82,7 +87,10 @@
 
             <tr>
               <th class="bg-light">本文</th>
-              <td colspan="3"><%= comic.body.truncate(10) %></td>
+              <td colspan="3">
+                <%= comic.body.truncate(10) %>
+                <%= link_to "もっと読む", public_comic_path(comic), class:"btn btn-info btn-bg ml-5" %>
+               </td>
             </tr>
 
         </table>

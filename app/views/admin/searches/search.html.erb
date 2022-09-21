@@ -5,22 +5,24 @@
     </div>
   </div>
 
-  <div class="row mt-3">
-    <div class="col">
+  <div class="row mt-3 justify-content-center">
 
-      <% if @range == "Comic" %>
-
+    <% if @range == "Comic" %>
+      <div class="col-md-10">
         <%= render 'admin/comics/comic', comics: @comics %>
+      </div>
 
-      <% elsif @range == "Customer" %>
+    <% elsif @range == "Customer" %>
+      <div class="col-md-11">
 
           <% @customers.each do |customer| %>
-            <table class="table table-bordered">
+            <table class="table table-bordered text-center">
                 <tr>
-                  <th><%= image_tag customer.get_profile_image(50,50) %>
+                  <th class="bg-light" width="20%">
+                    <%= image_tag customer.get_profile_image(50,50) %>
                       会員ID: <%= customer.id %>
                   </th>
-                  <td>ユーザー名:<%= customer.name %></td>
+                  <td width="20%">ユーザー名:<%= customer.name %></td>
                   <td>会員ステータス:
                     <% if customer.is_deleted %>
                       退会
@@ -29,12 +31,13 @@
                     <% end %>
                   </td>
                   <td>会員登録日:<%= customer.created_at.strftime("%Y年%m月%d日") %></td>
-                  <td><%= link_to "詳細", admin_customer_path(customer), class:"btn btn-info btn-sm" %></td>
+                  <td class="bg-light"><%= link_to "会員詳細", admin_customer_path(customer), class:"btn btn-info btn-sm" %></td>
                 </tr>
             </table>
           <% end %>
 
-      <% end %>
+      </div>
+    <% end %>
 
   </div>
 </div>

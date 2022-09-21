@@ -6,15 +6,15 @@
     </div>
   </div>
 
-  <div class="row mt-3">
-    <div class="col text-center">
-    <table class="table table-bordered">
+  <div class="row mt-3 justify-content-center">
+    <div class="col-md-10">
+    <table class="table table-bordered text-center">
       <tr>
         <td colspan="2"><%= image_tag @customer.get_profile_image(100,100) %></td>
       </tr>
       <tr>
-        <th class="bg-light">会員ID</th>
-        <td><%= @customer.id %></td>
+        <th class="bg-light" width="50%">会員ID</th>
+        <td><strong><%= @customer.id %></strong></td>
       </tr>
 
       <tr>
@@ -35,18 +35,18 @@
       <tr>
         <th class="bg-light">会員ステータス</th>
           <% if @customer.is_deleted %>
-            <td>退会</td>
+            <td class="text-danger"><strong>退会</strong></td>
           <% else %>
-            <td>有効</td>
+            <td class="text-success"><strong>有効</strong></td>
           <% end %>
       </tr>
     </table>
 
     <div class="text-right">
 
-        <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer), class:"btn btn-success btn-sm" %>
-        <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer), class:"btn btn-warning btn-sm" %>
-        <%= link_to "ブックマーク一覧", admin_customers_bookmark_path(@customer), class:"btn btn-info btn-sm" %>
+        <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer), class:"btn btn-success btn-bg" %>
+        <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer), class:"btn btn-warning btn-bg" %>
+        <%= link_to "ブックマーク一覧", admin_customers_bookmark_path(@customer), class:"btn btn-info btn-bg" %>
 
     </div>
 </div>

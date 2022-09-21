@@ -11,6 +11,8 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     if current_customer.email == 'guest@guest'
        redirect_to root_path, alert: "ゲストユーザーは会員情報を編集できません。"
+    elsif @customer.id != current_customer.id
+       redirect_to root_path, alert: "自分以外のユーザーの会員情報は編集できません。"
     end
   end
 

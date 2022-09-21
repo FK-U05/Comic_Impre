@@ -1,10 +1,18 @@
 <!-- ユーザー情報 -->
 <table class="table table-bordered text-center">
-  <tr>
-    <th><%= image_tag customer.get_profile_image(100,100) %></th>
+  <tr class="bg-light">
+    <th>
+      <%= link_to public_customer_path(customer) do %>
+        <%= image_tag customer.get_profile_image(100,100) %>
+      <% end %>
+    </th>
   </tr>
-  <tr>
-    <th><%= customer.name %></th>
+  <tr class="bg-light">
+    <th>
+      <%= link_to public_customer_path(customer) do %>
+        <%= customer.name %>
+      <% end %>
+    </th>
   </tr>
 
 <% if customer.email != 'guest@guest' %>

@@ -13,23 +13,23 @@
 
         <table class="table table-bordered">
             <tr>
-              <th class="bg-info text-light">
+              <th class="bg-light" width="20%">
                 <%= link_to admin_customer_path(customer) do %>
                   <%= image_tag customer.get_profile_image(100,100) %>
                 <% end %>
                  会員ID: <%= customer.id %>
               </th>
-              <th>ユーザー名</th>
-              <td><%= customer.name %></td>
-              <th>会員登録日</th>
+              <th class="bg-light">ユーザー名</th>
+              <td width="10%"><%= customer.name %></td>
+              <th class="bg-light">会員登録日</th>
               <td><%= customer.created_at.strftime("%Y年%m月%d日") %></td>
-              <th>会員ステータス</th>
+              <th class="bg-light">会員ステータス</th>
                 <% if customer.is_deleted %>
-                  <td>退会</td>
+                  <td class="text-danger"><strong>退会</strong></td>
                 <% else %>
-                  <td>有効</td>
+                  <td class="text-success"><strong>有効</strong></td>
                 <% end %>
-              <td>
+              <td class="bg-light">
                 <%= link_to "会員詳細へ", admin_customer_path(customer), class:"btn btn-info btn-bg" %>
               </td>
             </tr>

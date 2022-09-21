@@ -9,37 +9,39 @@
         <h3><strong>ブックマーク一覧</strong></h3>
           <% @customer.bookmarks.each do |bookmark| %>
             <table class="table table-bordered mt-3">
-              <tr>
-                <th width="30%">タイトル</th>
-                <td>
-                  <%= link_to admin_comic_path(bookmark.comic) do %>
-                  <%= bookmark.comic.title %>
+              <tr class="bg-info">
+                <th width="20%">タイトル</th>
+                <td colspan="3">
+                  <%= link_to admin_comic_path(bookmark.comic), class:"text-light" do %>
+                  <strong><%= bookmark.comic.title %></strong>
                   <% end %>
                 </td>
               </tr>
 
               <tr>
-                <th>著者名</th>
+                <th class="bg-light">著者名</th>
                 <td><%= bookmark.comic.name %></td>
-              </tr>
 
-              <tr>
-                <th>出版社</th>
+                <th class="bg-light" width="20%">出版社</th>
                 <td><%= bookmark.comic.company %></td>
               </tr>
 
               <tr>
-                <th>投稿したユーザー</th>
+                <th class="bg-light">投稿したユーザー</th>
                 <td>
                   <%= link_to admin_customer_path(bookmark.comic.customer) do %>
-                  <%= bookmark.comic.customer.name %>
+                  <strong><%= bookmark.comic.customer.name %></strong>
                   <% end %>
                 </td>
+
+                <th class="bg-light">投稿日時</th>
+                <td><%= bookmark.comic.created_at.strftime("%Y年%m月%d日") %></td>
+
               </tr>
 
               <tr>
-                <th>おすすめ度</th>
-                <td>
+                <th class="bg-light">おすすめ度</th>
+                <td colspan="3">
                     <div class="star-rate">
                       <div id="star-rate-<%= bookmark.comic.id %>"></div>
 
@@ -60,35 +62,30 @@
                 </tr>
 
                 <tr>
-                  <th>ジャンル</th>
+                  <th class="bg-light">ジャンル</th>
                   <td>
                     <% bookmark.comic.genres.each do |genre| %>
-                      <%= link_to admin_genre_comics_genre_path(genre_id: genre.id) do %>
-                        <%= genre.genre_name %>
+                      <%= link_to admin_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+                        <strong><%= genre.genre_name %></strong>
                       <% end %>
                     <% end %>
                   </td>
-                </tr>
 
-                <tr>
-                  <th>タグ</th>
+                  <th class="bg-light">タグ</th>
                   <td>
                     <% bookmark.comic.tags.each do |tag| %>
-                      <%= link_to admin_tag_comics_tag_path(tag_id: tag.id) do %>
-                        <%= tag.tag_name %>
+                      <%= link_to admin_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+                        <strong><%= tag.tag_name %></strong>
                       <% end %>
                     <% end %>
                   </td>
                 </tr>
 
                 <tr>
-                  <th>投稿日時</th>
-                  <td><%= bookmark.comic.created_at.strftime("%Y年%m月%d日") %></td>
-                </tr>
-
-                <tr>
-                  <th>本文</th>
-                  <td><%= bookmark.comic.body.truncate(10) %></td>
+                  <th class="bg-light">本文</th>
+                  <td colspan="3">
+                    <%= bookmark.comic.body.truncate(10) %>
+                    <%= link_to "投稿詳細", admin_comic_path(bookmark.comic), class:"btn btn-info btn-bg ml-5" %></td>
               </tr>
 
             </table>

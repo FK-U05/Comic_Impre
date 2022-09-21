@@ -4,7 +4,7 @@
           <th width="20%">タイトル</th>
           <td colspan="3">
             <%= link_to admin_comic_path(comic), class:"text-light" do %>
-              <%= comic.title %>
+              <strong><%= comic.title %></strong>
             <% end %>
           </td>
         </tr>
@@ -21,7 +21,7 @@
           <th class="bg-light">投稿したユーザー</th>
           <td>
             <%= link_to admin_customer_path(comic.customer) do %>
-            <%= comic.customer.name %>
+            <strong><%= comic.customer.name %></strong>
             <% end %>
           </td>
 
@@ -57,7 +57,7 @@
           <td>
             <% comic.genres.each do |genre| %>
               <%= link_to admin_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
-                <%= genre.genre_name %>
+                <strong><%= genre.genre_name %></strong>
               <% end %>
             <% end %>
           </td>
@@ -66,7 +66,7 @@
           <td>
             <% comic.tags.each do |tag| %>
               <%= link_to admin_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
-                <%= tag.tag_name %>
+                <strong><%= tag.tag_name %></strong>
               <% end %>
             <% end %>
           </td>
@@ -88,7 +88,10 @@
 
         <tr>
           <th class="bg-light">本文</th>
-          <td colspan="3"><%= comic.body.truncate(10) %></td>
+          <td colspan="3">
+            <%= comic.body.truncate(10) %>
+            <%= link_to "投稿詳細", admin_comic_path(comic), class:"btn btn-info btn-bg ml-5" %>
+          </td>
         </tr>
 
     </table>

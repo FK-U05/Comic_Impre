@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.pagination>.active>a{
+  text-align: center;
+  border-radius: 15px;
+}

@@ -15,7 +15,7 @@
             <% @genres.each do |genre| %>
               <tr>
                 <th><%= genre.genre_name %></th>
-                <td width="30%"><%= link_to "編集する", edit_admin_genre_path(genre), class:"btn btn-success btn-bg" %></td>
+                <td width="30%" class="bg-light"><%= link_to "編集する", edit_admin_genre_path(genre), class:"btn btn-success btn-bg" %></td>
               </tr>
             <% end %>
           </tbody>
@@ -31,7 +31,7 @@
             <% @tags.each do |tag| %>
               <tr>
                 <th><%= tag.tag_name %></th>
-                <td width="30%"><%= link_to "編集する", edit_admin_tag_path(tag), class:"btn btn-success btn-bg" %></td>
+                <td width="30%" class="bg-light"><%= link_to "編集する", edit_admin_tag_path(tag), class:"btn btn-success btn-bg" %></td>
               </tr>
             <% end %>
           </tbody>

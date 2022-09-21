@@ -4,7 +4,7 @@
     <div class="col-md-2">
       <%= render 'admin/customers/customer', customer: @comic.customer %>
       <div class="text-center">
-      <%= link_to "投稿詳細へ戻る", admin_comic_path(@comic), class:"btn btn-warning btn-sm" %>
+      <%= link_to "投稿詳細へ戻る", admin_comic_path(@comic), class:"btn btn-warning btn-bg" %>
       </div>
     </div>
 
@@ -12,7 +12,7 @@
       <h3 class="text-center"><strong><%= @comic.title %> へのコメント一覧</strong></h3>
             <% if @comic.comic_comments.exists? %>
               <% @comic.comic_comments.each do |comment| %>
-                <table class="table table-bordered">
+                <table class="table table-bordered mt-3">
                    <tr>
                       <th class="text-center" width="10%">
                         <%= link_to admin_customer_path(comment.customer) do %>
