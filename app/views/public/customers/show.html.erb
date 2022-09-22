@@ -19,7 +19,7 @@
               <% else %>
                   <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
                     <i class="fas fa-bookmark"></i>
-                    ブックマークする(<%= @last_comic.bookmarks.count %>)
+                    ブックマークする (<%= @last_comic.bookmarks.count %>)
                   <% end %>
              <% end %>
           <% end %>
@@ -98,7 +98,9 @@
 
           <tr>
             <th class="bg-light">本文</th>
-            <td colspan="3"><%= @last_comic.body %></td>
+            <td colspan="3"><%= @last_comic.body %>
+            <%= link_to "もっと読む", public_comic_path(@last_comic), class:"btn btn-info btn-bg ml-5" %>
+            </td>
           </tr>
         </table>
     </div>

@@ -11,14 +11,14 @@
         <div class="text-right">
           <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
               <% if @comic.bookmarked_by?(current_customer) %>
-                  <%= link_to public_comic_bookmark_path(@comic), method: :delete, class:"btn btn-info btn-bg" do %>
+                  <%= link_to public_comic_bookmark_path(@comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
                     <i class="fas fa-bookmark"></i>
                     ブックマークを外す(<%= @comic.bookmarks.count %>)
                   <% end %>
               <% else %>
                   <%= link_to public_comic_bookmark_path(@comic), method: :post, class:"btn btn-secondary btn-bg" do %>
                     <i class="fas fa-bookmark"></i>
-                    ブックマークする(<%= @comic.bookmarks.count %>)
+                    ブックマークする (<%= @comic.bookmarks.count %>)
                   <% end %>
              <% end %>
           <% end %>
@@ -116,7 +116,7 @@
       <% if @comic.customer == current_customer %>
 
     <div class="col mr-1">
-      <%= link_to "内容を編集する", edit_public_comic_path(@comic), class:"btn btn-success btn-bg" %>
+      <%= link_to "投稿内容を編集する", edit_public_comic_path(@comic), class:"btn btn-success btn-bg" %>
     </div>
 
     <div class="col mr-1">

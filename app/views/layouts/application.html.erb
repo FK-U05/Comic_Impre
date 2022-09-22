@@ -45,7 +45,7 @@
                     <% end %>
               </li>
               <li class ="rounded mr-4">
-                    <%= link_to destroy_customer_session_path, method: :delete, class:"btn btn-secondary btn-bg" do %>
+                    <%= button_to destroy_customer_session_path, method: :delete, class:"btn btn-secondary btn-bg" do %>
                       <i class="fas fa-sign-out-alt"></i> ログアウト
                     <% end %>
               </li>
@@ -68,14 +68,14 @@
                 <% end %>
               </li>
               <li class ="rounded mr-5">
-                <%= link_to destroy_admin_session_path, method: :delete, class:"btn btn-secondary btn-bg" do %>
+                <%= button_to destroy_admin_session_path, method: :delete, class:"btn btn-secondary btn-bg" do %>
                   <i class="fas fa-sign-out-alt"></i> ログアウト
                 <% end %>
               </li>
 
                 <% else %>
                   <li class ="rounded mr-4">
-                    <%= link_to public_customers_guest_sign_in_path, method: :post, class:"btn btn-secondary btn-bg" do %>
+                    <%= button_to public_customers_guest_sign_in_path, method: :post, class:"btn btn-secondary btn-bg" do %>
                       <i class="fas fa-users"></i> ゲストログイン
                     <% end %>
                   </li>

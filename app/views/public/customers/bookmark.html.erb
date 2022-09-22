@@ -13,6 +13,14 @@
           </div>
 
           <% @customer.bookmarks.each do |bookmark| %>
+          <div class="text-right">
+            <% if bookmark.comic.bookmarked_by?(current_customer) %>
+              <%= link_to public_comic_bookmark_path(bookmark.comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
+                <i class="fas fa-bookmark"></i>
+                ブックマークを外す(<%= bookmark.comic.bookmarks.count %>)
+            <% end %>
+            <% end %>
+          </div>
             <table class="table table-bordered text-center">
 
               <tr class="bg-info">

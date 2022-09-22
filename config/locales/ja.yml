@@ -11,6 +11,8 @@ ja:
     attributes:
       customer:
         name: ユーザー名
+        email: メールアドレス
+        password: パスワード
 
   views:
     pagination:
