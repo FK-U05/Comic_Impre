@@ -1,7 +1,8 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-3 mb-5">
+
+  <div class="row text-center">
     <div class="col">
-      <h3 class="text-center"><strong><%= params[:word] %> の検索結果</strong></h3>
+      <h3 class="p-1 bg-primary text-light"><strong><%= params[:word] %> の検索結果</strong></h3>
     </div>
   </div>
 
@@ -13,7 +14,7 @@
       </div>
 
     <% elsif @range == "Customer" %>
-      <div class="col-md-11">
+      <div class="col">
 
           <% @customers.each do |customer| %>
             <table class="table table-bordered text-center">
@@ -22,15 +23,17 @@
                     <%= image_tag customer.get_profile_image(50,50) %>
                       会員ID: <%= customer.id %>
                   </th>
-                  <td width="20%">ユーザー名:<%= customer.name %></td>
-                  <td>会員ステータス:
+                  <th  class="bg-light">ユーザー名</th>
+                  <td width="10%"><%= customer.name %></td>
+                  <th class="bg-light">会員ステータス</th>
                     <% if customer.is_deleted %>
-                      退会
+                      <td class="text-danger"><strong>退会</strong></td>
                     <% else %>
-                      有効
+                      <td class="text-success"><strong>有効</strong></td>
                     <% end %>
                   </td>
-                  <td>会員登録日:<%= customer.created_at.strftime("%Y年%m月%d日") %></td>
+                  <th class="bg-light">会員登録日</th>
+                  <td><%= customer.created_at.strftime("%Y年%m月%d日") %></td>
                   <td class="bg-light"><%= link_to "会員詳細", admin_customer_path(customer), class:"btn btn-info btn-sm" %></td>
                 </tr>
             </table>

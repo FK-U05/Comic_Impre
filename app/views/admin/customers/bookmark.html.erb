@@ -1,12 +1,20 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-3 mb-5">
+
+  <div class="row mt-2">
 
       <div class="col-md-2">
         <%= render 'admin/customers/customer', customer: @customer %>
       </div>
 
-      <div class="col text-center">
-        <h3><strong>ブックマーク一覧</strong></h3>
+      <div class="col text-center ml-4">
+        <h3 class="p-1 bg-info text-light"><strong>ブックマーク一覧</strong></h3>
+
+
+
+        <% if @customer.bookmarks.exists? %>
+        <%= paginate @bookmark_comics %>
+
+
           <% @customer.bookmarks.each do |bookmark| %>
             <table class="table table-bordered mt-3">
               <tr class="bg-info">
@@ -89,6 +97,13 @@
               </tr>
 
             </table>
+        <% end %>
+         <% else %>
+
+          <div class="col mt-5">
+            <h5 class="text-center">このユーザーはまだブックマークしていません</h5>
+          </div>
+
         <% end %>
     </div>
 

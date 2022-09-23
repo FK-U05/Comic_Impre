@@ -8,11 +8,10 @@
 
       <div class="col text-center ml-4">
         <h3 class="p-1 bg-info text-light"><strong><%= @customer.name %> のブックマーク一覧</strong></h3>
-         <%= paginate @bookmark_comics %>
+
 
         <% if @customer.bookmarks.exists? %>
-
-
+        <%= paginate @bookmark_comics %>
 
           <% @customer.bookmarks.each do |bookmark| %>
 

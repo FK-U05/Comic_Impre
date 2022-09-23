@@ -36,6 +36,7 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:comic_id)
     @bookmark_comics = Comic.find(bookmarks)
+    @bookmark_comics = Comic.order(created_at: :desc).page(params[:page]).per(3)
   end
 
   private

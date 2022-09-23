@@ -1,26 +1,31 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-5">
 
-  <div class="row">
+  <div class="row text-center">
     <div class="col">
-      <h3 class="text-center"><strong>タグ編集</strong></h3>
+      <h3 class="p-1 bg-danger text-light"><strong>タグ編集</strong></h3>
     </div>
   </div>
 
-  <div class="row text-center mt-5">
-    <div class="col">
+<div class="bg-light">
+
       <%= form_with model: @tag, url: admin_tag_path(@tag), method: :patch do |f| %>
-        <strong><%= f.label :タグ名 %></strong>
-        <%= f.text_field :tag_name %>
 
-        <%= f.submit "変更保存", class:"btn btn-success btn-sm" %>
-      <% end %>
+      <div class="form-group row text-center mt-3">
+        <div class="col mt-5 mr-2 text-right">
+        <strong><%= f.label :タグ名, class:"p-1 bg-secondary text-light mr-5" %></strong>
+        <%= f.text_field :tag_name %>
+        </div>
+
+<div class="col mt-5 text-left">
+        <%= f.submit "変更保存", class:"btn btn-success btn-bg mr-5" %>
     </div>
   </div>
+   <% end %>
 
-  <div class="row text-center mt-3">
-    <div class="col">
-      <%= link_to "戻る", admin_top_path, class:"btn btn-warning btn-sm" %>
-      <%= link_to "削除する", admin_tag_path(@tag), method: :delete, class:"btn btn-danger btn-sm", data: {confirm: "タグ名を削除しますか？"} %>
+  <div class="row text-right mt-3 mr-2">
+    <div class="col mb-4">
+      <%= link_to "戻る", admin_top_path, class:"btn btn-warning btn-bg" %>
+      <%= link_to "削除する", admin_tag_path(@tag), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "タグ名を削除しますか？"} %>
     </div>
   </div>
 

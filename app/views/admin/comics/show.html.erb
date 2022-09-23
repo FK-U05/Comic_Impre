@@ -1,15 +1,18 @@
-<div class="container mt-3">
-  <div class="row">
+<div class="container mt-3 mb-5">
 
-    <div class="col-md-2 mt-2">
+  <div class="row mt-2">
+
+    <div class="col-md-2">
       <%= render 'admin/customers/customer', customer: @comic.customer %>
     </div>
 
-    <div class="col mt-2">
-      <h3 class="text-center"><strong>投稿の詳細</strong></h3>
-        <div class="text-right">
-          <p class="btn bg-info text-light">ブクマ数(<%= @comic.bookmarks.count %>)</p>
+    <div class="col text-center ml-4">
+      <h3 class="p-1 bg-info text-light"><strong>投稿の詳細</strong></h3>
+
+        <div class="mt-4 text-right">
+          <div class="btn bg-info btn-bg text-light">ブクマ数 (<%= @comic.bookmarks.count %>)</div>
         </div>
+
           <table class="table table-bordered text-center">
             <tr class="bg-info">
               <th width="20%">タイトル</th>

@@ -1,27 +1,26 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-3 mb-5">
 
-    <div class="col-md-2">
+  <div class="row mt-2">
+
+    <div class="col-md-2 text-center">
       <%= render 'admin/customers/customer', customer: @comic.customer %>
-      <div class="text-center">
       <%= link_to "投稿詳細へ戻る", admin_comic_path(@comic), class:"btn btn-warning btn-bg" %>
-      </div>
     </div>
 
-    <div class="col">
-      <h3 class="text-center"><strong><%= @comic.title %> へのコメント一覧</strong></h3>
+    <div class="col ml-4">
+      <h3 class="p-1 bg-info text-light text-center"><strong><%= @comic.title %> へのコメント一覧</strong></h3>
             <% if @comic.comic_comments.exists? %>
               <% @comic.comic_comments.each do |comment| %>
                 <table class="table table-bordered mt-3">
                    <tr>
-                      <th class="text-center" width="10%">
+                      <th class="text-center bg-light" width="10%">
                         <%= link_to admin_customer_path(comment.customer) do %>
                           <%= image_tag comment.customer.get_profile_image(50,50) %>
                         <% end %>
                         <%= comment.customer.name %></th>
                       <td><%= comment.comment %></td>
                       <td class="text-center" width="10%">
-                        <%= link_to "削除", admin_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-sm", data: {confirm: "コメントを削除しますか？"} %>
+                        <%= link_to "削除", admin_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "コメントを削除しますか？"} %>
                       </td>
                     </tr>
                 </table>
