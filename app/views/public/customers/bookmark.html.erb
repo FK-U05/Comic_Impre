@@ -1,26 +1,34 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-3 mb-5">
+
+  <div class="row mt-2">
 
       <div class="col-md-2">
         <%= render 'customer', customer: @customer %>
       </div>
 
-      <div class="col">
-        <h3 class="text-center"><strong>ブックマーク一覧</strong></h3>
+      <div class="col text-center ml-4">
+        <h3 class="p-1 bg-info text-light"><strong><%= @customer.name %> のブックマーク一覧</strong></h3>
+         <%= paginate @bookmark_comics %>
+
         <% if @customer.bookmarks.exists? %>
-          <div class="col text-right">
-            <%= paginate @bookmark_comics %>
-          </div>
+
+
 
           <% @customer.bookmarks.each do |bookmark| %>
+
           <div class="text-right">
+
+
             <% if bookmark.comic.bookmarked_by?(current_customer) %>
               <%= link_to public_comic_bookmark_path(bookmark.comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
                 <i class="fas fa-bookmark"></i>
-                ブックマークを外す(<%= bookmark.comic.bookmarks.count %>)
+                ブックマークを外す (<%= bookmark.comic.bookmarks.count %>)
             <% end %>
             <% end %>
+
           </div>
+
+
             <table class="table table-bordered text-center">
 
               <tr class="bg-info">

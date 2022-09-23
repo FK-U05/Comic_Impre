@@ -1,15 +1,15 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-5">
 
   <div class="row text-center">
-    <div class="col mt-5">
-      <h3><strong>退会確認</strong></h3>
+    <div class="col">
+      <h3 class="p-1 bg-danger text-light"><strong>退会確認</strong></h3>
     </div>
   </div>
 
-  <div class="row text-center mt-3">
+  <div class="row text-center mt-5">
     <div class="col">
 
-        <h5>本当に退会しますか？<br>
+        <h5 class="p-3 font-weight-bold bg-light d-inline-block">本当に退会しますか？<br>
         退会すると、会員登録情報や<br>
         これまでの投稿、コメントは全て削除されます。<br>
         退会する場合は、「退会する」をクリックしてください。</h5>
@@ -19,10 +19,10 @@
 
   <div class="row text-center mt-5">
     <div class="col">
-      <%= link_to "退会しない", public_customer_path(@customer), class:"btn btn-info btn-bg" %>
+      <%= link_to "退会しない", public_customer_path(@customer), class:"btn btn-info btn-lg" %>
     </div>
     <div class="col">
-      <%= link_to "退会する", public_customers_withdrawal_path(@customer), method: :patch, class:"btn btn-danger btn-bg", data: {confirm: "退会処理をします。よろしいですか？"} %>
+      <%= link_to "退会する", public_customers_withdrawal_path(@customer), method: :patch, class:"btn btn-danger btn-lg", data: {confirm: "退会処理をします。よろしいですか？"} %>
     </div>
   </div>
 

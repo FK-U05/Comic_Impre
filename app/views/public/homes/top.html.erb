@@ -1,39 +1,40 @@
-<div class="container mt-5">
+<div class="container mt-3 bg-info p-3">
 
-  <div class="row">
+  <div class="row text-center">
     <div class="col">
-      <h1 class="text-center">ようこそ、Comic Impreへ！</h1>
+      <h1 class="bg-light p-1 d-inline-block font-weight-bold">ようこそ、Comic Impre へ！</h1>
     </div>
   </div>
 
   <div class="row text-center mt-4">
     <div class="col">
-      <h3>Comic Impreとは？
+      <h3 class="p-1 bg-light">Comic Impre とは？
         <i class="fas fa-book-reader"></i>
       </h3>
     </div>
   </div>
 
-  <div class="row text-center mt-2">
+  <div class="row text-center mt-3 mb-4">
     <div class="col">
 
-      <h5>「この漫画面白かった！誰かに感想を言いたい！」<br>
-          「面白い漫画が読みたいな、誰かオススメの漫画を知らないかな？」<br>
-          と思ったことはありませんか？<br>
-          Comic Impreではあなたが読んだ漫画の感想を気軽に投稿したり、<br>
-          誰かが投稿した漫画の感想を自由に見ることもできます。<br>
-          会員登録なしでも、誰かのオススメの漫画紹介は「みんなの投稿一覧」から<br>
-          誰でも見ることができます。<br>
-          是非一度、ご覧ください！</h5>
+      <h5 class="font-weight-bold bg-light d-inline-block p-3">
+        <p class="text-success">「この漫画面白かった！誰かに感想を言いたい！」</p>
+        <p class="text-danger">「面白い漫画が読みたいな、誰かオススメの漫画を知らないかな？」</p>
+        <p class="pt-1">と思ったことはありませんか？</p>
+        <p>Comic Impre では、あなたが読んだ漫画の感想を気軽に投稿したり、</p>
+        <p>他の人が投稿した漫画の感想を自由に読むことができます。</p>
+        <p>会員登録なしでも、誰かのオススメの漫画紹介は</p>
+        <p>「みんなの投稿一覧」から、誰でも閲覧できます。</p>
+        <p>是非一度、ご覧ください！</p>
 
     </div>
   </div>
 
-  <div class="row text-center mt-2">
+  <div class="row text-center mt-2 mb-3">
     <div class="col">
 
-          <%= link_to public_comics_path, class:"btn btn-warning btn-lg" do %>
-           みんなのおすすめ一覧へ
+          <%= link_to public_comics_path, class:"btn btn-warning btn-lg font-weight-bold" do %>
+           みんなの投稿一覧へ
           <% end %>
 
     </div>

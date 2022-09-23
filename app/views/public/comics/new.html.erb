@@ -1,54 +1,71 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-5">
 
-  <div class="row">
+  <div class="row text-center">
     <div class="col">
-    <h3 class="text-center"><strong>投稿フォーム</strong></h3>
+    <h3 class="p-1 bg-success text-light"><strong>投稿フォーム</strong></h3>
     </div>
   </div>
 
-  <div class="row text-center">
-    <div class="col mt-3">
+  <div class="bg-light">
+
 
       <%= form_with model: @comic, url: public_comics_check_path(@comic), method: :post do |f| %>
 
-        <div class="form-group">
-
-          <p class="btn bg-danger btn-sm text-light">必須</p>
-          <strong><%= f.label :タイトル %></strong>
-
+        <div class="form-group row mt-3">
+          <div class="col-md-6 mt-5 text-right">
+          <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
+          <strong><%= f.label :タイトル, class:"p-1 bg-info text-light" %></strong>
+          </div>
+          <div class="col-md-6 mt-5 text-left">
           <%= f.text_field :title, placeholder: "作品のタイトル" %>
+          </div>
 
         </div>
 
-        <div class="form-group">
-          <p class="btn bg-danger btn-sm text-light">必須</p>
-          <strong><%= f.label :著者名 %></strong>
+        <div class="form-group row">
+          <div class="col-md-6 text-right">
+          <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
+          <strong><%= f.label :著者名, class:"p-1 bg-info text-light" %></strong>
+          </div>
+          <div class="col-md-6 text-left">
           <%= f.text_field :name, placeholder: "作者名" %>
+         </div>
         </div>
 
-        <div class="form-group">
-          <p class="btn bg-danger btn-sm text-light">必須</p>
-          <strong><%= f.label :出版社 %></strong>
+        <div class="form-group row">
+          <div class="col-md-6 text-right">
+          <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
+          <strong><%= f.label :出版社, class:"p-1 bg-info text-light" %></strong>
+          </div>
+          <div class="col-md-6 text-left">
           <%= f.text_field :company, placeholder: "出版社名" %>
+          </div>
         </div>
 
-        <div class="form-group">
-          <p class="btn bg-danger btn-sm text-light">必須</p>
-          <strong><%= f.label :発行年月日%></strong>
+        <div class="form-group row">
+          <div class="col-md-6 text-right">
+          <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
+          <strong><%= f.label :発行年月日, class:"p-1 bg-info text-light" %></strong>
+          </div>
+           <div class="col-md-6 text-left">
           <%= f.date_field :release_date %>
         </div>
+        </div>
 
-        <div class="form-group">
-          <p class="btn bg-danger btn-sm text-light">必須</p>
-          <strong><%= f.label :本文 %></strong>
+        <div class="form-group row">
+          <div class="col text-center">
+          <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
+          <strong><%= f.label :本文, class:"p-1 bg-info text-light" %></strong>
           <p><%= f.text_area :body, size:"60x10", placeholder: "作品の良かったところやおすすめしたいところ" %></p>
+        </div>
         </div>
 
         <!--星レビュー機能-->
-        <strong>おすすめ度(☆いくつかをお選び下さい)</strong>
-        <div class="form-group" id="star">
-          <%= f.hidden_field :star, id: :review_star %>
-        </div>
+        <div class="text-center">
+        <p class="p-1 bg-info text-light d-inline-block"><strong>おすすめ度 (☆いくつかをお選び下さい)</strong></p>
+          <div class="form-group p-1" id="star">
+            <%= f.hidden_field :star, id: :review_star %>
+          </div>
 
            <script>
              $('#star').empty();
@@ -61,23 +78,30 @@
                scoreName: 'comic[star]',
              });
            </script>
+        </div>
 
-        <div class="form-group">
-          <strong><%= f.label :ジャンル %></strong>
-          <p><%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true }) %></p>
+        <div class="form-group text-center">
+
+          <strong><%= f.label :ジャンル, class:"p-1 bg-info text-light" %></strong>
+          <p><%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true, class:"check_box" }) %></p>
+
           <p><%= f.text_field :genre_name, placeholder: "その他" %></p>
         </div>
 
-        <div class="form-group">
-          <strong><%= f.label :タグ %></strong>
+        <div class="form-group text-center">
+
+          <strong><%= f.label :タグ, class:"p-1 bg-info text-light" %></strong>
           <p><%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %></p>
           <p><%= f.text_field :tag_name, placeholder: "その他" %></p>
         </div>
 
-        <%= f.submit "投稿確認画面へ", class:"btn btn-info btn-lg" %>
+        <div class="text-center">
+
+        <%= f.submit "投稿確認画面へ", class:"btn btn-success btn-lg mt-4 mb-5" %>
+        </div>
 
     <% end %>
 
-    </div>
+
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-5">
 
   <div class="row mt-2">
 
@@ -6,13 +6,13 @@
       <%= render 'customer', customer: @customer %>
     </div>
 
-    <div class="col">
-      <h3 class="text-center"><strong>下書き一覧</strong></h3>
+    <div class="col text-center ml-4">
+      <h3 class="p-1 bg-secondary text-light"><strong>下書き一覧</strong></h3>
 
         <% if @comics.exists? %>
 
           <% @comics.each do |comic| %>
-            <table class="table table-bordered text-center mt-3 ml-4">
+            <table class="table table-bordered text-center mt-3">
 
               <tr class="bg-light">
                 <th width="20%">タイトル</th>
@@ -26,9 +26,6 @@
                 <th class="bg-light" width="20%">出版社</th>
                 <td><%= comic.company %></td>
               </tr>
-
-
-
 
               <!--星レビュー機能-->
               <tr>
@@ -95,8 +92,8 @@
 
         <% else %>
 
-          <div class="text-center mt-3">
-            <h5 class="text-center">下書き途中のものはありません</h5>
+          <div class="text-center mt-5">
+            <h5>下書きの投稿はありません</h5>
           </div>
 
         <% end %>

@@ -1,8 +1,8 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-5">
 
-  <div class="row">
+  <div class="row text-center">
     <div class="col">
-      <h3 class="text-center"><strong>投稿内容の確認</strong></h3>
+      <h3 class="p-1 bg-danger text-light"><strong>投稿内容の確認</strong></h3>
     </div>
   </div>
 
@@ -14,44 +14,43 @@
         <table class="table table-bordered text-center mt-3">
 
           <tr>
-            <th width="20%">タイトル</th>
+            <th class="bg-light" width="20%">タイトル</th>
             <th><%= @comic.title %></th>
           </tr>
           <%= f.hidden_field :title, :value => @comic.title %>
 
           <tr>
-            <th>著者名</th>
+            <th class="bg-light">著者名</th>
             <th><%= @comic.name %></th>
           </tr>
           <%= f.hidden_field :name, :value => @comic.name %>
 
           <tr>
-            <th>出版社名</th>
+            <th class="bg-light">出版社名</th>
             <th><%= @comic.company %></th>
           </tr>
           <%= f.hidden_field :company, :value => @comic.company %>
 
           <tr>
-            <th>発行年月日</th>
+            <th class="bg-light">発行年月日</th>
             <th><%= @comic.release_date.strftime("%Y年%m月%d日") %></th>
           </tr>
           <%= f.hidden_field :release_date, :value => @comic.release_date %>
 
           <tr>
-            <th>本文</th>
+            <th class="bg-light">本文</th>
             <th><%= @comic.body %></th>
           </tr>
           <%= f.hidden_field :body, :value => @comic.body %>
 
           <!--星レビュー機能-->
           <tr>
-            <th>おすすめ度</th>
-            <td>
-              <div class="form-group" id="star">
-                <%= f.hidden_field :star, id: :review_star %>
-              </div>
+            <th class="bg-light">おすすめ度</th>
 
-               <script>
+              <td class="form-group" id="star">
+                <%= f.hidden_field :star, id: :review_star %>
+
+                 <script>
                  $('#star').empty();
                  $('#star').raty({
                    size: 36,
@@ -62,10 +61,14 @@
                     scoreName: 'comic[star]',
                  });
                </script>
+
             </td>
-          </tr>
+            </tr>
+
+
+
           <tr>
-            <th>ジャンル</th>
+            <th class="bg-light">ジャンル</th>
             <th>
               <% @comic.genres.each do |genre| %>
                 <%= genre.genre_name %>
@@ -75,7 +78,7 @@
           <%= f.hidden_field :genre_names, :value => @comic.genres.map(&:genre_name), :multiple => true %>
 
           <tr>
-            <th>タグ</th>
+            <th class="bg-light">タグ</th>
             <th>
               <% @comic.tags.each do |tag| %>
                 <%= tag.tag_name %>
@@ -85,9 +88,9 @@
           <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
 
          <tr>
-           <th><%= f.label"公開範囲を選択" %></th>
+           <th class="bg-light"><%= f.label"公開範囲を選択" %></th>
            <td><%= f.select :status, [["公開", "published"], ["下書き", "draft"]], required: true %>
-               下書きで設定したものは、マイページの下書き一覧から編集することができます</td>
+               下書きを選択された場合は公開されません。マイページの下書き一覧から内容を編集することができます。</td>
         </tr>
 
         </table>
@@ -97,7 +100,7 @@
 
     <div class="row">
       <div class="col text-center">
-        <%= f.submit "保存 / 投稿する", class:"btn btn-info btn-bg" %>
+        <%= f.submit "保存 / 投稿する", class:"btn btn-info btn-lg" %>
       <% end %>
       </div>
     </div>
@@ -135,7 +138,7 @@
                 <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
 
                 <div class="col">
-                  <%= f.submit "戻る", name: :back, class:"btn btn-warning btn-bg" %>
+                  <%= f.submit "戻る", name: :back, class:"btn btn-warning btn-lg" %>
                 </div>
           <% end %>
     </div>

@@ -1,18 +1,19 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-5">
 
   <div class="row mt-2">
+
     <div class-"col-md-2">
       <%= render 'customer', customer: @customer %>
     </div>
 
-    <div class="col">
-      <h3 class="text-center"><strong>最新の投稿</strong></h3>
+    <div class="col text-center ml-4">
+      <h3 class="p-1 bg-primary text-light"><strong><%= @customer.name %> の最新の投稿</strong></h3>
         <% if @customer.comics.exists? %>
 
-        <div class="text-right">
+        <div class="mt-4 text-right">
           <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
               <% if @last_comic.bookmarked_by?(current_customer) %>
-                  <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg" do %>
+                  <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
                     <i class="fas fa-bookmark"></i>
                     ブックマークを外す(<%= @last_comic.bookmarks.count %>)
                   <% end %>
@@ -25,7 +26,7 @@
           <% end %>
         </div>
 
-        <table class="table table-bordered text-center ml-4">
+        <table class="table table-bordered text-center">
           <tr class="bg-info">
             <th width="20%">タイトル</th>
             <td colspan="3">

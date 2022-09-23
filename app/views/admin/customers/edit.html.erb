@@ -15,10 +15,32 @@
 
       <div class="form-group row text-center mt-3">
         <div class="col">
-          <%= image_tag @customer.get_profile_image(100,100) %>
-        </div>
-        <div class="col">
-          <%= f.file_field :profile_image, accept: "image/*" %>
+          <strong><%= f.label :ユーザー画像 %></strong>
+              <%= f.file_field :profile_image, accept: "image/*", id: :image %>
+
+                <div id="image_wrapper">
+                  <% if @customer.profile_image.present? %>
+                     <%= image_tag @customer.get_profile_image(100,100), id: :img_preview %>
+                  <% else %>
+                    <%= image_tag "no_image.jpeg", id: :img_preview %>
+                  <% end %>
+                </div>
+
+                  <script>
+                    $(function() {
+                        $('#image').on('change', function() {
+                            var selectedFile = this.files[0];
+                            var fileReader = new FileReader();
+
+                            fileReader.onload = function(event) {
+                                var loadedImageUri = event.target.result;
+                                 $('#img_preview').attr('src', loadedImageUri);
+                            };
+
+                            fileReader.readAsDataURL(selectedFile);
+                        });
+                    });
+                  </script>
         </div>
       </div>
 

@@ -11,13 +11,14 @@
   </head>
 
   <body>
-    <header>
+    <header class="bg-light p-2">
       <nav class="navbar navbar-expand-lg">
         <div class="container mt-4">
 
-          <h1 class="navbar">
+          <div class="navbar">
+            <h1>
             <strong>
-              <%= link_to root_path, class:"text-secondary" do %>
+              <%= link_to root_path, class:"text-dark" do %>
                 <i class="fas fa-house-user"></i>
                   Comic Impre
                 <i class="fas fa-book"></i>
@@ -30,7 +31,7 @@
             <% if customer_signed_in? %>
 
               <li class ="rounded mr-4">
-                <%= link_to public_customer_path(current_customer.id), class:"btn btn-info btn-bg" do %>
+                <%= link_to public_customer_path(current_customer.id), class:"btn btn-primary btn-bg" do %>
                   <i class="fas fa-user"></i> マイページ
                 <% end %>
               </li>
@@ -115,8 +116,8 @@
 
     <%= yield %>
 
-    <footer>
-      <div class="container mt-4">
+    <footer class="bg-light mt-2">
+      <div class="container p-2">
         <div class="text-center">
           <%= link_to admin_session_path, class:"btn btn-dark btn-sm" do %>
             <i class="fas fa-user-lock"></i> 管理者ログイン

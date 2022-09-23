@@ -82,7 +82,7 @@ class Public::ComicsController < ApplicationController
   def edit
     @comic = Comic.find(params[:id])
     if @comic.customer.id != current_customer.id
-       redirect_to public_comics_path, alert: "他のユーザーの投稿は編集できません。"
+       redirect_to public_comics_path, alert: "他のユーザーの投稿はできません。"
     end
     @genre_list = @comic.genres.pluck(:genre_names).join(nil)
     @tag_list = @comic.tags.pluck(:tag_names).join(nil)
