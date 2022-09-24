@@ -23,7 +23,7 @@
                 <% if @customer.profile_image.present? %>
                   <%= image_tag @customer.get_profile_image, id: :img_preview %>
                 <% else %>
-                  <%= image_tag "no_image.jpeg", id: :img_preview %>
+                  <%= image_tag "no_image.jpg", id: :img_preview %>
                 <% end %>
               </div>
               <p class="mt-3 text-center">
