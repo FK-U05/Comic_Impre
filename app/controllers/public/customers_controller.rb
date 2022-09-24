@@ -21,7 +21,7 @@ class Public::CustomersController < ApplicationController
     if @customer.update(customer_params)
        redirect_to public_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
     else
-       render "edit", alert: "ユーザー名とメールアドレスを入力してください。"
+       redirect_to edit_public_customer_path(@customer), alert: "ユーザー名とメールアドレスを入力してください。"
     end
   end
 
