@@ -1,5 +1,5 @@
-<!-- ユーザー情報 -->
 <table class="table table-bordered text-center">
+
   <tr class="bg-light">
     <th>
       <%= link_to public_customer_path(customer) do %>
@@ -7,6 +7,7 @@
       <% end %>
     </th>
   </tr>
+
   <tr class="bg-light">
     <th>
       <%= link_to public_customer_path(customer) do %>
@@ -15,18 +16,21 @@
     </th>
   </tr>
 
-<% if customer.email != 'guest@guest' %>
-
-  <!-- ログインしているユーザー本人でありゲストログインでもない時だけ、編集リンクと下書きを表示-->
-  <% if customer == current_customer %>
+  <!-- ログインしているユーザー本人にのみ編集リンクと下書き一覧を表示-->
+  <% if customer.email != 'guest@guest' && customer == current_customer  %>
     <tr>
-      <th><%= link_to "会員情報を編集", edit_public_customer_path(current_customer), class:"text-success" %></th>
-    </tr>
-    <tr>
-      <th><%= link_to "下書き一覧", draft_public_customer_path(customer), class:"text-secondary" %></th>
+      <th>
+        <%= link_to "会員情報を編集", edit_public_customer_path(current_customer), class:"text-success" %>
+      </th>
     </tr>
 
+    <tr>
+      <th>
+        <%= link_to "下書き一覧", draft_public_customer_path(customer), class:"text-secondary" %>
+      </th>
+    </tr>
   <% end %>
+
     <tr>
       <th>
         <%= link_to public_customers_comics_path(customer), class:"text-warning" do %>
@@ -37,9 +41,9 @@
     </tr>
 
     <tr>
-      <th><%= link_to "ブックマーク一覧", public_customers_bookmark_path(customer), class:"text-info" %></th>
+      <th>
+        <%= link_to "ブックマーク一覧", public_customers_bookmark_path(customer), class:"text-info" %>
+      </th>
     </tr>
-
-<% end %>
 
 </table>

@@ -2,97 +2,103 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-success text-light"><strong><%= @customer.name %> の編集</strong></h3>
+      <h3 class="p-1 bg-success text-light">
+        <strong><%= @customer.name %> の編集</strong>
+      </h3>
     </div>
   </div>
 
-  <div class="bg-light">
+    <div class="bg-light">
 
-  <div class="row text-center mt-5">
-    <div class="col">
-      <h5 class="p-1 bg-secondary text-light"><strong>会員ID: <%= @customer.id %></strong></h5>
-    </div>
-  </div>
+      <div class="row text-center mt-5">
+        <div class="col">
+          <h5 class="p-1 bg-secondary text-light">
+            <strong>会員ID: <%= @customer.id %></strong>
+          </h5>
+        </div>
+      </div>
 
-    <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+        <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
 
-      <div class="form-group row text-center mt-3">
-        <div class="col mt-3">
-          <strong><%= f.label :ユーザー画像, class:"p-1 bg-secondary text-light" %></strong>
+          <div class="form-group row text-center mt-3">
+            <div class="col mt-3">
+              <strong><%= f.label :ユーザー画像, class:"p-1 bg-secondary text-light" %></strong>
 
+              <!-- 画像プレビュー -->
                 <div id="image_wrapper">
                   <% if @customer.profile_image.present? %>
-                     <%= image_tag @customer.get_profile_image(100,100), id: :img_preview %>
+                    <%= image_tag @customer.get_profile_image(100,100), id: :img_preview %>
                   <% else %>
                     <%= image_tag "no_image.jpeg", id: :img_preview %>
                   <% end %>
                 </div>
-                <p class="mt-3 text-center">
-                <%= f.file_field :profile_image, accept: "image/*", id: :image %>
-                </p>
 
-                  <script>
-                    $(function() {
-                        $('#image').on('change', function() {
-                            var selectedFile = this.files[0];
-                            var fileReader = new FileReader();
+                  <p class="mt-3 text-center">
+                    <%= f.file_field :profile_image, accept: "image/*", id: :image %>
+                  </p>
 
-                            fileReader.onload = function(event) {
-                                var loadedImageUri = event.target.result;
-                                 $('#img_preview').attr('src', loadedImageUri);
-                            };
+                    <script>
+                      $(function() {
+                      $('#image').on('change', function() {
+                        var selectedFile = this.files[0];
+                        var fileReader = new FileReader();
 
-                            fileReader.readAsDataURL(selectedFile);
-                        });
-                    });
-                  </script>
-        </div>
-      </div>
+                        fileReader.onload = function(event) {
+                            var loadedImageUri = event.target.result;
+                             $('#img_preview').attr('src', loadedImageUri);
+                        };
 
-      <div class="form-group row text-center mt-2">
-        <div class="col text-right">
-          <strong><%= f.label :ユーザー名, class:"p-1 bg-secondary text-light" %></strong>
-        </div>
-        <div class="col text-left">
-          <%= f.text_field :name %>
-        </div>
-      </div>
+                        fileReader.readAsDataURL(selectedFile);
+                      });
+                      });
+                    </script>
+            </div>
+          </div>
 
-      <div class="form-group row text-center mt-2">
-        <div class="col text-right">
-          <strong><%= f.label :メールアドレス, class:"p-1 bg-secondary text-light" %></strong>
-        </div>
-        <div class="col text-left">
-          <%= f.email_field :email %>
-        </div>
-      </div>
+          <div class="form-group row text-center mt-2">
+            <div class="col text-right">
+              <strong><%= f.label :ユーザー名, class:"p-1 bg-secondary text-light" %></strong>
+            </div>
+            <div class="col text-left">
+              <%= f.text_field :name %>
+            </div>
+          </div>
 
-      <div class="form-group row text-center mt-2">
-        <div class="col text-right">
-          <strong><%= f.label :会員ステータス, class:"p-1 bg-secondary text-light" %></strong>
-        </div>
-        <div class="col text-left">
-          <%= f.radio_button :is_deleted, false %>
-          <%= f.label :is_deleted, '有効' %>
-          <%= f.radio_button :is_deleted, true %>
-          <%= f.label :is_deleted, '退会' %>
-        </div>
-      </div>
+          <div class="form-group row text-center mt-2">
+            <div class="col text-right">
+              <strong><%= f.label :メールアドレス, class:"p-1 bg-secondary text-light" %></strong>
+            </div>
+            <div class="col text-left">
+              <%= f.email_field :email %>
+            </div>
+          </div>
 
-      <div class="form-group row text-center mt-3">
-        <div class="col">
-          <%= f.submit "変更保存", class:"btn btn-success btn-bg" %>
-        </div>
-      </div>
+          <div class="form-group row text-center mt-2">
+            <div class="col text-right">
+              <strong><%= f.label :会員ステータス, class:"p-1 bg-secondary text-light" %></strong>
+            </div>
+            <div class="col text-left">
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, '有効' %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, '退会' %>
+            </div>
+          </div>
 
-    <% end %>
+          <div class="form-group row text-center mt-3">
+            <div class="col">
+              <%= f.submit "変更保存", class:"btn btn-success btn-bg" %>
+            </div>
+          </div>
 
-  <div class="row text-center">
-     <div class="col">
-       <%= link_to "戻る", admin_customer_path(@customer), class:"btn btn-warning btn-bg mb-4" %>
-     </div>
-  </div>
+        <% end %>
 
-  </div>
+          <div class="row text-center">
+            <div class="col">
+              <%= link_to "戻る", admin_customer_path(@customer), class:"btn btn-warning btn-bg mb-4" %>
+            </div>
+          </div>
+
+    </div>
 
 </div>

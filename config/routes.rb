@@ -34,8 +34,8 @@ namespace :admin do
      get :draft
    end
  end
- resources :genres, only:[:index, :create, :edit, :update]
- resources :tags, only:[:index, :create, :edit, :update, :destroy]
+ resources :genres, only:[:index, :destroy, :edit, :update]
+ resources :tags, only:[:index, :edit, :update, :destroy]
 end
 
 namespace :public do
@@ -64,8 +64,6 @@ namespace :public do
      get :draft
    end
  end
- resources :genres, only:[:create, :destroy, :edit, :update]
- resources :tags, only:[:create, :destroy, :edit, :update, :index]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

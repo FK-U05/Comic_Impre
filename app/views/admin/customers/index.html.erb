@@ -2,41 +2,49 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-info text-light"><strong>会員一覧</strong></h3>
+      <h3 class="p-1 bg-info text-light">
+        <strong>会員一覧</strong>
+      </h3>
     </div>
   </div>
 
-<div class="row mt-3 mb-5">
-  <div class="col text-center">
-    <% @customers.each do |customer| %>
+  <div class="row mt-3 mb-5">
+    <div class="col text-center">
+      <%= paginate @customers %>
 
+        <% @customers.each do |customer| %>
 
-        <table class="table table-bordered">
+          <table class="table table-bordered">
             <tr>
+
               <th class="bg-light" width="20%">
                 <%= link_to admin_customer_path(customer) do %>
                   <%= image_tag customer.get_profile_image(100,100) %>
+                  会員ID: <%= customer.id %>
                 <% end %>
-                 会員ID: <%= customer.id %>
               </th>
+
               <th class="bg-light">ユーザー名</th>
               <td width="10%"><%= customer.name %></td>
+
               <th class="bg-light">会員登録日</th>
               <td><%= customer.created_at.strftime("%Y年%m月%d日") %></td>
+
               <th class="bg-light">会員ステータス</th>
                 <% if customer.is_deleted %>
                   <td class="text-danger"><strong>退会</strong></td>
                 <% else %>
                   <td class="text-success"><strong>有効</strong></td>
                 <% end %>
+
               <td class="bg-light">
                 <%= link_to "会員詳細へ", admin_customer_path(customer), class:"btn btn-info btn-bg" %>
               </td>
             </tr>
-        </table>
-        <% end %>
-      </div>
-     </div>
+          </table>
 
+        <% end %>
+    </div>
+  </div>
 
 </div>

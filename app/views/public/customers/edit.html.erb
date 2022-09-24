@@ -2,80 +2,89 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-success text-light"><strong><%= @customer.name %> の編集</strong></h3>
+      <h3 class="p-1 bg-success text-light">
+        <strong><%= @customer.name %> の編集</strong>
+      </h3>
     </div>
   </div>
 
   <div class="bg-light">
 
-      <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
+    <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
 
-        <div class="form-group row text-center mt-3">
-          <div class="col mt-5">
-            <strong><%= f.label :ユーザー画像, class:"p-1 bg-secondary text-light" %></strong>
+      <div class="form-group row text-center mt-3">
+        <div class="col mt-5">
+          <strong>
+            <%= f.label :ユーザー画像, class:"p-1 bg-secondary text-light" %>
+          </strong>
+            <!--　画像プレビュー -->
             <div id="image_wrapper">
-                  <% if @customer.profile_image.present? %>
-                     <%= image_tag @customer.get_profile_image(100,100), id: :img_preview %>
-                  <% else %>
-                    <%= image_tag "no_image.jpeg", id: :img_preview %>
-                  <% end %>
+              <% if @customer.profile_image.present? %>
+                <%= image_tag @customer.get_profile_image(100,100), id: :img_preview %>
+              <% else %>
+                <%= image_tag "no_image.jpeg", id: :img_preview %>
+              <% end %>
             </div>
             <p class="mt-3 text-center">
               <%= f.file_field :profile_image, accept: "image/*", id: :image %>
             </p>
 
-                  <script>
-                    $(function() {
-                        $('#image').on('change', function() {
-                            var selectedFile = this.files[0];
-                            var fileReader = new FileReader();
+              <script>
+                $(function() {
+                $('#image').on('change', function() {
+                var selectedFile = this.files[0];
+                var fileReader = new FileReader();
 
-                            fileReader.onload = function(event) {
-                                var loadedImageUri = event.target.result;
-                                 $('#img_preview').attr('src', loadedImageUri);
-                            };
+                fileReader.onload = function(event) {
+                var loadedImageUri = event.target.result;
+                $('#img_preview').attr('src', loadedImageUri);
+                };
 
-                            fileReader.readAsDataURL(selectedFile);
-                        });
-                    });
-                  </script>
-</div>
+                fileReader.readAsDataURL(selectedFile);
+                });
+                });
+              </script>
         </div>
+      </div>
 
-        <div class="form-group row text-center mt-2">
-          <div class="col text-right">
-            <strong><%= f.label :ユーザー名, class:"p-1 bg-secondary text-light" %></strong>
-          </div>
-          <div class="col text-left">
-            <%= f.text_field :name %>
-          </div>
+      <div class="form-group row text-center mt-2">
+        <div class="col text-right">
+          <strong>
+            <%= f.label :ユーザー名, class:"p-1 bg-secondary text-light" %>
+          </strong>
         </div>
-
-        <div class="form-group row text-center mt-2">
-          <div class="col text-right">
-           <strong><%= f.label :メールアドレス, class:"p-1 bg-secondary text-light" %></strong>
-          </div>
-          <div class="col text-left">
-            <%= f.email_field :email %>
-          </div>
+        <div class="col text-left">
+          <%= f.text_field :name %>
         </div>
+      </div>
 
-        <div class="row text-center mt-2">
-          <div class="col">
-            <%= f.submit "変更保存", class:"btn btn-success btn-bg" %>
-          </div>
+      <div class="form-group row text-center mt-2">
+        <div class="col text-right">
+          <strong>
+            <%= f.label :メールアドレス, class:"p-1 bg-secondary text-light" %>
+          </strong>
         </div>
+        <div class="col text-left">
+          <%= f.email_field :email %>
+        </div>
+      </div>
 
-      <% end %>
+      <div class="row text-center mt-2">
+        <div class="col">
+          <%= f.submit "変更保存", class:"btn btn-success btn-bg" %>
+        </div>
+      </div>
 
-  <div class="row text-center">
-    <div class="col">
-      <%= link_to "戻る", public_customer_path(current_customer), class:"btn btn-warning btn-bg mb-4" %>
-    </div>
-    <div class="col">
-      <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-bg mb-4", data: {confirm: "退会確認画面に移動しますか？"} %>
-    </div>
-  </div>
+    <% end %>
+
+      <div class="row text-center">
+        <div class="col">
+          <%= link_to "戻る", public_customer_path(current_customer), class:"btn btn-warning btn-bg mb-4" %>
+        </div>
+        <div class="col">
+          <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-bg mb-4", data: {confirm: "退会確認画面に移動しますか？"} %>
+        </div>
+      </div>
 
   </div>
 

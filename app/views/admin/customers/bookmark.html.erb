@@ -2,54 +2,53 @@
 
   <div class="row mt-2">
 
-      <div class="col-md-2">
-        <%= render 'admin/customers/customer', customer: @customer %>
-      </div>
+    <div class="col-md-2">
+      <%= render 'admin/customers/customer', customer: @customer %>
+    </div>
 
-      <div class="col text-center ml-4">
-        <h3 class="p-1 bg-info text-light"><strong>ブックマーク一覧</strong></h3>
+    <div class="col text-center ml-4">
 
-
+      <h3 class="p-1 bg-info text-light">
+        <strong>ブックマーク一覧</strong>
+      </h3>
 
         <% if @customer.bookmarks.exists? %>
-        <%= paginate @bookmark_comics %>
+          <%= paginate @bookmark_comics %>
 
+            <% @customer.bookmarks.each do |bookmark| %>
+              <table class="table table-bordered mt-3">
+                <tr class="bg-info">
+                  <th width="20%">タイトル</th>
+                  <td colspan="3">
+                    <%= link_to admin_comic_path(bookmark.comic), class:"text-light" do %>
+                      <strong><%= bookmark.comic.title %></strong>
+                    <% end %>
+                  </td>
+                </tr>
 
-          <% @customer.bookmarks.each do |bookmark| %>
-            <table class="table table-bordered mt-3">
-              <tr class="bg-info">
-                <th width="20%">タイトル</th>
-                <td colspan="3">
-                  <%= link_to admin_comic_path(bookmark.comic), class:"text-light" do %>
-                  <strong><%= bookmark.comic.title %></strong>
-                  <% end %>
-                </td>
-              </tr>
+                <tr>
+                  <th class="bg-light">著者名</th>
+                  <td><%= bookmark.comic.name %></td>
 
-              <tr>
-                <th class="bg-light">著者名</th>
-                <td><%= bookmark.comic.name %></td>
+                  <th class="bg-light" width="20%">出版社</th>
+                  <td><%= bookmark.comic.company %></td>
+                </tr>
 
-                <th class="bg-light" width="20%">出版社</th>
-                <td><%= bookmark.comic.company %></td>
-              </tr>
+                <tr>
+                  <th class="bg-light">投稿したユーザー</th>
+                  <td>
+                    <%= link_to admin_customer_path(bookmark.comic.customer) do %>
+                      <strong><%= bookmark.comic.customer.name %></strong>
+                    <% end %>
+                  </td>
 
-              <tr>
-                <th class="bg-light">投稿したユーザー</th>
-                <td>
-                  <%= link_to admin_customer_path(bookmark.comic.customer) do %>
-                  <strong><%= bookmark.comic.customer.name %></strong>
-                  <% end %>
-                </td>
+                  <th class="bg-light">投稿日時</th>
+                  <td><%= bookmark.comic.created_at.strftime("%Y年%m月%d日") %></td>
+                </tr>
 
-                <th class="bg-light">投稿日時</th>
-                <td><%= bookmark.comic.created_at.strftime("%Y年%m月%d日") %></td>
-
-              </tr>
-
-              <tr>
-                <th class="bg-light">おすすめ度</th>
-                <td colspan="3">
+                <tr>
+                  <th class="bg-light">おすすめ度</th>
+                  <td colspan="3">
                     <div class="star-rate">
                       <div id="star-rate-<%= bookmark.comic.id %>"></div>
 
@@ -93,19 +92,23 @@
                   <th class="bg-light">本文</th>
                   <td colspan="3">
                     <%= bookmark.comic.body.truncate(10) %>
-                    <%= link_to "投稿詳細", admin_comic_path(bookmark.comic), class:"btn btn-info btn-bg ml-5" %></td>
-              </tr>
+                    <%= link_to "投稿詳細", admin_comic_path(bookmark.comic), class:"btn btn-info btn-bg ml-5" %>
+                  </td>
+                </tr>
 
-            </table>
-        <% end %>
-         <% else %>
+              </table>
+            <% end %>
+
+        <% else %>
 
           <div class="col mt-5">
             <h5 class="text-center">このユーザーはまだブックマークしていません</h5>
           </div>
 
         <% end %>
+
     </div>
 
   </div>
+
 </div>

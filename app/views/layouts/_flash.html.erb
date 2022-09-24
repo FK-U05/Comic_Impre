@@ -1,13 +1,13 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col">
-      <div class=" text-center bg-light text-success">
 
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>">
-        <%= value %>
-        </div>
-      <% end %>
+      <div class=" text-center bg-light text-success">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>">
+            <%= value %>
+          </div>
+        <% end %>
       </div>
 
     </div>

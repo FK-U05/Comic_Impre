@@ -23,9 +23,9 @@ class Public::ComicsController < ApplicationController
 
   def new
     if current_customer.email == 'guest@guest'
-      redirect_to root_path, alert: "ゲストユーザーは投稿できません。会員新規登録をお願いします。"
+       redirect_to root_path, alert: "ゲストユーザーは投稿できません。会員新規登録をお願いします。"
     else
-    @comic = Comic.new
+       @comic = Comic.new
     end
   end
 
@@ -42,7 +42,7 @@ class Public::ComicsController < ApplicationController
     @comic.tags_save(tag_list)
     redirect_to public_comics_path, notice: "投稿 / 保存できました！"
     if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
-     render :new and return
+       render :new and return
     end
   end
 

@@ -2,53 +2,56 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-primary text-light"><strong><%= @customer.name %> の詳細</strong></h3>
+      <h3 class="p-1 bg-primary text-light">
+        <strong><%= @customer.name %> の詳細</strong>
+      </h3>
     </div>
   </div>
 
   <div class="row mt-3 justify-content-center">
     <div class="col-md-10">
-    <table class="table table-bordered text-center">
-      <tr>
-        <td colspan="2"><%= image_tag @customer.get_profile_image(200,200) %></td>
-      </tr>
-      <tr>
-        <th class="bg-light" width="50%">会員ID</th>
-        <td><strong><%= @customer.id %></strong></td>
-      </tr>
+      <table class="table table-bordered text-center">
+        <tr>
+          <td colspan="2"><%= image_tag @customer.get_profile_image(200,200) %></td>
+        </tr>
 
-      <tr>
-        <th class="bg-light">ユーザー名</th>
-        <td><%= @customer.name %></td>
-      </tr>
+        <tr>
+          <th class="bg-light" width="50%">会員ID</th>
+          <td><strong><%= @customer.id %></strong></td>
+        </tr>
 
-      <tr>
-        <th class="bg-light">メールアドレス</th>
-        <td><%= @customer.email %></td>
-      </tr>
+        <tr>
+          <th class="bg-light">ユーザー名</th>
+          <td><%= @customer.name %></td>
+        </tr>
 
-      <tr>
-        <th class="bg-light">会員登録日</th>
-        <td><%= @customer.created_at.strftime("%Y年%m月%d日") %></td>
-      </tr>
+        <tr>
+          <th class="bg-light">メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
 
-      <tr>
-        <th class="bg-light">会員ステータス</th>
-          <% if @customer.is_deleted %>
-            <td class="text-danger"><strong>退会</strong></td>
-          <% else %>
-            <td class="text-success"><strong>有効</strong></td>
-          <% end %>
-      </tr>
-    </table>
+        <tr>
+          <th class="bg-light">会員登録日</th>
+          <td><%= @customer.created_at.strftime("%Y年%m月%d日") %></td>
+        </tr>
 
-    <div class="text-right">
+        <tr>
+          <th class="bg-light">会員ステータス</th>
+            <% if @customer.is_deleted %>
+              <td class="text-danger"><strong>退会</strong></td>
+            <% else %>
+              <td class="text-success"><strong>有効</strong></td>
+            <% end %>
+        </tr>
+      </table>
 
+      <div class="text-right">
         <%= link_to "会員情報を変更する", edit_admin_customer_path(@customer), class:"btn btn-success btn-bg" %>
         <%= link_to "このユーザーの投稿一覧", admin_customers_comics_path(@customer), class:"btn btn-warning btn-bg" %>
         <%= link_to "ブックマーク一覧", admin_customers_bookmark_path(@customer), class:"btn btn-info btn-bg" %>
+      </div>
 
     </div>
-</div>
   </div>
+
 </div>

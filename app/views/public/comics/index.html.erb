@@ -2,19 +2,19 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-warning"><strong>みんなの投稿一覧</strong></h3>
+      <h3 class="p-1 bg-warning">
+        <strong>みんなの投稿一覧</strong>
+      </h3>
     </div>
   </div>
 
   <div class="row mt-3 text-center">
     <div class="col">
-
       <%= link_to '投稿日時が新しい順', public_comics_path(latest: "true") %> /
       <%= link_to '投稿日時が古い順', public_comics_path(old: "true") %> /
       <%= link_to 'おすすめ度の高い順', public_comics_path(star_count: "true") %> /
       <%= link_to 'コメント数の多い順', public_comics_path(comic_comment: "true") %> /
       <%= link_to 'ブックマーク数の多い順', public_comics_path(bookmark_count: "true") %>
-
     </div>
   </div>
 
@@ -54,13 +54,14 @@
           <% end %>
         </tbody>
       </table>
-    </div>
 
+    </div>
     <div class="col">
-        <%= paginate @comics %>
-      <%= render 'comic', comics: @comics %>
-    </div>
 
+      <%= paginate @comics %>
+      <%= render 'comic', comics: @comics %>
+
+    </div>
   </div>
 
 </div>

@@ -19,9 +19,9 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to public_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
+       redirect_to public_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
     else
-      render "edit"
+       render "edit"
     end
   end
 
@@ -59,9 +59,9 @@ class Public::CustomersController < ApplicationController
   #退会確認
   def quit
     if current_customer.email == 'guest@guest'
-    redirect_to root_path, alert: "ゲストユーザーは退会できません。"
+       redirect_to root_path, alert: "ゲストユーザーは退会できません。"
     else
-    @customer = current_customer
+       @customer = current_customer
     end
   end
 

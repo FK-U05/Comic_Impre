@@ -1,7 +1,6 @@
 class Admin::ComicCommentsController < ApplicationController
  before_action :authenticate_admin!
 
-
  def index
   @comic = Comic.find(params[:comic_id])
   @comic_comment = ComicComment.all

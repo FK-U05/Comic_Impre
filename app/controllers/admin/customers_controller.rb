@@ -2,7 +2,7 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @customers = Customer.all.page(params[:page]).per(3)
+    @customers = Customer.all.page(params[:page]).per(10)
   end
 
   def show
@@ -15,11 +15,14 @@ class Admin::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to admin_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
+    if @customer.update(customer_params)
+      redirect_to admin_customer_path(@customer), notice: "会員情報を編集 / 保存しました。"
+    else
+       render "edit"
+    end
   end
 
-   #下書き一覧
+  #下書き一覧
   def draft
     @customer = Customer.find(params[:id])
     @comics = @customer.comics.where(status: :draft).order('created_at DESC').page(params[:page]).per(3)

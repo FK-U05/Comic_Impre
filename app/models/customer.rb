@@ -14,13 +14,13 @@ class Customer < ApplicationRecord
 
   def get_profile_image(width,height)
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpeg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+           file_path = Rails.root.join('app/assets/images/no_image.jpeg')
+           profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_fit: [width, height]).processed
   end
 
-#ゲストログイン時のcustomer情報
+  #ゲストログイン時のcustomer情報
   def self.guest
     find_or_create_by!(email: 'guest@guest') do |customer|
       customer.password = SecureRandom.urlsafe_base64
@@ -32,9 +32,9 @@ class Customer < ApplicationRecord
   #検索
   def self.looks(searches, words)
     if searches == "perfect_match"
-      @customer = Customer.where("name LIKE ?", "#{words}")
+       @customer = Customer.where("name LIKE ?", "#{words}")
     else
-      @customer = Customer.where("name LIKE ?", "%#{words}%")
+       @customer = Customer.where("name LIKE ?", "%#{words}%")
     end
   end
 

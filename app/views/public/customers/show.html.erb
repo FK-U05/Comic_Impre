@@ -7,126 +7,128 @@
     </div>
 
     <div class="col text-center ml-4">
-      <h3 class="p-1 bg-primary text-light"><strong><%= @customer.name %> の最新の投稿</strong></h3>
-        <% if @customer.comics.exists? %>
 
-        <div class="mt-4 text-right">
-          <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
+      <h3 class="p-1 bg-primary text-light">
+        <strong><%= @customer.name %> の最新の投稿</strong>
+      </h3>
+
+        <!-- もし一つも投稿していなければ -->
+        <% if @customer.comics.empty? %>
+
+          <h5 class="mt-5 mb-5 text-center">投稿がありません。</h5>
+
+        <% else %>
+
+          <div class="mt-4 text-right">
+            <!-- ログインしているのがゲストユーザーでなければ表示する -->
+            <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
+              <!--　ユーザーがブックマークをしていれば外すボタンを表示 -->
               <% if @last_comic.bookmarked_by?(current_customer) %>
-                  <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
-                    <i class="fas fa-bookmark"></i>
-                    ブックマークを外す(<%= @last_comic.bookmarks.count %>)
-                  <% end %>
+                <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
+                  <i class="fas fa-bookmark"></i>ブックマークを外す(<%= @last_comic.bookmarks.count %>)
+                <% end %>
               <% else %>
-                  <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
-                    <i class="fas fa-bookmark"></i>
-                    ブックマークする (<%= @last_comic.bookmarks.count %>)
+                <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
+                  <i class="fas fa-bookmark"></i>ブックマークする (<%= @last_comic.bookmarks.count %>)
+                <% end %>
+              <% end %>
+
+            <% end %>
+
+          </div>
+
+            <table class="table table-bordered text-center">
+              <tr class="bg-info">
+                <th width="20%">タイトル</th>
+                <td colspan="3">
+                  <%= link_to public_comic_path(@last_comic), class:"text-light" do %>
+                    <strong><%= @last_comic.title %></strong>
                   <% end %>
-             <% end %>
-          <% end %>
-        </div>
+                </td>
+              </tr>
 
-        <table class="table table-bordered text-center">
-          <tr class="bg-info">
-            <th width="20%">タイトル</th>
-            <td colspan="3">
-              <%= link_to public_comic_path(@last_comic), class:"text-light" do %>
-                <strong><%= @last_comic.title %></strong>
-              <% end %>
-            </td>
-          </tr>
+              <tr>
+                <th class="bg-light">著者名</th>
+                <td><%= @last_comic.name %></td>
 
-          <tr>
-            <th class="bg-light">著者名</th>
-            <td><%= @last_comic.name %></td>
+                <th class="bg-light" width="20%">出版社</th>
+                <td><%= @last_comic.company %></td>
+              </tr>
 
-            <th class="bg-light" width="20%">出版社</th>
-            <td><%= @last_comic.company %></td>
-          </tr>
+              <tr>
+                <th class="bg-light">発行年月日</th>
+                <td><%= @last_comic.release_date.strftime("%Y年%m月%d日") %></td>
 
-          <tr>
-            <th class="bg-light">発行年月日</th>
-            <td><%= @last_comic.release_date.strftime("%Y年%m月%d日") %></td>
+                <th class="bg-light">投稿日時</th>
+                <td><%= @last_comic.created_at.strftime("%Y年%m月%d日") %></td>
+              </tr>
 
-            <th class="bg-light">投稿日時</th>
-            <td><%= @last_comic.created_at.strftime("%Y年%m月%d日") %></td>
-          </tr>
+              <!-- 星レビュー機能 -->
+              <tr>
+                <th class="bg-light">おすすめ度</th>
+                <td colspan="3">
+                  <div id="star-rate-<%= @last_comic.id %>">
 
-          </tr>
+                    <script>
+                      $('#star-rate-<%= @last_comic.id %>').raty({
+                      size      : 36,
+                      starOff   : '<%= asset_path('star-off.png') %>',
+                      starOn    : '<%= asset_path('star-on.png') %>',
+                      starHalf  : '<%= asset_path('star-half.png') %>',
+                      half      : true,
+                      readOnly: true,
+                      score: <%= @last_comic.star %>,
+                      });
+                    </script>
 
-          <!-- 星レビュー機能 -->
-          <tr>
-            <th class="bg-light">おすすめ度</th>
-            <td colspan="3">
-              <div id="star-rate-<%= @last_comic.id %>">
+                  </div>
+                </td>
+              </tr>
 
-                  <script>
-                    $('#star-rate-<%= @last_comic.id %>').raty({
-                    size      : 36,
-                    starOff   : '<%= asset_path('star-off.png') %>',
-                    starOn    : '<%= asset_path('star-on.png') %>',
-                    starHalf  : '<%= asset_path('star-half.png') %>',
-                    half      : true,
-                    readOnly: true,
-                    score: <%= @last_comic.star %>,
-                    });
-                  </script>
+              <tr>
+                <th class="bg-light">ジャンル</th>
+                <td>
+                  <% @last_comic.genres.each do |genre| %>
+                    <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+                      <strong><%= genre.genre_name %></strong>
+                    <% end %>
+                  <% end %>
+                </td>
 
-              </div>
-            </td>
-          </tr>
+                <th class="bg-light">タグ</th>
+                <td>
+                  <% @last_comic.tags.each do |tag| %>
+                    <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+                      <strong><%= tag.tag_name %></strong>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
 
-          <tr>
-            <th class="bg-light">ジャンル</th>
-            <td>
-              <% @last_comic.genres.each do |genre| %>
-                <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
-                  <strong><%= genre.genre_name %></strong>
-                <% end %>
-              <% end %>
-            </td>
-
-            <th class="bg-light">タグ</th>
-            <td>
-              <% @last_comic.tags.each do |tag| %>
-                <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
-                  <strong><%= tag.tag_name %></strong>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-
-
-          <tr>
-            <th class="bg-light">本文</th>
-            <td colspan="3"><%= @last_comic.body %>
-            <%= link_to "もっと読む", public_comic_path(@last_comic), class:"btn btn-info btn-bg ml-5" %>
-            </td>
-          </tr>
-        </table>
+              <tr>
+                <th class="bg-light">本文</th>
+                <td colspan="3">
+                  <%= @last_comic.body %>
+                  <%= link_to "もっと読む", public_comic_path(@last_comic), class:"btn btn-info btn-bg ml-5" %>
+                </td>
+              </tr>
+            </table>
     </div>
   </div>
 
   <div class="row text-right">
     <div class="col">
-        <%= link_to "投稿詳細", public_comic_path(@last_comic), class:"btn btn-info btn-bg" %>
+      <%= link_to "投稿詳細", public_comic_path(@last_comic), class:"btn btn-info btn-bg" %>
 
-        <% if @customer.email != 'guest@guest' %>
-          <%= link_to "投稿フォームへ", new_public_comic_path, class:"btn btn-success btn-bg" %>
+        <!-- 投稿があればここまで表示する -->
         <% end %>
+
+      <!-- ゲストユーザーでなければ表示する -->
+      <% if @customer.email != 'guest@guest' %>
+        <%= link_to "投稿フォームへ", new_public_comic_path, class:"btn btn-success btn-bg" %>
+      <% end %>
     </div>
   </div>
 
-  <% else %>
-
-    <div class="col mt-5">
-      <h5 class="text-center">投稿がありません</h5>
-    </div>
-
-  <% end %>
-
-
-    </div>
-  </div>
 </div>
 

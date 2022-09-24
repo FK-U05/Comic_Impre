@@ -38,7 +38,7 @@ class Admin::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
     if @comic.update(comic_params)
       #入力されたジャンル名をgenre_listに追加する
-      #まずはからになっている配列を消す
+      #まずは空になっている配列を消す
       genre_ids = params[:comic][:genre_ids].reject(&:empty?)
       #予め選択されているジャンルを取り出す
       genre_names_check_box = Genre.find(genre_ids).pluck(:genre_name)

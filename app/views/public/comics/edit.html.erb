@@ -2,109 +2,128 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-success text-light"><strong>投稿編集</strong></h3>
+      <h3 class="p-1 bg-success text-light">
+        <strong>投稿編集</strong>
+      </h3>
     </div>
   </div>
 
   <div class="bg-light">
 
-        <%= form_with model: @comic, url: public_comic_path(@comic), method: :patch do |f| %>
+    <%= form_with model: @comic, url: public_comic_path(@comic), method: :patch do |f| %>
 
-          <div class="form-group row mt-3">
-            <div class="col-md-6 mt-5 text-right">
-            <strong><%= f.label :タイトル, class:"p-1 bg-info text-light" %></strong>
-            </div>
-            <div class="col-md-6 mt-5 text-left">
-            <%= f.text_field :title %>
-            </div>
-          </div>
+      <div class="form-group row mt-3">
+        <div class="col-md-6 mt-5 text-right">
+          <strong>
+            <%= f.label :タイトル, class:"p-1 bg-info text-light" %>
+          </strong>
+        </div>
+        <div class="col-md-6 mt-5 text-left">
+          <%= f.text_field :title %>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <div class="col-md-6 text-right">
-            <strong><%= f.label :著者名, class:"p-1 bg-info text-light" %></strong>
-            </div>
-            <div class="col-md-6 text-left">
-            <%= f.text_field :name %>
-          </div>
-           </div>
+      <div class="form-group row">
+        <div class="col-md-6 text-right">
+          <strong>
+            <%= f.label :著者名, class:"p-1 bg-info text-light" %>
+          </strong>
+        </div>
+        <div class="col-md-6 text-left">
+          <%= f.text_field :name %>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <div class="col-md-6 text-right">
-            <strong><%= f.label :出版社, class:"p-1 bg-info text-light" %></strong>
-            </div>
-            <div class="col-md-6 text-left">
-            <%= f.text_field :company %>
-          </div>
-           </div>
+      <div class="form-group row">
+        <div class="col-md-6 text-right">
+          <strong>
+            <%= f.label :出版社, class:"p-1 bg-info text-light" %>
+          </strong>
+        </div>
+        <div class="col-md-6 text-left">
+          <%= f.text_field :company %>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <div class="col-md-6 text-right">
-            <strong><%= f.label :発行年月日, class:"p-1 bg-info text-light" %></strong>
-            </div>
-            <div class="col-md-6 text-left">
+      <div class="form-group row">
+        <div class="col-md-6 text-right">
+          <strong>
+            <%= f.label :発行年月日, class:"p-1 bg-info text-light" %>
+          </strong>
+        </div>
+        <div class="col-md-6 text-left">
           <%= f.date_field :release_date %>
-          </div>
-           </div>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <div class="col text-center">
-            <strong><%= f.label :本文, class:"p-1 bg-info text-light" %></strong>
-            <p><%= f.text_area :body, size:"60x10" %></p>
-            </div>
-          </div>
+      <div class="form-group row">
+        <div class="col text-center">
+          <strong>
+            <%= f.label :本文, class:"p-1 bg-info text-light" %>
+          </strong>
+          <p><%= f.text_area :body, size:"60x10" %></p>
+        </div>
+      </div>
 
-          <!--星レビュー機能-->
-          <div class="text-center">
-          <p class="p-1 bg-info text-light d-inline-block"><strong>おすすめ度</strong></p>
-          <div class="form-group" id="star">
-            <%= f.hidden_field :star, id: :review_star %>
-          </div>
-
-             <script>
-               $('#star').empty();
-               $('#star').raty({
-                 size: 36,
-                 starOff:  '<%= asset_path('star-off.png') %>',
-                 starOn:   '<%= asset_path('star-on.png') %>',
-                 starHalf: '<%= asset_path('star-half.png') %>',
-                 half: true,
-                  scoreName: 'comic[star]',
-               });
-             </script>
-            </div>
-
-          <div class="form-group text-center">
-            <strong><%= f.label :ジャンル, class:"p-1 bg-info text-light" %></strong>
-            <p><%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true }) %></p>
-            <p><%= f.text_field :genre_names %></p>
-          </div>
-
-          <div class="form-group text-center">
-            <strong><%= f.label :タグ, class:"p-1 bg-info text-light" %></strong>
-            <p><%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %></p>
-            <p><%= f.text_field :tag_names %></p>
-          </div>
-
-          <div class="form-group text-center">
-            <strong><%= f.label"公開範囲を選択", class:"p-1 bg-info text-light" %></strong>
-            <p><%= f.select :status, [["公開", "published"], ["下書き", "draft"]], required: true %></p>
-          </div>
-
-          <div class="text-center">
-
-        <%= f.submit "変更保存", class:"btn btn-success btn-lg mt-4 mb-5" %>
+      <!--星レビュー機能-->
+      <div class="text-center">
+        <p class="p-1 bg-info text-light d-inline-block">
+          <strong>おすすめ度</strong>
+        </p>
+        <div class="form-group" id="star">
+          <%= f.hidden_field :star, id: :review_star %>
         </div>
 
-      <% end %>
+          <script>
+            $('#star').empty();
+            $('#star').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn:   '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            scoreName: 'comic[star]',
+            });
+          </script>
+      </div>
 
-  <div class="row">
-    <div class="col text-left">
-      <%= link_to "戻る", public_comic_path(@comic), class:"btn btn-warning btn-lg ml-5 mb-3" %>
-    </div>
-    <div class="col text-right">
-      <%= link_to "削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-lg mr-5 mb-3", data: {confirm: "この投稿を削除しますか？"} %>
-    </div>
-  </div>
+      <div class="form-group text-center">
+        <strong>
+          <%= f.label :ジャンル, class:"p-1 bg-info text-light" %>
+        </strong>
+        <p><%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :genre_name,{ multiple:true }) %></p>
+        <p><%= f.text_field :genre_names %></p>
+      </div>
+
+      <div class="form-group text-center">
+        <strong>
+          <%= f.label :タグ, class:"p-1 bg-info text-light" %>
+        </strong>
+        <p><%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name,{ multiple:true }) %></p>
+        <p><%= f.text_field :tag_names %></p>
+      </div>
+
+      <div class="form-group text-center">
+        <strong>
+          <%= f.label"公開範囲を選択", class:"p-1 bg-info text-light" %>
+        </strong>
+        <p><%= f.select :status, [["公開", "published"], ["下書き", "draft"]], required: true %></p>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "変更保存", class:"btn btn-success btn-lg mt-4 mb-5" %>
+      </div>
+
+    <% end %>
+
+      <div class="row">
+        <div class="col text-left">
+          <%= link_to "戻る", public_comic_path(@comic), class:"btn btn-warning btn-lg ml-5 mb-3" %>
+        </div>
+        <div class="col text-right">
+          <%= link_to "削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-lg mr-5 mb-3", data: {confirm: "この投稿を削除しますか？"} %>
+        </div>
+      </div>
 
   </div>
 

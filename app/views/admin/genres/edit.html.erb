@@ -2,31 +2,37 @@
 
   <div class="row text-center">
     <div class="col">
-      <h3 class="p-1 bg-success text-light"><strong>ジャンル編集</strong></h3>
+      <h3 class="p-1 bg-success text-light">
+        <strong>ジャンル編集</strong>
+      </h3>
     </div>
   </div>
 
-<div class="bg-light">
+    <div class="bg-light">
 
-        <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch do |f| %>
+      <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch do |f| %>
 
         <div class="form-group row text-center mt-3">
-        <div class="col mt-5 mr-2 text-right">
-          <strong><%= f.label :ジャンル名, class:"p-1 bg-secondary text-light mr-5" %></strong>
-          <%= f.text_field :genre_name %>
+          <div class="col mt-5 mr-2 text-right">
+            <strong>
+              <%= f.label :ジャンル名, class:"p-1 bg-secondary text-light mr-5" %>
+            </strong>
+              <%= f.text_field :genre_name %>
           </div>
 
-        <div class="col mt-5 text-left">
-          <%= f.submit "変更保存", class:"btn btn-success btn-bg mr-5" %>
+          <div class="col mt-5 text-left">
+            <%= f.submit "変更保存", class:"btn btn-success btn-bg mr-5" %>
+          </div>
         </div>
-    </div>
-    <% end %>
+      <% end %>
 
-  <div class="row text-right mt-3 mr-2">
-    <div class="col mb-4">
-      <%= link_to "戻る", admin_top_path, class:"btn btn-warning btn-bg" %>
-      <%= link_to "削除する", admin_genre_path(@genre), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "ジャンル名を削除しますか？"} %>
+        <div class="row text-right mt-3 mr-2">
+          <div class="col mb-4">
+            <%= link_to "戻る", admin_top_path, class:"btn btn-warning btn-bg" %>
+            <%= link_to "削除する", admin_genre_path(@genre), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "ジャンル名を削除しますか？"} %>
+          </div>
+        </div>
+
     </div>
-  </div>
 
 </div>

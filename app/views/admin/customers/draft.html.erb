@@ -1,14 +1,14 @@
 <div class="container mt-3 mb-5">
-
   <div class="row mt-2">
 
     <div class-"col-md-2">
       <%= render 'customer', customer: @customer %>
     </div>
 
-      <div class="col text-center ml-4">
-      <h3 class="p-1 bg-secondary text-light"><strong>下書き一覧</strong></h3>
-
+    <div class="col text-center ml-4">
+      <h3 class="p-1 bg-secondary text-light">
+        <strong>下書き一覧</strong>
+      </h3>
 
         <% if @comics.exists? %>
 
@@ -26,8 +26,6 @@
 
                 <th class="bg-light" width="20%">出版社</th>
                 <td><%= comic.company %></td>
-              </tr>
-
               </tr>
 
               <!--星レビュー機能-->
@@ -70,7 +68,6 @@
                 </td>
               </tr>
 
-
               <tr>
                 <th class="bg-light">本文</th>
                 <td colspan="3"><%= comic.body.truncate(10) %></td>
@@ -105,5 +102,4 @@
     </div>
 
   </div>
-
 </div>
