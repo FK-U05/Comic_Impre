@@ -12,7 +12,7 @@
         <strong><%= @customer.name %> の最新の投稿</strong>
       </h3>
 
-        <% if current_customer.email == 'guest@guest' %>
+        <% if @customer.email == 'guest@guest' %>
 
           <h5 class="mt-5 mb-5 text-center">
             ゲストユーザーは投稿できません。新規で会員登録を行うと投稿できるようになります。<br>
