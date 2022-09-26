@@ -127,7 +127,7 @@
           <%= link_to "戻る", admin_comic_path(@comic), class:"btn btn-warning btn-bg ml-5 mb-3" %>
         </div>
         <div class="col text-right">
-          <%= link_to "削除する", admin_comic_path(@comic), method: :delete, class:"btn btn-danger btn-bg mr-5 mb-3" %>
+          <%= link_to "削除する", admin_comic_path(@comic), method: :delete, class:"btn btn-danger btn-bg mr-5 mb-3", data: {confirm: "この投稿を削除しますか？"} %>
         </div>
       </div>
 
