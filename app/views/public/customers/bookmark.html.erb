@@ -13,99 +13,102 @@
         <% if @customer.bookmarks.exists? %>
           <%= paginate @bookmark_comics %>
 
-            <% @customer.bookmarks.each do |bookmark| %>
+            <% @bookmark_comics.each do |bookmark| %>
+              <!-- 退会したユーザーの投稿は表示しない -->
+              <% if bookmark.customer.is_deleted == false %>
 
-              <div class="text-right">
-                <% if bookmark.comic.bookmarked_by?(current_customer) %>
-                  <%= link_to public_comic_bookmark_path(bookmark.comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
-                    <i class="fas fa-bookmark"></i>ブックマークを外す (<%= bookmark.comic.bookmarks.count %>)
+                <div class="text-right">
+                  <% if bookmark.bookmarked_by?(current_customer) %>
+                    <%= link_to public_comic_bookmark_path(bookmark), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
+                      <i class="fas fa-bookmark"></i>ブックマークを外す (<%= bookmark.bookmarks.count %>)
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div>
+                </div>
 
-                <table class="table table-bordered text-center">
+                  <table class="table table-bordered text-center">
 
-                  <tr class="bg-info">
-                    <th width="20%">タイトル</th>
-                    <td colspan="3">
-                      <%= link_to public_comic_path(bookmark.comic), class:"text-light mr-5" do %>
-                        <strong><%= bookmark.comic.title %></strong>
-                      <% end %>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th class="bg-light">著者名</th>
-                    <td><%= bookmark.comic.name %></td>
-
-                    <th class="bg-light">出版社</th>
-                    <td><%= bookmark.comic.company %></td>
-                  </tr>
-
-                  <tr>
-                    <th class="bg-light">投稿したユーザー</th>
-                    <td>
-                      <%= link_to public_customer_path(bookmark.comic.customer) do %>
-                        <strong><%= bookmark.comic.customer.name %></strong>
-                      <% end %>
-                    </td>
-
-                    <th class="bg-light">投稿日時</th>
-                    <td><%= bookmark.comic.created_at.strftime("%Y年%m月%d日") %></td>
-                  </tr>
-
-                  <tr>
-                    <th class="bg-light">おすすめ度</th>
-                    <td colspan="3">
-                      <div class="star-rate">
-                        <div id="star-rate-<%= bookmark.comic.id %>"></div>
-
-                          <script>
-                            $('#star-rate-<%= bookmark.comic.id %>').raty({
-                            size      : 36,
-                            starOff   : '<%= asset_path('star-off.png') %>',
-                            starOn    : '<%= asset_path('star-on.png') %>',
-                            starHalf  : '<%= asset_path('star-half.png') %>',
-                            half      : true,
-                            readOnly: true,
-                            score: <%= bookmark.comic.star %>,
-                            });
-                          </script>
-
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th class="bg-light">ジャンル</th>
-                    <td>
-                      <% bookmark.comic.genres.each do |genre| %>
-                        <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
-                          <strong><%= genre.genre_name %></strong>
+                    <tr class="bg-info">
+                      <th width="20%">タイトル</th>
+                      <td colspan="3">
+                        <%= link_to public_comic_path(bookmark), class:"text-light mr-5" do %>
+                          <strong><%= bookmark.title %></strong>
                         <% end %>
-                      <% end %>
-                    </td>
+                      </td>
+                    </tr>
 
-                    <th class="bg-light">タグ</th>
-                    <td>
-                      <% bookmark.comic.tags.each do |tag| %>
-                        <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
-                          <strong><%= tag.tag_name %></strong>
+                    <tr>
+                      <th class="bg-light">著者名</th>
+                      <td><%= bookmark.name %></td>
+
+                      <th class="bg-light">出版社</th>
+                      <td><%= bookmark.company %></td>
+                    </tr>
+
+                    <tr>
+                      <th class="bg-light">投稿したユーザー</th>
+                      <td>
+                        <%= link_to public_customer_path(bookmark.customer) do %>
+                          <strong><%= bookmark.customer.name %></strong>
                         <% end %>
-                      <% end %>
-                    </td>
-                  </tr>
+                      </td>
 
-                  <tr>
-                    <th class="bg-light">本文</th>
-                    <td colspan="3">
-                      <%= bookmark.comic.body.truncate(10) %>
-                      <%= link_to "もっと読む", public_comic_path(bookmark.comic), class:"btn btn-info btn-bg ml-5" %>
-                    </td>
-                  </tr>
+                      <th class="bg-light">投稿日時</th>
+                      <td><%= bookmark.created_at.strftime("%Y年%m月%d日") %></td>
+                    </tr>
 
-                </table>
+                    <tr>
+                      <th class="bg-light">おすすめ度</th>
+                      <td colspan="3">
+                        <div class="star-rate">
+                          <div id="star-rate-<%= bookmark.id %>"></div>
 
+                            <script>
+                              $('#star-rate-<%= bookmark.id %>').raty({
+                              size      : 36,
+                              starOff   : '<%= asset_path('star-off.png') %>',
+                              starOn    : '<%= asset_path('star-on.png') %>',
+                              starHalf  : '<%= asset_path('star-half.png') %>',
+                              half      : true,
+                              readOnly: true,
+                              score: <%= bookmark.star %>,
+                              });
+                            </script>
+
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th class="bg-light">ジャンル</th>
+                      <td>
+                        <% bookmark.genres.each do |genre| %>
+                          <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+                            <strong><%= genre.genre_name %></strong>
+                          <% end %>
+                        <% end %>
+                      </td>
+
+                      <th class="bg-light">タグ</th>
+                      <td>
+                        <% bookmark.tags.each do |tag| %>
+                          <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+                            <strong><%= tag.tag_name %></strong>
+                          <% end %>
+                        <% end %>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th class="bg-light">本文</th>
+                      <td colspan="3">
+                        <%= bookmark.body.truncate(30) %>
+                        <%= link_to "もっと読む", public_comic_path(bookmark), class:"btn btn-info btn-bg ml-5" %>
+                      </td>
+                    </tr>
+
+                  </table>
+
+              <% end %>
             <% end %>
 
         <% else %>

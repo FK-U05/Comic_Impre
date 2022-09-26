@@ -16,25 +16,29 @@
         <% if @comic.comic_comments.exists? %>
 
           <% @comic.comic_comments.each do |comment| %>
-            <table class="table table-bordered mt-3">
+            <!-- 退会したユーザーのコメントは表示しない -->
+            <% if comment.customer.is_deleted == false %>
+              <table class="table table-bordered mt-3">
 
-              <tr>
-                <th class="text-center bg-light" width="10%">
-                  <%= link_to public_customer_path(comment.customer) do %>
-                    <%= image_tag comment.customer.get_profile_image(50,50) %>
-                    <%= comment.customer.name %>
+                <tr>
+                  <th class="text-center bg-light" width="10%">
+                    <%= link_to public_customer_path(comment.customer) do %>
+                      <%= image_tag comment.customer.get_profile_image(50,50) %>
+                      <%= comment.customer.name %>
+                    <% end %>
+                  </th>
+                  <td><%= comment.comment %></td>
+
+                  <% if comment.customer == current_customer %>
+                    <td class="text-center" width="10%">
+                      <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "コメントを削除しますか？"} %>
+                    </td>
                   <% end %>
-                </th>
-                <td><%= comment.comment %></td>
+                </tr>
 
-                <% if comment.customer == current_customer %>
-                  <td class="text-center" width="10%">
-                    <%= link_to "削除", public_comic_comic_comment_path(comment.comic, comment), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "コメントを削除しますか？"} %>
-                  </td>
-                <% end %>
-              </tr>
+              </table>
+            <% end %>
 
-            </table>
           <% end %>
 
         <% else %>

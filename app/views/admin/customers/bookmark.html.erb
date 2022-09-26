@@ -91,7 +91,7 @@
                 <tr>
                   <th class="bg-light">本文</th>
                   <td colspan="3">
-                    <%= bookmark.comic.body.truncate(10) %>
+                    <%= bookmark.comic.body.truncate(30) %>
                     <%= link_to "投稿詳細", admin_comic_path(bookmark.comic), class:"btn btn-info btn-bg ml-5" %>
                   </td>
                 </tr>

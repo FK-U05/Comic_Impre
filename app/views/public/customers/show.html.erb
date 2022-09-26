@@ -108,7 +108,7 @@
               <tr>
                 <th class="bg-light">本文</th>
                 <td colspan="3">
-                  <%= @last_comic.body %>
+                  <%= @last_comic.body.truncate(30) %>
                   <%= link_to "もっと読む", public_comic_path(@last_comic), class:"btn btn-info btn-bg ml-5" %>
                 </td>
               </tr>

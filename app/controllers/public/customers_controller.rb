@@ -38,6 +38,7 @@ class Public::CustomersController < ApplicationController
        redirect_to root_path, alert: "自分以外のユーザーの下書き一覧は表示できません。"
     elsif current_customer.email == 'guest@guest'
        redirect_to root_path, alert: "ゲストユーザーは投稿できません。会員新規登録をお願いします。"
+    else
        @comics = @customer.comics.where(status: :draft).order('created_at DESC').page(params[:page]).per(3)
     end
   end
@@ -47,7 +48,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:comic_id)
     @bookmark_comics = Comic.find(bookmarks)
-    @bookmark_comics = Comic.order(created_at: :desc).page(params[:page]).per(3)
+    @bookmark_comics = Kaminari.paginate_array(@bookmark_comics).page(params[:page]).per(3)
   end
 
   #ゲストログイン
