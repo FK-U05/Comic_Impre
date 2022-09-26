@@ -12,8 +12,15 @@
         <strong><%= @customer.name %> の最新の投稿</strong>
       </h3>
 
+        <% if current_customer.email == 'guest@guest' %>
+
+          <h5 class="mt-5 mb-5 text-center">
+            ゲストユーザーは投稿できません。新規で会員登録を行うと投稿できるようになります。<br>
+            会員登録をされる方は一度、<%= link_to "こちら", destroy_customer_session_path, method: :delete %>からログアウトをお願いします。
+          </h5>
+
         <!-- もし一つも投稿していなければ -->
-        <% if @customer.comics.empty? %>
+        <% elsif @customer.comics.empty? %>
 
           <h5 class="mt-5 mb-5 text-center">投稿がありません。</h5>
 
