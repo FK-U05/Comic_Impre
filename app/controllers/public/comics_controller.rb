@@ -55,7 +55,7 @@ class Public::ComicsController < ApplicationController
     tag_list = params[:comic][:tag_name].split(nil)
     @comic.tags_save(tag_list)
     if @comic.invalid? #必須項目に空のものがあれば入力画面に遷移
-       flash.now[:alert] = "必要項目を入力してください"
+       flash.now[:alert] = "必須項目を入力してください。"
        render :new
     end
   end
@@ -82,7 +82,7 @@ class Public::ComicsController < ApplicationController
   def edit
     @comic = Comic.find(params[:id])
     if @comic.customer.id != current_customer.id
-       redirect_to public_comics_path, alert: "他のユーザーの投稿はできません。"
+       redirect_to public_comics_path, alert: "他のユーザーの投稿は編集できません。"
     end
     @genre_list = @comic.genres.pluck(:genre_names).join(nil)
     @tag_list = @comic.tags.pluck(:tag_names).join(nil)
@@ -107,6 +107,9 @@ class Public::ComicsController < ApplicationController
       tag_list = tag_names_check_box + tag_names_txt
       @comic.tags_save(tag_list)
       redirect_to public_comic_path(@comic), notice: "投稿を編集 / 保存しました。"
+    else
+      flash.now[:alert] = "必須項目を入力してください。"
+      render :edit
     end
   end
 

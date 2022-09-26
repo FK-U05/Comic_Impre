@@ -36,7 +36,8 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     if @customer.id != current_customer.id
        redirect_to root_path, alert: "自分以外のユーザーの下書き一覧は表示できません。"
-    else
+    elsif current_customer.email == 'guest@guest'
+       redirect_to root_path, alert: "ゲストユーザーは投稿できません。会員新規登録をお願いします。"
        @comics = @customer.comics.where(status: :draft).order('created_at DESC').page(params[:page]).per(3)
     end
   end

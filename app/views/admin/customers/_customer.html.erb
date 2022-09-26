@@ -8,7 +8,11 @@
   </tr>
 
   <tr class="bg-light">
-    <th><%= customer.name %></th>
+    <th>
+      <%= link_to admin_customer_path(customer) do %>
+        <%= customer.name %>
+      <% end %>
+    </th>
   </tr>
 
   <tr>

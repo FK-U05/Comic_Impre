@@ -16,12 +16,12 @@
         <div class="field row text-center mt-3">
           <div class="col mt-5">
             <strong>
-              <%= f.label :ユーザー画像, class:"p-1 bg-secondary text-light" %>
+              <%= f.label :ユーザー画像（必須ではありません）, class:"p-1 bg-secondary text-light" %>
             </strong>
               <!-- 画像プレビュー -->
               <div id="image_wrapper">
                 <% if @customer.profile_image.present? %>
-                  <%= image_tag @customer.get_profile_image, id: :img_preview %>
+                  <%= image_tag @customer.profile_image, id: :img_preview %>
                 <% else %>
                   <%= image_tag "no_image.jpg", id: :img_preview %>
                 <% end %>
@@ -51,6 +51,7 @@
 
         <div class="field row text-center mt-5">
           <div class="col text-right">
+            <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
             <strong>
               <%= f.label :ユーザー名, class:"p-1 bg-secondary text-light" %>
             </strong>
@@ -63,6 +64,7 @@
         <div class="field row text-center mt-3">
           <div class="col text-right">
             <strong>
+              <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
               <%= f.label :メールアドレス, class:"p-1 bg-secondary text-light" %>
             </strong>
           </div>
@@ -73,6 +75,7 @@
 
         <div class="field row text-center mt-3">
           <div class="col text-right">
+            <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
             <strong>
               <%= f.label :パスワード, class:"p-1 bg-secondary text-light" %>
             </strong>
@@ -87,6 +90,7 @@
 
         <div class="field row text-center mt-3">
           <div class="col text-right">
+            <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
             <strong>
               <%= f.label :パスワード確認, class:"p-1 bg-secondary text-light" %>
             </strong>
