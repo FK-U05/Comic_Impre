@@ -38,6 +38,7 @@
           <div id="star-rate-<%= comic.id %>"></div>
 
             <script>
+              $('#star-rate-<%= comic.id %>').empty();
               $('#star-rate-<%= comic.id %>').raty({
               size      : 36,
               starOff   : '<%= asset_path('star-off.png') %>',
