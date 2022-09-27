@@ -4,7 +4,7 @@
 ### サイトテーマ
 自分が読んだ漫画の感想、オススメの漫画の紹介文を気軽に投稿できる、
 または他の誰かが漫画を読んだ感想や、オススメする漫画の紹介文を検索できるレビューサイト。
-トップ画面
+- トップ画面
 ![image](https://user-images.githubusercontent.com/108564549/192443428-d8fe6b45-7b6c-43d8-91d9-8e400e538abe.png)
 
 ### テーマを選んだ理由
@@ -32,13 +32,13 @@
 - 気になっている漫画の詳細を誰かの感想を見て知りたい時
 
 ## 設計書
-- ER図
-- ![image](https://user-images.githubusercontent.com/108564549/192446704-1172a48a-c608-49ac-a421-5b34ff63d3dc.png)
-- アプリケーション詳細設計書
+#### ER図
+ ![image](https://user-images.githubusercontent.com/108564549/192446704-1172a48a-c608-49ac-a421-5b34ff63d3dc.png)
+#### アプリケーション詳細設計書
 - 顧客側
-- ![image](https://user-images.githubusercontent.com/108564549/192446804-1d46ef4e-4202-49e6-8ef3-15a45aaeb6b3.png)
+ ![image](https://user-images.githubusercontent.com/108564549/192446804-1d46ef4e-4202-49e6-8ef3-15a45aaeb6b3.png)
 - 管理側
-- ![image](https://user-images.githubusercontent.com/108564549/192446972-b7343e09-9d14-45c5-8103-55e3df22e71a.png)
+ ![image](https://user-images.githubusercontent.com/108564549/192446972-b7343e09-9d14-45c5-8103-55e3df22e71a.png)
 
 ## 開発環境
 - OS：Linux(CentOS)
