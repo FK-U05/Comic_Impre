@@ -2,8 +2,9 @@
 
 ## サイト概要
 ### サイトテーマ
-<自分が読んだ漫画の感想、オススメの漫画の紹介文を気軽に投稿できる、
-または他の誰かが漫画を読んだ感想や、オススメする漫画の紹介文を検索できるレビューサイト>
+自分が読んだ漫画の感想、オススメの漫画の紹介文を気軽に投稿できる、
+または他の誰かが漫画を読んだ感想や、オススメする漫画の紹介文を検索できるレビューサイト。
+トップ画面(https://user-images.githubusercontent.com/108564549/192443428-d8fe6b45-7b6c-43d8-91d9-8e400e538abe.png)
 
 ### テーマを選んだ理由
 私は漫画が好きで、面白い漫画を読んだ時、この漫画を誰かにオススメしたい、感想を共有したいと
@@ -30,8 +31,8 @@
 - 気になっている漫画の詳細を誰かの感想を見て知りたい時
 
 ## 設計書
-- ER図(https://drive.google.com/file/d/1y19IL2gb5WRSLxfBZa4hhEQ7PojeJ2fV/view?usp=sharing)
-- アプリケーション詳細設計書(https://docs.google.com/spreadsheets/d/1SuGb_DqPgtw9uz6lX1j9TkKy9ZaXp3rCr5byDmcHJgA/edit?usp=sharing)
+- ER図
+- アプリケーション詳細設計書
 
 ## 開発環境
 - OS：Linux(CentOS)
