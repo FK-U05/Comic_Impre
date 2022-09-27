@@ -34,8 +34,8 @@ namespace :admin do
      get :draft
    end
  end
- resources :genres, only:[:index, :destroy, :edit, :update]
- resources :tags, only:[:index, :edit, :update, :destroy]
+ resources :genres, only:[:destroy, :edit, :update]
+ resources :tags, only:[:edit, :update, :destroy]
 end
 
 namespace :public do
@@ -59,7 +59,7 @@ namespace :public do
   resources :genres do
     get 'comics_genre',to: 'comics#genre_search'
   end
- resources :customers, only:[:show, :index, :edit, :update] do
+ resources :customers, only:[:show, :edit, :update] do
    member do
      get :draft
    end

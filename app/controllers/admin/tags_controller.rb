@@ -1,10 +1,6 @@
 class Admin::TagsController < ApplicationController
   before_action :authenticate_admin!
 
-  def index
-    @tags = Tag.all
-  end
-
   def edit
     @tag = Tag.find(params[:id])
   end

@@ -30,7 +30,8 @@
 - 気になっている漫画の詳細を誰かの感想を見て知りたい時
 
 ## 設計書
-<...>
+- ER図(https://drive.google.com/file/d/1y19IL2gb5WRSLxfBZa4hhEQ7PojeJ2fV/view?usp=sharing)
+- アプリケーション詳細設計書(https://docs.google.com/spreadsheets/d/1SuGb_DqPgtw9uz6lX1j9TkKy9ZaXp3rCr5byDmcHJgA/edit?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
