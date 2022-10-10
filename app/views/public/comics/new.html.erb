@@ -72,24 +72,45 @@
 
       <!--星レビュー機能-->
       <div class="text-center">
+
         <p class="p-1 bg-info text-light d-inline-block">
           <strong>おすすめ度 (☆いくつかをお選び下さい)</strong>
         </p>
+
         <div class="form-group p-1" id="star">
           <%= f.hidden_field :star, id: :review_star %>
         </div>
 
-          <script>
-            $('#star').empty();
-            $('#star').raty({
-            size: 36,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn:   '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            half: true,
-            scoreName: 'comic[star]',
-            });
-          </script>
+          <% if @comic.star.present? %>
+
+            <script>
+              $('#star').empty();
+              $('#star').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn:   '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              score: <%= @comic.star %>,
+              scoreName: 'comic[star]',
+              });
+            </script>
+
+          <% else %>
+
+            <script>
+              $('#star').empty();
+              $('#star').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn:   '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              scoreName: 'comic[star]',
+              });
+            </script>
+
+          <% end %>
 
       </div>
 
