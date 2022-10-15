@@ -34,6 +34,8 @@
 ## 設計書
 #### ER図
  ![image](https://user-images.githubusercontent.com/108564549/192446704-1172a48a-c608-49ac-a421-5b34ff63d3dc.png)
+#### テーブル定義書
+ URL(https://docs.google.com/spreadsheets/d/1wE9E8g54IwZmT8vYoxDOQI5BP2yvKbrh7UvUjiOmg2k/edit?usp=sharing)
 #### アプリケーション詳細設計書
 - 顧客側
  ![image](https://user-images.githubusercontent.com/108564549/192446804-1d46ef4e-4202-49e6-8ef3-15a45aaeb6b3.png)
@@ -51,5 +53,5 @@
 漫画の感想を投稿する際に画像の使用はできません。また、漫画のタイトル、著者名、出版社、発行年月日の記載が必要です。
 
 ## テストユーザー
- メールアドレス: customer1@customer1  
+ メールアドレス: customer1@customer1
  パスワード: customer1
