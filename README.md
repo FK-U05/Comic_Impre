@@ -35,7 +35,8 @@
 #### ER図
  ![image](https://user-images.githubusercontent.com/108564549/192446704-1172a48a-c608-49ac-a421-5b34ff63d3dc.png)
 #### テーブル定義書
- URL(https://docs.google.com/spreadsheets/d/1wE9E8g54IwZmT8vYoxDOQI5BP2yvKbrh7UvUjiOmg2k/edit?usp=sharing)
+ URL
+ (https://docs.google.com/spreadsheets/d/1wE9E8g54IwZmT8vYoxDOQI5BP2yvKbrh7UvUjiOmg2k/edit?usp=sharing)
 #### アプリケーション詳細設計書
 - 顧客側
  ![image](https://user-images.githubusercontent.com/108564549/192446804-1d46ef4e-4202-49e6-8ef3-15a45aaeb6b3.png)
