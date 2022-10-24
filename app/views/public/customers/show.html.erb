@@ -31,11 +31,11 @@
             <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
               <!--　ユーザーがブックマークをしていれば外すボタンを表示 -->
               <% if @last_comic.bookmarked_by?(current_customer) %>
-                <%= link_to public_comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
+                <%= link_to comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
                   <i class="fas fa-bookmark"></i>ブックマークを外す(<%= @last_comic.bookmarks.count %>)
                 <% end %>
               <% else %>
-                <%= link_to public_comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
+                <%= link_to comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
                   <i class="fas fa-bookmark"></i>ブックマークする (<%= @last_comic.bookmarks.count %>)
                 <% end %>
               <% end %>
@@ -48,7 +48,7 @@
               <tr class="bg-info">
                 <th width="20%">タイトル</th>
                 <td colspan="3">
-                  <%= link_to public_comic_path(@last_comic), class:"text-light" do %>
+                  <%= link_to comic_path(@last_comic), class:"text-light" do %>
                     <strong><%= @last_comic.title %></strong>
                   <% end %>
                 </td>
@@ -96,7 +96,7 @@
                 <th class="bg-light">ジャンル</th>
                 <td>
                   <% @last_comic.genres.each do |genre| %>
-                    <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+                    <%= link_to genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
                       <strong><%= genre.genre_name %></strong>
                     <% end %>
                   <% end %>
@@ -105,7 +105,7 @@
                 <th class="bg-light">タグ</th>
                 <td>
                   <% @last_comic.tags.each do |tag| %>
-                    <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+                    <%= link_to tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
                       <strong><%= tag.tag_name %></strong>
                     <% end %>
                   <% end %>
@@ -116,7 +116,7 @@
                 <th class="bg-light">本文</th>
                 <td colspan="3">
                   <%= @last_comic.body.truncate(30) %>
-                  <%= link_to "もっと読む", public_comic_path(@last_comic), class:"btn btn-info btn-bg ml-5" %>
+                  <%= link_to "もっと読む", comic_path(@last_comic), class:"btn btn-info btn-bg ml-5" %>
                 </td>
               </tr>
             </table>
@@ -125,14 +125,14 @@
 
   <div class="row text-right">
     <div class="col">
-      <%= link_to "投稿詳細", public_comic_path(@last_comic), class:"btn btn-info btn-bg" %>
+      <%= link_to "投稿詳細", comic_path(@last_comic), class:"btn btn-info btn-bg" %>
 
         <!-- 投稿があればここまで表示する -->
         <% end %>
 
       <!-- ゲストユーザーでなければ表示する -->
       <% if @customer.email != 'guest@guest' %>
-        <%= link_to "投稿フォームへ", new_public_comic_path, class:"btn btn-success btn-bg" %>
+        <%= link_to "投稿フォームへ", new_comic_path, class:"btn btn-success btn-bg" %>
       <% end %>
     </div>
   </div>

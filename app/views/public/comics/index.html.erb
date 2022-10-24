@@ -10,11 +10,11 @@
 
   <div class="row mt-3 text-center">
     <div class="col">
-      <%= link_to '投稿日時が新しい順', public_comics_path(latest: "true") %> /
-      <%= link_to '投稿日時が古い順', public_comics_path(old: "true") %> /
-      <%= link_to 'おすすめ度の高い順', public_comics_path(star_count: "true") %> /
-      <%= link_to 'コメント数の多い順', public_comics_path(comic_comment: "true") %> /
-      <%= link_to 'ブックマーク数の多い順', public_comics_path(bookmark_count: "true") %>
+      <%= link_to '投稿日時が新しい順', comics_path(latest: "true") %> /
+      <%= link_to '投稿日時が古い順', comics_path(old: "true") %> /
+      <%= link_to 'おすすめ度の高い順', comics_path(star_count: "true") %> /
+      <%= link_to 'コメント数の多い順', comics_path(comic_comment: "true") %> /
+      <%= link_to 'ブックマーク数の多い順', comics_path(bookmark_count: "true") %>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
           <% @genre_list.each do |genre| %>
           <tr>
             <th>
-              <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+              <%= link_to genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
                 <%= genre.genre_name %>
               <% end %>
             </th>
@@ -46,7 +46,7 @@
           <% @tag_list.each do |tag| %>
             <tr>
               <th>
-                <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+                <%= link_to tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
                   <%= tag.tag_name %>
                 <% end %>
               </th>

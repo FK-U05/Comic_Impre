@@ -11,11 +11,9 @@ class Public::ComicsController < ApplicationController
     elsif params[:star_count]
         @comics = Comic.where(status: :published).star_count.page(params[:page]).per(3)
     elsif params[:comic_comment]
-        comics = Comic.where(status: :published).comic_comment_count
-        @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
+        @comics = Comic.where(status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
-        comics = Comic.where(status: :published).bookmark_count
-        @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
+        @comics = Comic.where(status: :published).bookmark_count.page(params[:page]).per(3)
     else
         @comics = Comic.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
@@ -40,7 +38,7 @@ class Public::ComicsController < ApplicationController
     #入力されたタグ名をtag_listに追加する
     tag_list = params[:comic][:tag_names][0].split(nil)
     @comic.tags_save(tag_list)
-    redirect_to public_comics_path, notice: "投稿 / 保存できました！"
+    redirect_to comics_path, notice: "投稿 / 保存できました！"
     if params[:back] || !@comic.save #戻るボタンを押したときまたは、@comicが保存されなかったらnewアクションを実行
        render :new and return
     end
@@ -82,7 +80,7 @@ class Public::ComicsController < ApplicationController
   def edit
     @comic = Comic.find(params[:id])
     if @comic.customer.id != current_customer.id
-       redirect_to public_comics_path, alert: "他のユーザーの投稿は編集できません。"
+       redirect_to comics_path, alert: "他のユーザーの投稿は編集できません。"
     end
     @genre_list = @comic.genres.pluck(:genre_name).join(nil)
     @tag_list = @comic.tags.pluck(:tag_name).join(nil)
@@ -106,7 +104,7 @@ class Public::ComicsController < ApplicationController
       tag_names_txt = params[:comic][:tag_names].split(nil)
       tag_list = tag_names_check_box + tag_names_txt
       @comic.tags_save(tag_list)
-      redirect_to public_comic_path(@comic), notice: "投稿を編集 / 保存しました。"
+      redirect_to comic_path(@comic), notice: "投稿を編集 / 保存しました。"
     else
       flash.now[:alert] = "必須項目を入力してください。"
       render :edit
@@ -116,7 +114,7 @@ class Public::ComicsController < ApplicationController
   def destroy
     @comic = Comic.find(params[:id])
     @comic.destroy
-    redirect_to public_comics_path, notice: "投稿を削除しました。"
+    redirect_to comics_path, notice: "投稿を削除しました。"
   end
 
   #タグで絞り込んだ投稿一覧

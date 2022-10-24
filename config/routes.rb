@@ -16,8 +16,6 @@ root to: "public/homes#top"
 namespace :admin do
  get 'top'=>"homes#top"
  get 'search'=>"searches#search"
- get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
- get 'customers/bookmark/:id', to:'customers#bookmark', as: "customers/bookmark"
  resources :comics, only:[:index, :show, :edit, :destroy, :update] do
   resources :comic_comments, only:[:index, :destroy]
   end
@@ -31,6 +29,8 @@ namespace :admin do
   end
  resources :customers, only:[:index, :show, :edit, :update] do
    member do
+     get :comics
+     get :bookmark
      get :draft
    end
  end
@@ -38,16 +38,14 @@ namespace :admin do
  resources :tags, only:[:edit, :update, :destroy]
 end
 
-namespace :public do
+scope module: :public do
  post 'customers/guest_sign_in', to: 'customers#guest_sign_in'
  get 'search'=>"searches#search"
- post 'comics/check', to: 'comics#check', as: "comics/check"
- post 'comics/back', to: 'comics#back', as: "comics/back"
- get 'customers/comics/:id', to:'customers#comics', as: "customers/comics"
- get 'customers/bookmark/:id', to:'customers#bookmark', as: "customers/bookmark"
- get 'customers/quit', to: 'customers#quit', as: "customers/quit"
- patch 'customers/withdrawal/:id', to: 'customers#withdrawal', as: "customers/withdrawal"
  resources :comics, only:[:index, :new, :create, :show, :edit, :destroy, :update] do
+  collection do
+    post :check
+    post :back
+  end
   resources :comic_comments, only: [:index, :create, :destroy]
   resource :bookmark, only: [:create, :destroy]
   end
@@ -60,8 +58,14 @@ namespace :public do
     get 'comics_genre',to: 'comics#genre_search'
   end
  resources :customers, only:[:show, :edit, :update] do
+   collection do
+     get :quit
+   end
    member do
+     get :comics
+     get :bookmark
      get :draft
+     patch :withdrawal
    end
  end
 end

@@ -11,11 +11,9 @@ class Admin::ComicsController < ApplicationController
     elsif params[:star_count]
         @comics = Comic.all.star_count.page(params[:page]).per(3)
     elsif params[:comic_comment]
-        comics = Comic.all.comic_comment_count
-        @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
+        @comics = Comic.all.comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
-        comics = Comic.all.bookmark_count
-        @comics = Kaminari.paginate_array(comics).page(params[:page]).per(3)
+        @comics = Comic.all.bookmark_count.page(params[:page]).per(3)
     else
         @comics = Comic.all.order(created_at: :desc).page(params[:page]).per(3)
     end

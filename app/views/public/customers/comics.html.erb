@@ -3,7 +3,7 @@
 
     <div class="col-md-2 text-center">
       <%= render 'public/customers/customer', customer: @customer %>
-      <%= link_to "会員詳細へ戻る", public_customer_path(@customer), class:"btn btn-info btn-bg" %>
+      <%= link_to "会員詳細へ戻る", customer_path(@customer), class:"btn btn-info btn-bg" %>
     </div>
 
     <div class="col ml-4 text-center">
@@ -24,7 +24,7 @@
 
         <% else %>
 
-          <h5 class="text-center mt-5">投稿がありません。新規投稿は<%= link_to "こちら", new_public_comic_path %></h5>
+          <h5 class="text-center mt-5">投稿がありません。新規投稿は<%= link_to "こちら", new_comic_path %></h5>
 
         <% end %>
     </div>

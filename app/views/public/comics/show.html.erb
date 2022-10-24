@@ -14,12 +14,12 @@
       <div class="mt-4 text-right">
         <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
           <% if @comic.bookmarked_by?(current_customer) %>
-            <%= link_to public_comic_bookmark_path(@comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
+            <%= link_to comic_bookmark_path(@comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
               <i class="fas fa-bookmark"></i>
               ブックマークを外す(<%= @comic.bookmarks.count %>)
             <% end %>
           <% else %>
-            <%= link_to public_comic_bookmark_path(@comic), method: :post, class:"btn btn-secondary btn-bg" do %>
+            <%= link_to comic_bookmark_path(@comic), method: :post, class:"btn btn-secondary btn-bg" do %>
               <i class="fas fa-bookmark"></i>
               ブックマークする (<%= @comic.bookmarks.count %>)
             <% end %>
@@ -77,7 +77,7 @@
             <th class="bg-light">ジャンル</th>
             <td>
               <% @comic_genres.each do |genre| %>
-                <%= link_to public_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+                <%= link_to genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
                   <strong><%= genre.genre_name %></strong>
                 <% end %>
               <% end %>
@@ -88,7 +88,7 @@
             <th class="bg-light">タグ</th>
             <td>
               <% @comic_tags.each do |tag| %>
-                <%= link_to public_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+                <%= link_to tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
                   <strong><%= tag.tag_name %></strong>
                 <% end %>
               <% end %>
@@ -113,7 +113,7 @@
   <div class="row text-right">
 
     <div class="col ml-4">
-      <%= link_to public_comic_comic_comments_path(@comic), class:"btn btn-primary btn-bg" do %>
+      <%= link_to comic_comic_comments_path(@comic), class:"btn btn-primary btn-bg" do %>
         コメント一覧(<%= @comic.comic_comments.count %>)
       <% end %>
     </div>
@@ -121,10 +121,10 @@
       <% if @comic.customer == current_customer %>
 
         <div class="col">
-          <%= link_to "投稿内容を編集する", edit_public_comic_path(@comic), class:"btn btn-success btn-bg" %>
+          <%= link_to "投稿内容を編集する", edit_comic_path(@comic), class:"btn btn-success btn-bg" %>
         </div>
         <div class="col mr-1">
-          <%= button_to "この投稿を削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "この投稿を削除しますか？"} %>
+          <%= button_to "この投稿を削除する", comic_path(@comic), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "この投稿を削除しますか？"} %>
         </div>
 
       <% end %>
@@ -136,7 +136,7 @@
     <div class="col ml-4">
       <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
 
-        <%= form_with model: [@comic, @comic_comment], url: public_comic_comic_comments_path(@comic), method: :post do |f| %>
+        <%= form_with model: [@comic, @comic_comment], url: comic_comic_comments_path(@comic), method: :post do |f| %>
           <%= f.text_area :comment, size:"100x3", placeholder: "コメントを送信できます" %>
           <p><%= f.submit "コメントを送信する", class:"btn btn-warning btn-bg" %></p>
         <% end %>

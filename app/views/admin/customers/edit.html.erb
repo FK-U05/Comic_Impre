@@ -79,9 +79,9 @@
             </div>
             <div class="col text-left">
               <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, '有効' %>
+              <%= f.label :is_deleted, '有効', value: false %>
               <%= f.radio_button :is_deleted, true %>
-              <%= f.label :is_deleted, '退会' %>
+              <%= f.label :is_deleted, '退会', value: true %>
             </div>
           </div>
 

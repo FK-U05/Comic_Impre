@@ -11,16 +11,16 @@ class Public::ComicCommentsController < ApplicationController
     @comment = current_customer.comic_comments.new(comic_comment_params)
     @comment.comic_id = @comic.id
     if @comment.save
-       redirect_to public_comic_comic_comments_path(@comic), notice: "コメントを送信しました！"
+       redirect_to comic_comic_comments_path(@comic), notice: "コメントを送信しました！"
     else
-       redirect_to public_comic_path(@comic), alert: "コメント内容を入力してください"
+       redirect_to comic_path(@comic), alert: "コメント内容を入力してください"
     end
   end
 
   def destroy
     @comic = Comic.find(params[:comic_id])
     ComicComment.find(params[:id]).destroy
-    redirect_to public_comic_comic_comments_path(@comic), notice: "コメントを削除しました。"
+    redirect_to comic_comic_comments_path(@comic), notice: "コメントを削除しました。"
   end
 
 private

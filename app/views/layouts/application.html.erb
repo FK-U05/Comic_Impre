@@ -32,19 +32,19 @@
               <% if customer_signed_in? %>
 
                 <li class ="rounded mr-4">
-                  <%= link_to public_customer_path(current_customer.id), class:"btn btn-primary btn-bg" do %>
+                  <%= link_to customer_path(current_customer.id), class:"btn btn-primary btn-bg" do %>
                     <i class="fas fa-user"></i> マイページ
                   <% end %>
                 </li>
 
                 <li class ="rounded mr-4">
-                  <%= link_to new_public_comic_path, class:"btn btn-success btn-bg" do %>
+                  <%= link_to new_comic_path, class:"btn btn-success btn-bg" do %>
                     <i class="fas fa-plus"></i> 投稿フォーム
                   <% end %>
                 </li>
 
                 <li class ="rounded mr-4">
-                  <%= link_to public_comics_path, class:"btn btn-warning btn-bg" do %>
+                  <%= link_to comics_path, class:"btn btn-warning btn-bg" do %>
                     <i class="fas fa-book-open"></i> みんなの投稿
                   <% end %>
                 </li>
@@ -84,7 +84,7 @@
               <% else %>
 
                 <li class ="rounded mr-4">
-                  <%= button_to public_customers_guest_sign_in_path, method: :post, class:"btn btn-secondary btn-bg" do %>
+                  <%= button_to customers_guest_sign_in_path, method: :post, class:"btn btn-secondary btn-bg" do %>
                     <i class="fas fa-users"></i> ゲストログイン
                   <% end %>
                 </li>
@@ -102,7 +102,7 @@
                 </li>
 
                 <li class ="rounded mr-4">
-                  <%= link_to public_comics_path, class:"btn btn-warning btn-bg" do %>
+                  <%= link_to comics_path, class:"btn btn-warning btn-bg" do %>
                     <i class="fas fa-book-open"></i> みんなの投稿
                   <% end %>
                 </li>

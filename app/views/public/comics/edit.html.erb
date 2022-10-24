@@ -10,7 +10,7 @@
 
   <div class="bg-light">
 
-    <%= form_with model: @comic, url: public_comic_path(@comic), method: :patch do |f| %>
+    <%= form_with model: @comic, url: comic_path(@comic), method: :patch do |f| %>
 
       <div class="form-group row mt-3">
         <div class="col-md-6 mt-5 text-right">
@@ -143,10 +143,10 @@
 
       <div class="row">
         <div class="col text-left">
-          <%= link_to "戻る", public_comic_path(@comic), class:"btn btn-warning btn-lg ml-5 mb-3" %>
+          <%= link_to "戻る", comic_path(@comic), class:"btn btn-warning btn-lg ml-5 mb-3" %>
         </div>
         <div class="col text-right">
-          <%= link_to "削除する", public_comic_path(@comic), method: :delete, class:"btn btn-danger btn-lg mr-5 mb-3", data: {confirm: "この投稿を削除しますか？"} %>
+          <%= link_to "削除する", comic_path(@comic), method: :delete, class:"btn btn-danger btn-lg mr-5 mb-3", data: {confirm: "この投稿を削除しますか？"} %>
         </div>
       </div>
 

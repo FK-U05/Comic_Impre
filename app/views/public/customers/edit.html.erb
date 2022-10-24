@@ -10,7 +10,7 @@
 
   <div class="bg-light">
 
-    <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
+    <%= form_with model: @customer, url: customer_path(@customer), method: :patch do |f| %>
 
       <div class="form-group row text-center mt-3">
         <div class="col mt-5">
@@ -79,10 +79,10 @@
 
       <div class="row text-center">
         <div class="col">
-          <%= link_to "戻る", public_customer_path(current_customer), class:"btn btn-warning btn-bg mb-4" %>
+          <%= link_to "戻る", customer_path(current_customer), class:"btn btn-warning btn-bg mb-4" %>
         </div>
         <div class="col">
-          <%= link_to "退会する", public_customers_quit_path, class:"btn btn-danger btn-bg mb-4", data: {confirm: "退会確認画面に移動しますか？"} %>
+          <%= link_to "退会する", quit_customers_path, class:"btn btn-danger btn-bg mb-4", data: {confirm: "退会確認画面に移動しますか？"} %>
         </div>
       </div>
 

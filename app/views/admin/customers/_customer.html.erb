@@ -25,7 +25,7 @@
 
   <tr>
     <th>
-      <%= link_to admin_customers_comics_path(customer), class:"text-warning" do %>
+      <%= link_to comics_admin_customer_path(customer), class:"text-warning" do %>
         <%= customer.name %><br>
         の投稿一覧
       <% end %>
@@ -33,6 +33,6 @@
   </tr>
 
   <tr>
-    <th><%= link_to "ブックマーク一覧", admin_customers_bookmark_path(customer), class:"text-info" %></th>
+    <th><%= link_to "ブックマーク一覧", bookmark_admin_customer_path(customer), class:"text-info" %></th>
   </tr>
 </table>
