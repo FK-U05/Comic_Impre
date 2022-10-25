@@ -8,12 +8,19 @@ ja:
   activerecord:
     models:
       customer: 会員
+      comic: 漫画
     attributes:
       customer:
         name: ユーザー名
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+      comic:
+        company: 出版社名
+        title: タイトル
+        body: 本文
+        name: 著者名
+        release_date: 発行年月日
 
   views:
     pagination:

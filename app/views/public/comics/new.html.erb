@@ -9,10 +9,22 @@
   </div>
 
   <div class="bg-light">
+    <% if @comic.errors.any? %>
+      <div class="row">
+        <div class="col text-center p-3">
+          <p class="bg-danger text-light"><%= @comic.errors.count %>件、必要項目が入力されていません</p>
+          <p class="bg-danger text-light">
+            <% @comic.errors.full_messages.each do |message| %>
+             <%= message %><br>
+            <% end %>
+          <p>
+        </div>
+      </div>
+    <% end %>
 
     <%= form_with model: @comic, url: check_comics_path(@comic), method: :post do |f| %>
 
-      <div class="form-group row mt-3">
+      <div class="form-group row">
         <div class="col-md-6 mt-5 text-right">
           <p class="p-1 rounded-sm bg-danger text-light d-inline-block">必須</p>
           <strong>

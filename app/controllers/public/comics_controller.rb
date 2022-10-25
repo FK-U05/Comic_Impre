@@ -53,7 +53,6 @@ class Public::ComicsController < ApplicationController
     tag_list = params[:comic][:tag_name].split(nil)
     @comic.tags_save(tag_list)
     if @comic.invalid? #必須項目に空のものがあれば入力画面に遷移
-       flash.now[:alert] = "必須項目を入力してください。"
        render :new
     end
   end
