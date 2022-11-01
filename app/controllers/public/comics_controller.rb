@@ -74,9 +74,11 @@ class Public::ComicsController < ApplicationController
     @comic_tags = @comic.tags
     @comic_genres = @comic.genres
     @comic_comment = ComicComment.new
-    @comic_detail = Comic.find(params[:id])
+    if customer_signed_in?
+      @comic_detail = Comic.find(params[:id])
     unless ViewCount.find_by(customer_id: current_customer.id, comic_id: @comic_detail.id)
       current_customer.view_counts.create(comic_id: @comic_detail.id)
+    end
     end
   end
 
