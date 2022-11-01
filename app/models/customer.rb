@@ -9,6 +9,7 @@ class Customer < ApplicationRecord
   has_many :comics, dependent: :destroy
   has_many :comic_comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
 
   validates :name , presence: true
 

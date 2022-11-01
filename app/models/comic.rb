@@ -10,6 +10,7 @@ class Comic < ApplicationRecord
 
   has_many :comic_comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
   belongs_to :customer
 
   validates :company, presence: true
