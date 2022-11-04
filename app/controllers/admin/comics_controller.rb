@@ -24,6 +24,7 @@ class Admin::ComicsController < ApplicationController
     @customer = @comic.customer
     @comic_tags = @comic.tags
     @comic_genres = @comic.genres
+    @comic_detail = Comic.find(params[:id])
   end
 
   def edit
