@@ -12,20 +12,18 @@
         <strong><%= @customer.name %> の投稿一覧</strong>
       </h3>
 
+      <div class="mt-4">
         <% if @customer.comics.exists? %>
-          <div class="col text-right">
-            <%= paginate @comics %>
-          </div>
 
-            <%= render 'admin/comics/comic', comics: @comics %>
+          <%= paginate @comics %>
+          <%= render 'admin/comics/comic', comics: @comics %>
 
         <% else %>
 
-          <div class="col mt-5">
-            <h5 class="text-center">まだこのユーザーは投稿していません</h5>
-          </div>
+          <h5 class="text-center mt-5">まだこのユーザーは投稿していません</h5>
 
         <% end %>
+      </div>
 
     </div>
 

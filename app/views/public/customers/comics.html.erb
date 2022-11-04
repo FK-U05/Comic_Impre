@@ -10,6 +10,8 @@
       <h3 class="p-1 bg-warning">
         <strong><%= @customer.name %> の投稿一覧</strong>
       </h3>
+
+      <div class="mt-4">
         <% if @customer.comics.exists? %>
 
           <%= paginate @comics %>
@@ -27,6 +29,7 @@
           <h5 class="text-center mt-5">投稿がありません。新規投稿は<%= link_to "こちら", new_comic_path %></h5>
 
         <% end %>
+      </div>
     </div>
 
   </div>

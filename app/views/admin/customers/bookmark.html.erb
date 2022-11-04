@@ -1,5 +1,4 @@
 <div class="container mt-3 mb-5">
-
   <div class="row mt-2">
 
     <div class="col-md-2">
@@ -9,14 +8,15 @@
     <div class="col text-center ml-4">
 
       <h3 class="p-1 bg-info text-light">
-        <strong>ブックマーク一覧</strong>
+        <strong><%= @customer.name %> のブックマーク一覧</strong>
       </h3>
 
+      <div class="mt-4">
         <% if @customer.bookmarks.exists? %>
           <%= paginate @bookmark_comics %>
 
             <% @customer.bookmarks.each do |bookmark| %>
-              <table class="table table-bordered mt-3">
+              <table class="table table-bordered mt-1">
                 <tr class="bg-info">
                   <th width="20%">タイトル</th>
                   <td colspan="3">
@@ -106,9 +106,9 @@
           </div>
 
         <% end %>
+      </div>
 
     </div>
 
   </div>
-
 </div>
