@@ -1,5 +1,5 @@
 class Public::ComicCommentsController < ApplicationController
-  before_action :authenticate_customer!,except:[:index]
+  before_action :authenticate_customer!
 
   def index
     @comic = Comic.find(params[:comic_id])

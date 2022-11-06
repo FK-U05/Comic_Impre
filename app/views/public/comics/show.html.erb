@@ -113,22 +113,24 @@
 
   <div class="row text-right">
 
-    <div class="col ml-4">
-      <%= link_to comic_comic_comments_path(@comic), class:"btn btn-primary btn-bg" do %>
-        コメント一覧(<%= @comic.comic_comments.count %>)
-      <% end %>
-    </div>
+    <% if customer_signed_in? %>
+      <div class="col ml-4">
+        <%= link_to comic_comic_comments_path(@comic), class:"btn btn-primary btn-bg" do %>
+          コメント一覧(<%= @comic.comic_comments.count %>)
+        <% end %>
+      </div>
+    <% end %>
 
-      <% if @comic.customer == current_customer %>
+    <% if @comic.customer == current_customer %>
 
-        <div class="col">
-          <%= link_to "投稿内容を編集する", edit_comic_path(@comic), class:"btn btn-success btn-bg" %>
-        </div>
-        <div class="col mr-1">
-          <%= button_to "この投稿を削除する", comic_path(@comic), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "この投稿を削除しますか？"} %>
-        </div>
+      <div class="col">
+        <%= link_to "投稿内容を編集する", edit_comic_path(@comic), class:"btn btn-success btn-bg" %>
+      </div>
+      <div class="col mr-1">
+        <%= button_to "この投稿を削除する", comic_path(@comic), method: :delete, class:"btn btn-danger btn-bg", data: {confirm: "この投稿を削除しますか？"} %>
+      </div>
 
-      <% end %>
+    <% end %>
 
   </div>
 
