@@ -29,7 +29,19 @@ class Public::CustomersController < ApplicationController
   #投稿一覧
   def comics
     @customer = Customer.find(params[:id])
-    @comics = @customer.comics.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    if  params[:latest]
+        @comics = @customer.comics.where(status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @comics = @customer.comics.where(status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @comics = @customer.comics.where(status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @comics = @customer.comics.where(status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @comics = @customer.comics.where(status: :published).bookmark_count.page(params[:page]).per(3)
+    else
+        @comics = @customer.comics.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   #下書き一覧

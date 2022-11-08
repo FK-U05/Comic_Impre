@@ -11,11 +11,16 @@
         <strong><%= @customer.name %> の投稿一覧</strong>
       </h3>
 
-      <div class="mt-4">
         <% if @customer.comics.exists? %>
+          <div class="mt-4 text-center">
+            <%= link_to '投稿日時が新しい順', comics_customer_path(latest: "true") %> /
+            <%= link_to '投稿日時が古い順', comics_customer_path(old: "true") %> /
+            <%= link_to 'おすすめ度の高い順', comics_customer_path(star_count: "true") %> /
+            <%= link_to 'コメント数の多い順', comics_customer_path(comic_comment: "true") %> /
+            <%= link_to 'ブックマーク数の多い順', comics_customer_path(bookmark_count: "true") %>
 
-          <%= paginate @comics %>
-          <%= render 'public/comics/comic', comics: @comics %>
+            <%= paginate @comics %>
+            <%= render 'public/comics/comic', comics: @comics %>
 
         <% elsif @customer.email == 'guest@guest' %>
 
@@ -29,7 +34,8 @@
           <h5 class="text-center mt-5">投稿がありません。新規投稿は<%= link_to "こちら", new_comic_path %></h5>
 
         <% end %>
-      </div>
+
+          </div>
     </div>
 
   </div>
