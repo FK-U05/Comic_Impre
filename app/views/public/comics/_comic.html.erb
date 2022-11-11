@@ -86,6 +86,12 @@
       </tr>
 
       <tr>
+        <th class="bg-light">ネタバレ</th>
+          <% if comic.spoiler_status %>
+            <td class="text-danger"><strong>無</strong></td>
+          <% else %>
+            <td class="text-success"><strong>有</strong></td>
+          <% end %>
         <th class="bg-light">本文</th>
         <td colspan="3">
           <%= comic.body.truncate(30) %>

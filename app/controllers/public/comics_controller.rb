@@ -139,7 +139,7 @@ class Public::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star, :status, { genre_ids: []}, { tag_ids: []} )
+    params.require(:comic).permit(:title, :body, :name, :company, :release_date, :star, :status, :spoiler_status, { genre_ids: []}, { tag_ids: []} )
   end
 
 end

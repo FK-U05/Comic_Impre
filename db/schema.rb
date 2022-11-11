@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2022_11_01_034209) do
     t.date "release_date", null: false
     t.float "star"
     t.integer "status", default: 0, null: false
+    t.boolean "spoiler_status", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

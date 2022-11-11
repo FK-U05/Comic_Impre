@@ -97,6 +97,15 @@
           </tr>
 
           <tr>
+            <th class="bg-light">ネタバレ</th>
+              <% if @comic.spoiler_status %>
+                <td class="text-danger"><strong>無</strong></td>
+              <% else %>
+                <td class="text-success"><strong>有</strong></td>
+              <% end %>
+          </tr>
+
+          <tr>
             <th class="bg-light">投稿日時</th>
             <td><%= @comic.created_at.strftime("%Y年%m月%d日") %></td>
           </tr>

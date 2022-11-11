@@ -84,9 +84,15 @@
 
     <tr>
       <th class="bg-light">公開範囲</th>
-      <td colspan="3"><%= comic.status_i18n %></td>
-    </tr>
+      <td><%= comic.status_i18n %></td>
 
+      <th class="bg-light">ネタバレ</th>
+        <% if comic.spoiler_status %>
+          <td class="text-danger"><strong>無</strong></td>
+        <% else %>
+          <td class="text-success"><strong>有</strong></td>
+        <% end %>
+    </tr>
 
     <tr>
       <th class="bg-light">本文</th>

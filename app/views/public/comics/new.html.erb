@@ -142,6 +142,18 @@
         <p><%= f.text_field :tag_name, placeholder: "その他" %></p>
       </div>
 
+      <div class="form-group text-center">
+        <strong>
+          <%= f.label :ネタバレ, class:"p-1 bg-info text-light" %>
+        </strong>
+        <p>
+          <%= f.radio_button :spoiler_status, false %>
+          <%= f.label :spoiler_status, 'ネタバレあり', value: false %>
+          <%= f.radio_button :spoiler_status, true %>
+          <%= f.label :spoiler_status, 'ネタバレなし', value: true %>
+        </p>
+      </div>
+
       <div class="text-center">
         <%= f.submit "投稿確認画面へ", class:"btn btn-success btn-lg mt-4 mb-5" %>
       </div>
