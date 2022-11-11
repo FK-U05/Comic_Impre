@@ -17,7 +17,7 @@
           <strong>
             <%= f.label :ユーザー画像, class:"p-1 bg-secondary text-light" %>
           </strong>
-            <!--　画像プレビュー -->
+            <!-- 画像プレビュー -->
             <div id="image_wrapper">
               <% if @customer.profile_image.present? %>
                 <%= image_tag @customer.get_profile_image(100,100), id: :img_preview %>

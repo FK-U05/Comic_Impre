@@ -35,6 +35,8 @@
 ## 設計書
 #### ER図
  ![image](https://user-images.githubusercontent.com/108564549/192446704-1172a48a-c608-49ac-a421-5b34ff63d3dc.png)
+ URL<br>
+ (https://drive.google.com/file/d/1y19IL2gb5WRSLxfBZa4hhEQ7PojeJ2fV/view?usp=sharing)
 #### テーブル定義書
  URL<br>
  (https://docs.google.com/spreadsheets/d/1wE9E8g54IwZmT8vYoxDOQI5BP2yvKbrh7UvUjiOmg2k/edit?usp=sharing)
