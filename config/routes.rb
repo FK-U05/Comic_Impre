@@ -45,6 +45,8 @@ scope module: :public do
   collection do
     post :check
     post :back
+    get :spoiler
+    get :no_spoiler
   end
   resources :comic_comments, only: [:index, :create, :destroy]
   resource :bookmark, only: [:create, :destroy]

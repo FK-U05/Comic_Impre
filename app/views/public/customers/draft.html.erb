@@ -33,7 +33,7 @@
               <!--星レビュー機能-->
               <tr>
                 <th class="bg-light">おすすめ度</th>
-                <td colspan="3">
+                <td>
                   <div class="star-rate">
                     <div id="star-rate-<%= comic.id %>"></div>
 
@@ -52,6 +52,12 @@
 
                   </div>
                 </td>
+                <th class="bg-light">ネタバレ</th>
+                  <% if comic.spoiler_status %>
+                    <td class="text-danger"><strong>無</strong></td>
+                  <% else %>
+                    <td class="text-success"><strong>有</strong></td>
+                  <% end %>
               </tr>
 
               <tr>
@@ -72,7 +78,7 @@
 
               <tr>
                 <th class="bg-light">本文</th>
-                <td colspan="3"><%= comic.body.truncate(30) %></td>
+                <td colspan="3"><% comic.body.truncate(30) %></td>
               </tr>
 
               <tr>

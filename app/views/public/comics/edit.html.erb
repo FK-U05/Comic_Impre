@@ -130,6 +130,18 @@
 
       <div class="form-group text-center">
         <strong>
+          <%= f.label :ネタバレ, class:"p-1 bg-info text-light" %>
+        </strong>
+        <p>
+          <%= f.radio_button :spoiler_status, false %>
+          <%= f.label :spoiler_status, 'ネタバレあり', value: false %>
+          <%= f.radio_button :spoiler_status, true %>
+          <%= f.label :spoiler_status, 'ネタバレなし', value: true %>
+        </p>
+      </div>
+
+      <div class="form-group text-center">
+        <strong>
           <%= f.label"公開範囲を選択", class:"p-1 bg-info text-light" %>
         </strong>
         <p><%= f.select :status, [["公開", "published"], ["下書き", "draft"]], required: true %></p>

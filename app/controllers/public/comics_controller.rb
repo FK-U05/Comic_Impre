@@ -136,6 +136,33 @@ class Public::ComicsController < ApplicationController
     @comics = @genre.comics.where(status: :published).page(params[:page]).per(3)
   end
 
+  #ネタバレ無しで絞り込む
+  def no_spoiler
+    @tag_list = Tag.all
+    @genre_list = Genre.all
+    @no_spoiler = Comic.where(spoiler_status:true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    if  params[:latest]
+        @no_spoiler = Comic.where(spoiler_status:true, status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @no_spoiler = Comic.where(spoiler_status:true, status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @no_spoiler = Comic.where(spoiler_status:true, status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @no_spoiler = Comic.where(spoiler_status:true, status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @no_spoiler = Comic.where(spoiler_status:true, status: :published).bookmark_count.page(params[:page]).per(3)
+    else
+        @no_spoiler = Comic.where(spoiler_status:true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
+  end
+
+  def spoiler
+    @comics = Comic.all
+    @tag_list = Tag.all
+    @genre_list = Genre.all
+    @spoiler = Comic.where(spoiler_status:false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+  end
+
   private
 
   def comic_params
