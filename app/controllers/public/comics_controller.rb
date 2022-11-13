@@ -140,7 +140,6 @@ class Public::ComicsController < ApplicationController
   def no_spoiler
     @tag_list = Tag.all
     @genre_list = Genre.all
-    @no_spoiler = Comic.where(spoiler_status:true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     if  params[:latest]
         @no_spoiler = Comic.where(spoiler_status:true, status: :published).latest.page(params[:page]).per(3)
     elsif params[:old]
@@ -160,7 +159,19 @@ class Public::ComicsController < ApplicationController
     @comics = Comic.all
     @tag_list = Tag.all
     @genre_list = Genre.all
-    @spoiler = Comic.where(spoiler_status:false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    if  params[:latest]
+        @spoiler = Comic.where(spoiler_status:false, status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @spoiler = Comic.where(spoiler_status:false, status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @spoiler = Comic.where(spoiler_status:false, status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @spoiler = Comic.where(spoiler_status:false, status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @spoiler = Comic.where(spoiler_status:false, status: :published).bookmark_count.page(params[:page]).per(3)
+    else
+        @spoiler = Comic.where(spoiler_status:false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   private
