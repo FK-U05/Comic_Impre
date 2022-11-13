@@ -141,17 +141,17 @@ class Public::ComicsController < ApplicationController
     @tag_list = Tag.all
     @genre_list = Genre.all
     if  params[:latest]
-        @no_spoiler = Comic.where(spoiler_status:true, status: :published).latest.page(params[:page]).per(3)
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).latest.page(params[:page]).per(3)
     elsif params[:old]
-        @no_spoiler = Comic.where(spoiler_status:true, status: :published).old.page(params[:page]).per(3)
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).old.page(params[:page]).per(3)
     elsif params[:star_count]
-        @no_spoiler = Comic.where(spoiler_status:true, status: :published).star_count.page(params[:page]).per(3)
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).star_count.page(params[:page]).per(3)
     elsif params[:comic_comment]
-        @no_spoiler = Comic.where(spoiler_status:true, status: :published).comic_comment_count.page(params[:page]).per(3)
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
-        @no_spoiler = Comic.where(spoiler_status:true, status: :published).bookmark_count.page(params[:page]).per(3)
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).bookmark_count.page(params[:page]).per(3)
     else
-        @no_spoiler = Comic.where(spoiler_status:true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
   end
 
@@ -160,17 +160,17 @@ class Public::ComicsController < ApplicationController
     @tag_list = Tag.all
     @genre_list = Genre.all
     if  params[:latest]
-        @spoiler = Comic.where(spoiler_status:false, status: :published).latest.page(params[:page]).per(3)
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).latest.page(params[:page]).per(3)
     elsif params[:old]
-        @spoiler = Comic.where(spoiler_status:false, status: :published).old.page(params[:page]).per(3)
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).old.page(params[:page]).per(3)
     elsif params[:star_count]
-        @spoiler = Comic.where(spoiler_status:false, status: :published).star_count.page(params[:page]).per(3)
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).star_count.page(params[:page]).per(3)
     elsif params[:comic_comment]
-        @spoiler = Comic.where(spoiler_status:false, status: :published).comic_comment_count.page(params[:page]).per(3)
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
-        @spoiler = Comic.where(spoiler_status:false, status: :published).bookmark_count.page(params[:page]).per(3)
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).bookmark_count.page(params[:page]).per(3)
     else
-        @spoiler = Comic.where(spoiler_status:false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
   end
 
