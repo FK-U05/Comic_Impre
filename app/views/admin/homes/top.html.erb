@@ -14,7 +14,9 @@
 
       <table class="table table-bordered text-center">
         <thead class="bg-light">
-          <th colspan="2">ジャンル一覧</th>
+          <th colspan="2">ジャンル一覧
+          　<%= link_to "作成する", new_admin_genre_path, class:"btn btn-success btn-bg" %>
+          </th>
         </thead>
         <tbody>
           <% @genres.each do |genre| %>
@@ -34,7 +36,9 @@
 
         <table class="table table-bordered text-center">
           <thead class="bg-light">
-            <th colspan="2">タグ一覧</th>
+            <th colspan="2">タグ一覧
+            　<%= link_to "作成する", new_admin_tag_path, class:"btn btn-success btn-bg" %>
+            </th>
           </thead>
           <tbody>
             <% @tags.each do |tag| %>

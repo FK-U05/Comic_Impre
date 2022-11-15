@@ -34,8 +34,8 @@ namespace :admin do
      get :draft
    end
  end
- resources :genres, only:[:destroy, :edit, :update]
- resources :tags, only:[:edit, :update, :destroy]
+ resources :genres, only:[:new, :create, :destroy, :edit, :update]
+ resources :tags, only:[:new, :create, :edit, :update, :destroy]
 end
 
 scope module: :public do

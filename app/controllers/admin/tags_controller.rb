@@ -1,6 +1,16 @@
 class Admin::TagsController < ApplicationController
   before_action :authenticate_admin!
 
+  def new
+    @tag = Tag.new
+  end
+
+  def create
+    @tag = Tag.new(tag_params)
+    @tag.save
+    redirect_to admin_top_path, notice: "タグ名を保存しました。"
+  end
+
   def edit
     @tag = Tag.find(params[:id])
   end
