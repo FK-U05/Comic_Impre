@@ -25,28 +25,6 @@
 
         <% else %>
 
-          <div class="mt-4 text-right">
-            <!-- ログインしているのがゲストユーザーでなければ表示する -->
-            <% if customer_signed_in? && current_customer.email != 'guest@guest'%>
-              <!--　ユーザーがブックマークをしていれば外すボタンを表示 -->
-              <% if @last_comic.bookmarked_by?(current_customer) %>
-
-                <%= link_to comic_bookmark_path(@last_comic), method: :delete, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
-                  <i class="fas fa-bookmark"></i>ブックマークを外す(<%= @last_comic.bookmarks.count %>)
-                <% end %>
-
-              <% else %>
-
-                <%= link_to comic_bookmark_path(@last_comic), method: :post, class:"btn btn-secondary btn-bg" do %>
-                  <i class="fas fa-bookmark"></i>ブックマークする (<%= @last_comic.bookmarks.count %>)
-                <% end %>
-
-              <% end %>
-
-            <% end %>
-
-          </div>
-
           <table class="table table-bordered text-center">
             <tr class="bg-info">
               <th width="20%">タイトル</th>

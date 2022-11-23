@@ -1,0 +1,11 @@
+<% if comic.bookmarked_by?(current_customer) %>
+  <%= link_to comic_bookmark_path(comic), method: :delete, remote: true, class:"btn btn-info btn-bg", data: {confirm: "ブックマークを外しますか？"} do %>
+    <i class="fas fa-bookmark"></i>
+    ブックマークを外す(<%= comic.bookmarks.count %>)
+  <% end %>
+<% else %>
+  <%= link_to comic_bookmark_path(comic), method: :post, remote: true, class:"btn btn-secondary btn-bg" do %>
+    <i class="fas fa-bookmark"></i>
+    ブックマークする (<%= comic.bookmarks.count %>)
+  <% end %>
+<% end %>
