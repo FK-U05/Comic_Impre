@@ -25,6 +25,14 @@
 
         <% else %>
 
+          <div class="mt-4 text-right">
+            <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
+                <div id="bookmark_button_<%= @comic.id %>">
+                  <%= render 'public/comics/bookmark', comic: @comic %>
+                </div>
+            <% end %>
+          </div>
+
           <table class="table table-bordered text-center">
             <tr class="bg-info">
               <th width="20%">タイトル</th>
