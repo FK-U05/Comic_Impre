@@ -7,8 +7,11 @@ class Admin::TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
-    @tag.save
-    redirect_to admin_top_path, notice: "タグ名を保存しました。"
+    if @tag.save
+      redirect_to admin_top_path, notice: "タグ名を保存しました。"
+    else
+      redirect_to admin_top_path, notice: "タグ名を入力してください。"
+    end
   end
 
   def edit
