@@ -45,6 +45,42 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  #ネタバレ無しで絞り込む
+  def no_spoiler
+    @customer = Customer.find(params[:id])
+    if  params[:latest]
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).bookmark_count.page(params[:page]).per(3)
+    else
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
+  end
+
+  #ネタバレ有りで絞り込む
+  def spoiler
+    @customer = Customer.find(params[:id])
+    if  params[:latest]
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).bookmark_count.page(params[:page]).per(3)
+    else
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
+  end
+
   #下書き一覧
   def draft
     @customer = Customer.find(params[:id])

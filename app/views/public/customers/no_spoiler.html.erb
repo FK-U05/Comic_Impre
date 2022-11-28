@@ -1,0 +1,36 @@
+<div class="container mt-3 mb-5">
+  <div class="row mt-2">
+
+    <div class="col-md-2 text-center">
+      <%= render 'public/customers/customer', customer: @customer %>
+      <%= link_to "会員詳細へ戻る", customer_path(@customer), class:"btn btn-info btn-bg" %>
+    </div>
+
+    <div class="col ml-4 text-center">
+      <h3 class="p-1 bg-warning">
+        <strong><%= @customer.name %> の投稿一覧（ネタバレ無し）</strong>
+      </h3>
+
+      <div class="mt-4 md-5 text-center">
+        <%= link_to '投稿日時が新しい順', no_spoiler_customer_path(@customer, latest: "true"), class:"font-weight-bold" %> /
+        <%= link_to '投稿日時が古い順', no_spoiler_customer_path(@customer, old: "true"), class:"font-weight-bold" %> /
+        <%= link_to 'おすすめ度の高い順', no_spoiler_customer_path(@customer, star_count: "true"), class:"font-weight-bold" %> /
+        <%= link_to 'コメント数の多い順', no_spoiler_customer_path(@customer, comic_comment: "true"), class:"font-weight-bold" %> /
+        <%= link_to 'ブックマーク数の多い順', no_spoiler_customer_path(@customer, bookmark_count: "true"), class:"font-weight-bold" %>
+
+      <div class="row mt-3 md-5 text-center font-weight-bold">
+        <div class="col">
+          < <%= link_to "ネタバレなし", no_spoiler_customer_path(@customer), class:"text-danger" %> /
+          <%= link_to "ネタバレあり", spoiler_customer_path(@customer), class:"text-success" %> >
+        </div>
+      </div>
+
+        <%= paginate @no_spoiler %>
+        <%= render 'public/comics/comic', comics: @no_spoiler %>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

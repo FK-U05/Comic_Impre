@@ -11,6 +11,7 @@
       <h3 class="p-1 bg-info text-light text-center">
         <strong><%= @comic.title %> へのコメント一覧</strong>
       </h3>
+
         <% if @comic.comic_comments.exists? %>
           <% @comic.comic_comments.each do |comment| %>
             <table class="table table-bordered mt-3">
@@ -33,9 +34,11 @@
           <% end %>
 
         <% else %>
+
           <div class="text-center mt-5">
             <h5>コメントはありません</h5>
           </div>
+
         <% end %>
     </div>
 

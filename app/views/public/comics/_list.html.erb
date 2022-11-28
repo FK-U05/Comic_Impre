@@ -1,0 +1,33 @@
+<table class="table table-bordered text-center">
+  <thead>
+    <th class="bg-light">ジャンルリスト</th>
+  </thead>
+  <tbody>
+    <% genre_list.each do |genre| %>
+      <tr>
+        <th>
+          <%= link_to genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
+            <%= genre.genre_name %>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table table-bordered text-center">
+  <thead>
+    <th class="bg-light">タグリスト</th>
+  </thead>
+  <tbody>
+    <% tag_list.each do |tag| %>
+      <tr>
+        <th>
+          <%= link_to tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
+            <%= tag.tag_name %>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

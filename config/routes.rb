@@ -65,6 +65,8 @@ scope module: :public do
    end
    member do
      get :comics
+     get :spoiler
+     get :no_spoiler
      get :bookmark
      get :draft
      patch :withdrawal

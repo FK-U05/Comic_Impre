@@ -155,6 +155,7 @@ class Public::ComicsController < ApplicationController
     end
   end
 
+  #ネタバレ有りで
   def spoiler
     @comics = Comic.all
     @tag_list = Tag.all

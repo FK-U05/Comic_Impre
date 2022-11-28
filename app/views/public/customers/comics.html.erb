@@ -20,6 +20,13 @@
             <%= link_to 'コメント数の多い順', comics_customer_path(comic_comment: "true"), class:"font-weight-bold" %> /
             <%= link_to 'ブックマーク数の多い順', comics_customer_path(bookmark_count: "true"), class:"font-weight-bold" %>
 
+            <div class="row mt-1 text-center font-weight-bold">
+              <div class="col">
+                < <%= link_to "ネタバレなし", no_spoiler_customer_path(@customer), class:"text-danger" %> /
+                <%= link_to "ネタバレあり", spoiler_customer_path(@customer), class:"text-success" %> >
+              </div>
+            </div>
+
             <%= paginate @comics %>
             <%= render 'public/comics/comic', comics: @comics %>
 
