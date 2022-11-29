@@ -14,7 +14,7 @@
       <div class="mt-4 text-right">
         <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
           <button type="button" class="btn btn-info disabled">閲覧数 (<%= @comic_detail.view_counts.count %>)</button>
-            <div id="bookmark_button_<%= @comic.id %>">
+            <div class="bookmark_button_<%= @comic.id %>">
               <%= render 'public/comics/bookmark', comic: @comic %>
             </div>
         <% end %>

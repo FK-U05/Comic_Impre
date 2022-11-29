@@ -12,7 +12,8 @@
       </h3>
 
         <% if @customer.bookmarks.exists? %>
-          <%= paginate @bookmark_comics %>
+
+            <%= paginate @bookmark_comics %>
 
             <% @bookmark_comics.each do |bookmark| %>
               <!-- 退会したユーザーの投稿は表示しない -->
