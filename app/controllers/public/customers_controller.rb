@@ -89,7 +89,7 @@ class Public::CustomersController < ApplicationController
     elsif current_customer.email == 'guest@guest'
        redirect_to root_path, alert: "ゲストユーザーは投稿できません。会員新規登録をお願いします。"
     else
-       @comics = @customer.comics.where(status: :draft).order('created_at DESC').page(params[:page]).per(3)
+       @comics = @customer.comics.where(status: :draft).order(created_at: :desc).page(params[:page]).per(3)
     end
   end
 
