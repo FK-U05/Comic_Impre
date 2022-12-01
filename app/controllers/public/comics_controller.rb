@@ -14,6 +14,8 @@ class Public::ComicsController < ApplicationController
         @comics = Comic.where(status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
         @comics = Comic.where(status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @comics = Comic.where(status: :published).view_count.page(params[:page]).per(3)
     else
         @comics = Comic.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
@@ -150,12 +152,14 @@ class Public::ComicsController < ApplicationController
         @no_spoiler = Comic.where(spoiler_status: :true, status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
         @no_spoiler = Comic.where(spoiler_status: :true, status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @no_spoiler = Comic.where(spoiler_status: :true, status: :published).view_count.page(params[:page]).per(3)
     else
         @no_spoiler = Comic.where(spoiler_status: :true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
   end
 
-  #ネタバレ有りで
+  #ネタバレ有りで絞り込む
   def spoiler
     @comics = Comic.all
     @tag_list = Tag.all
@@ -170,6 +174,8 @@ class Public::ComicsController < ApplicationController
         @spoiler = Comic.where(spoiler_status: :false, status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
         @spoiler = Comic.where(spoiler_status: :false, status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @spoiler = Comic.where(spoiler_status: :false, status: :published).view_count.page(params[:page]).per(3)
     else
         @spoiler = Comic.where(spoiler_status: :false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end

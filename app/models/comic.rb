@@ -28,7 +28,8 @@ class Comic < ApplicationRecord
   scope :star_count, -> {order(star: :desc)}
   scope :comic_comment_count, -> { left_joins(:comic_comments).group(:id).order("count(comic_comments.comic_id) desc")}
   scope :bookmark_count, -> { left_joins(:bookmarks).group(:id).order("count(bookmarks.comic_id) desc")}
-
+  scope :view_count, -> { left_joins(:view_counts).group(:id).order("count(view_counts.comic_id) desc")}
+  
   #ブックマーク
   def bookmarked_by?(customer)
     bookmarks.exists?(customer_id: customer.id)

@@ -99,6 +99,14 @@
                   </tr>
 
                   <tr>
+                    <th class="bg-light">コメント数</th>
+                    <td><%= bookmark.comic_comments.count %></td>
+
+                    <th class="bg-light">ブックマーク数</th>
+                    <td><%= bookmark.bookmarks.count %></td>
+                  </tr>
+
+                  <tr>
                     <th class="bg-light">本文</th>
                     <td colspan="3">
                       <%= bookmark.body.truncate(30) %>

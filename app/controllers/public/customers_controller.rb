@@ -40,6 +40,8 @@ class Public::CustomersController < ApplicationController
         @comics = @customer.comics.where(status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
         @comics = @customer.comics.where(status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @comics = @customer.comics.where(status: :published).view_count.page(params[:page]).per(3)
     else
         @comics = @customer.comics.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
@@ -58,6 +60,8 @@ class Public::CustomersController < ApplicationController
         @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
         @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).view_count.page(params[:page]).per(3)
     else
         @no_spoiler = @customer.comics.where(spoiler_status: :true, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
@@ -76,6 +80,8 @@ class Public::CustomersController < ApplicationController
         @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).comic_comment_count.page(params[:page]).per(3)
     elsif params[:bookmark_count]
         @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).view_count.page(params[:page]).per(3)
     else
         @spoiler = @customer.comics.where(spoiler_status: :false, status: :published).order(created_at: :desc).page(params[:page]).per(3)
     end
