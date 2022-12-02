@@ -3,8 +3,6 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @comic = Comic.find(params[:id])
-    @comics = @customer.comics
     @last_comic = Comic.published.where(customer_id: @customer).last
   end
 
