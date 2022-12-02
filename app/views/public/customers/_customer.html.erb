@@ -30,6 +30,7 @@
       </th>
     </tr>
   <% end %>
+  <% if customer.comics.exists? %>
 
     <tr>
       <th>
@@ -40,6 +41,7 @@
       </th>
     </tr>
 
+  <% end %>
   <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
     <tr>
       <th>
