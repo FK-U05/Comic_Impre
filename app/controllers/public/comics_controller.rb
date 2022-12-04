@@ -128,14 +128,42 @@ class Public::ComicsController < ApplicationController
   def tag_search
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @comics = @tag.comics.where(status: :published).page(params[:page]).per(3)
+    if  params[:latest]
+        @comics = @tag.comics.where(status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @comics = @tag.comics.where(status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @comics = @tag.comics.where(status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @comics = @tag.comics.where(status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @comics = @tag.comics.where(status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @comics = @tag.comics.where(status: :published).view_count.page(params[:page]).per(3)
+    else
+        @comics = @tag.comics.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   #ジャンルで絞り込んだ投稿一覧
   def genre_search
     @genre_list = Genre.all
     @genre = Genre.find(params[:genre_id])
-    @comics = @genre.comics.where(status: :published).page(params[:page]).per(3)
+    if  params[:latest]
+        @comics = @genre.comics.where(status: :published).latest.page(params[:page]).per(3)
+    elsif params[:old]
+        @comics = @genre.comics.where(status: :published).old.page(params[:page]).per(3)
+    elsif params[:star_count]
+        @comics = @genre.comics.where(status: :published).star_count.page(params[:page]).per(3)
+    elsif params[:comic_comment]
+        @comics = @genre.comics.where(status: :published).comic_comment_count.page(params[:page]).per(3)
+    elsif params[:bookmark_count]
+        @comics = @genre.comics.where(status: :published).bookmark_count.page(params[:page]).per(3)
+    elsif params[:view_count]
+        @comics = @genre.comics.where(status: :published).view_count.page(params[:page]).per(3)
+    else
+        @comics = @genre.comics.where(status: :published).order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   #ネタバレ無しで絞り込む

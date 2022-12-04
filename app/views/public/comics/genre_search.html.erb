@@ -8,6 +8,17 @@
     </div>
   </div>
 
+  <div class="row mt-3 text-center font-weight-bold">
+    <div class="col">
+      <%= link_to '投稿日時が新しい順', genre_comics_genre_path(@genre, latest: "true") %> /
+      <%= link_to '投稿日時が古い順', genre_comics_genre_path(@genre, old: "true") %> /
+      <%= link_to 'おすすめ度の高い順', genre_comics_genre_path(@genre, star_count: "true") %> /
+      <%= link_to 'コメント数の多い順', genre_comics_genre_path(@genre, comic_comment: "true") %> /
+      <%= link_to 'ブックマーク数の多い順', genre_comics_genre_path(@genre, bookmark_count: "true") %> /
+      <%= link_to '閲覧数の多い順', genre_comics_genre_path(@genre, view_count: "true") %>
+    </div>
+  </div>
+
   <div class="row mt-3 justify-content-center">
     <div class="col-md-10">
       <%= paginate @comics %>
