@@ -18,7 +18,7 @@
             <%= link_to '投稿日時が古い順', comics_customer_path(old: "true"), class:"font-weight-bold" %> /
             <%= link_to 'おすすめ度の高い順', comics_customer_path(star_count: "true"), class:"font-weight-bold" %> /
             <%= link_to 'コメント数の多い順', comics_customer_path(comic_comment: "true"), class:"font-weight-bold" %> /
-            <%= link_to 'ブックマーク数の多い順', comics_customer_path(bookmark_count: "true"), class:"font-weight-bold" %> / 
+            <%= link_to 'ブックマーク数の多い順', comics_customer_path(bookmark_count: "true"), class:"font-weight-bold" %> /
             <%= link_to '閲覧数の多い順', comics_customer_path(view_count: "true"), class:"font-weight-bold" %>
 
             <div class="row mt-1 text-center font-weight-bold">
@@ -28,8 +28,8 @@
               </div>
             </div>
 
-            <%= paginate @comics %>
             <%= render 'public/comics/comic', comics: @comics %>
+            <%= paginate @comics %>
 
         <% elsif @customer.email == 'guest@guest' %>
 

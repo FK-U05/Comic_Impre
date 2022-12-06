@@ -34,8 +34,8 @@
     </div>
 
     <div class="col">
-      <%= paginate @comics %>
       <%= render 'comic', comics: @comics %>
+      <%= paginate @comics %>
     </div>
 
   </div>
