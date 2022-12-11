@@ -20,44 +20,12 @@
 
   <div class="row mt-4">
     <div class="col-md-2">
-      <table class="table table-bordered text-center">
-        <thead>
-          <th class="bg-light">ジャンルリスト</th>
-        </thead>
-        <tbody>
-          <% @genre_list.each do |genre| %>
-            <tr>
-              <th>
-                <%= link_to admin_genre_comics_genre_path(genre_id: genre.id), class:"text-success" do %>
-                  <%= genre.genre_name %>
-                <% end %>
-              </th>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      <table class="table table-bordered text-center">
-        <thead>
-          <th class="bg-light">タグリスト</th>
-        </thead>
-        <tbody>
-          <% @tag_list.each do |tag| %>
-            <tr>
-              <th>
-                <%= link_to admin_tag_comics_tag_path(tag_id: tag.id), class:"text-danger" do %>
-                  <%= tag.tag_name %>
-                <% end %>
-              </th>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'admin/comics/list', genre_list: @genre_list, tag_list: @tag_list %>
     </div>
 
     <div class="col">
-        <%= paginate @comics %>
-        <%= render 'comic', comics: @comics %>
+      <%= render 'comic', comics: @comics %>
+      <%= paginate @comics %>
     </div>
   </div>
 
