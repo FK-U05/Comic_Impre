@@ -30,8 +30,8 @@
       </th>
     </tr>
   <% end %>
-  <% if customer.comics.exists? %>
 
+  <% if customer.comics.exists? %>
     <tr>
       <th>
         <%= link_to comics_customer_path(customer), class:"text-warning" do %>
@@ -40,8 +40,8 @@
         <% end %>
       </th>
     </tr>
-
   <% end %>
+
   <% if customer_signed_in? && current_customer.email != 'guest@guest' %>
     <tr>
       <th>

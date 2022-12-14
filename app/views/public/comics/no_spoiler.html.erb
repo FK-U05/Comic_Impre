@@ -28,16 +28,14 @@
     </div>
   <% end %>
 
-  <div class="row mt-4">
-    <div class="col-md-2">
-      <%= render 'public/comics/list', genre_list: @genre_list, tag_list: @tag_list %>
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <%= render 'public/comics/list', genre_list: @genre_list, tag_list: @tag_list %>
+      </div>
+      <div class="col">
+        <%= render 'comic', comics: @no_spoiler %>
+        <%= paginate @no_spoiler %>
+      </div>
     </div>
-
-    <div class="col">
-      <%= render 'comic', comics: @no_spoiler %>
-      <%= paginate @no_spoiler %>
-    </div>
-
-  </div>
 
 </div>

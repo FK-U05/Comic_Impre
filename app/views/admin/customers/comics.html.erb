@@ -14,14 +14,10 @@
 
       <div class="mt-4">
         <% if @customer.comics.exists? %>
-
-          <%= paginate @comics %>
           <%= render 'admin/comics/comic', comics: @comics %>
-
+          <%= paginate @comics %>
         <% else %>
-
           <h5 class="text-center mt-5">まだこのユーザーは投稿していません</h5>
-
         <% end %>
       </div>
 

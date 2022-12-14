@@ -20,7 +20,6 @@ class Public::ComicCommentsController < ApplicationController
   def destroy
     @comic = Comic.find(params[:comic_id])
     ComicComment.find(params[:id]).destroy
-    flash.now[:notice] = "コメントを削除しました。"
   end
 
 private

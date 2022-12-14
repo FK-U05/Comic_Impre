@@ -19,16 +19,15 @@
         <%= link_to 'ブックマーク数の多い順', spoiler_customer_path(@customer, bookmark_count: "true"), class:"font-weight-bold" %> /
         <%= link_to '閲覧数の多い順', spoiler_customer_path(@customer, view_count: "true"), class:"font-weight-bold" %>
 
-      <div class="row mt-3 md-5 text-center font-weight-bold">
-        <div class="col">
-          < <%= link_to "ネタバレなし", no_spoiler_customer_path(@customer), class:"text-danger" %> /
-          <%= link_to "ネタバレあり", spoiler_customer_path(@customer), class:"text-success" %> >
+        <div class="row mt-3 md-5 text-center font-weight-bold">
+          <div class="col">
+            < <%= link_to "ネタバレなし", no_spoiler_customer_path(@customer), class:"text-danger" %> /
+            <%= link_to "ネタバレあり", spoiler_customer_path(@customer), class:"text-success" %> >
+          </div>
         </div>
-      </div>
 
-        <%= paginate @spoiler %>
         <%= render 'public/comics/comic', comics: @spoiler %>
-
+        <%= paginate @spoiler %>
       </div>
 
     </div>

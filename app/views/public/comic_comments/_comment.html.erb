@@ -1,4 +1,4 @@
- <% comic.comic_comments.each do |comment| %>
+<% comic.comic_comments.each do |comment| %>
   <!-- 退会したユーザーのコメントは表示しない -->
   <% if comment.customer.is_deleted == false %>
     <table class="table table-bordered mt-3">
@@ -24,4 +24,5 @@
 
     </table>
   <% end %>
+
 <% end %>

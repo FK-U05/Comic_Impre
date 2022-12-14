@@ -32,12 +32,10 @@
       <div class="col-md-2">
         <%= render 'public/comics/list', genre_list: @genre_list, tag_list: @tag_list %>
       </div>
-
       <div class="col">
         <%= render 'comic', comics: @spoiler %>
         <%= paginate @spoiler %>
       </div>
-
     </div>
 
 </div>

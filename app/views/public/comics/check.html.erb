@@ -10,8 +10,7 @@
 
   <div class="row">
     <div class="col">
-    <!--このまま投稿する-->
-
+      <!--このまま投稿する-->
       <%= form_with model: @comic, url: comics_path, method: :post do |f| %>
         <table class="table table-bordered text-center mt-3">
 
@@ -117,7 +116,7 @@
   </div>
 
   <div class="row">
-  <!-- 戻って変更する -->
+    <!-- 戻って変更する -->
     <%= form_with model: @comic, url: back_comics_path, method: :post do |f| %>
       <%= f.hidden_field :title, :value => @comic.title %>
       <%= f.hidden_field :name, :value => @comic.name %>
@@ -144,9 +143,9 @@
           });
         </script>
 
-      <%= f.hidden_field :genre_names, :value => @comic.genres.map(&:genre_name), :multiple => true %>
-      <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
-      <%= f.hidden_field :spoiler_status, :value => @comic.spoiler_status %>
+        <%= f.hidden_field :genre_names, :value => @comic.genres.map(&:genre_name), :multiple => true %>
+        <%= f.hidden_field :tag_names, :value => @comic.tags.map(&:tag_name), :multiple => true %>
+        <%= f.hidden_field :spoiler_status, :value => @comic.spoiler_status %>
 
       <div class="col">
         <%= f.submit "戻る", name: :back, class:"btn btn-warning btn-lg" %>

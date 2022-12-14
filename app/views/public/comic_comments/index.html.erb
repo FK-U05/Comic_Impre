@@ -1,5 +1,4 @@
 <div class="container mt-3 mb-5">
-
   <div class="row mt-2">
 
     <div class="col-md-2 text-center">
@@ -14,21 +13,16 @@
       </h3>
 
         <% if @comic.comic_comments.exists? %>
-
           <div class="comment">
             <%= render 'public/comic_comments/comment', comic: @comic %>
           </div>
-
         <% else %>
-
           <div class="text-center mt-5">
             <h5>コメントはありません</h5>
           </div>
-
         <% end %>
 
     </div>
 
   </div>
-
 </div>
